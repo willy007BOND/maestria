@@ -2,11 +2,12 @@
 question_bank.py - Banco de preguntas para MongoDB Quiz System
 Total aproximado: ~520 preguntas distribuidas en 9 categorías
 
-Progreso: 50/520 preguntas
+Progreso: 100/520 preguntas
 """
 
-# Categoría 1: Instalación y Entorno (30 preguntas)
-# Categoría 2: CRUD - Create (20/60 preguntas)
+# Categoría 1: Instalación y Entorno (30 preguntas) ✅
+# Categoría 2: CRUD - Create (60 preguntas) ✅
+# Categoría 3: CRUD - Read (10/80 preguntas)
 
 QUESTIONS_BATCH_1 = [
     # ==================== CATEGORÍA 1: INSTALACIÓN Y ENTORNO ====================
@@ -674,6 +675,661 @@ QUESTIONS_BATCH_1 = [
     }
 ]
 
-# Total: 50 preguntas
+# Total Batch 1: 50 preguntas
 # Categoría 1 (Instalación y Entorno): 30 preguntas COMPLETAS ✅
-# Categoría 2 (CRUD - Create): 20 de 60 preguntas (faltan 40)
+# Categoría 2 (CRUD - Create): 20 de 60 preguntas
+
+# ==================== BATCH 2: Preguntas 51-100 ====================
+# Categoría 2: CRUD - Create (40 preguntas restantes)
+# Categoría 3: CRUD - Read (10 preguntas iniciales)
+
+QUESTIONS_BATCH_2 = [
+    # ==================== CATEGORÍA 2: CRUD - CREATE (continuación) ====================
+    # Preguntas 51-90 (40 preguntas para completar las 60 de esta categoría)
+
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "¿Cómo insertas un documento con un campo null en MongoDB?",
+        "option_a": "db.coleccion.insertOne({campo: null})",
+        "option_b": "db.coleccion.insertOne({campo: NULL})",
+        "option_c": "db.coleccion.insertOne({campo: 'null'})",
+        "option_d": "No es posible insertar valores null",
+        "option_e": "db.coleccion.insertOne({campo: undefined})",
+        "correct_answer": "a",
+        "explanation": "MongoDB soporta el valor null de JavaScript. Se inserta como {campo: null}. Esto es diferente de undefined (que no se almacena) y de 'null' como string. null es un valor BSON válido que indica ausencia intencional de valor.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es la diferencia entre un campo con valor null y un campo que no existe?",
+        "option_a": "Son exactamente lo mismo",
+        "option_b": "null indica ausencia intencional de valor; campo inexistente simplemente no está definido",
+        "option_c": "null ocupa más espacio",
+        "option_d": "Campos inexistentes no se pueden consultar",
+        "option_e": "null es un error, campos inexistentes son normales",
+        "correct_answer": "b",
+        "explanation": "Hay diferencia semántica: {campo: null} indica que el campo existe pero intencionalmente no tiene valor. Un campo inexistente simplemente no está en el documento. Ambos se consultan diferente: {campo: null} vs {campo: {$exists: false}}.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "Para infovuelos_limpio, ¿cómo insertas un vuelo con un array de escalas?",
+        "option_a": "db.infovuelos_limpio.insertOne({vuelo: 'IB3201', escalas: ['MAD', 'BCN', 'PAR']})",
+        "option_b": "db.infovuelos_limpio.insertOne({vuelo: 'IB3201', escalas: 'MAD,BCN,PAR'})",
+        "option_c": "db.infovuelos_limpio.insertOne({vuelo: 'IB3201', escalas: ARRAY('MAD', 'BCN', 'PAR')})",
+        "option_d": "db.infovuelos_limpio.insertOne({vuelo: 'IB3201', escalas: {'MAD', 'BCN', 'PAR'}})",
+        "option_e": "db.infovuelos_limpio.insertOne({vuelo: 'IB3201', escalas[0]: 'MAD', escalas[1]: 'BCN'})",
+        "correct_answer": "a",
+        "explanation": "Los arrays en MongoDB se insertan usando sintaxis de array JavaScript: ['valor1', 'valor2', ...]. MongoDB almacena arrays nativamente como tipo BSON Array, permitiendo consultas eficientes sobre elementos del array.",
+        "difficulty": "easy",
+        "dataset_reference": "infovuelos_limpio"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "¿Cómo insertas un documento con un ObjectId específico que ya tienes?",
+        "option_a": "db.coleccion.insertOne({_id: 'ObjectId(507f1f77bcf86cd799439011)'})",
+        "option_b": "db.coleccion.insertOne({_id: ObjectId('507f1f77bcf86cd799439011')})",
+        "option_c": "db.coleccion.insertOne({_id: new ObjectId('507f1f77bcf86cd799439011')})",
+        "option_d": "db.coleccion.insertOne({_id: '507f1f77bcf86cd799439011'})",
+        "option_e": "Tanto b como c son correctas",
+        "correct_answer": "e",
+        "explanation": "Ambas sintaxis son válidas: ObjectId('string') y new ObjectId('string') crean un objeto ObjectId de BSON. No uses comillas alrededor del ObjectId() ni uses solo el string, ya que se almacenaría como string en lugar de tipo ObjectId.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Qué sucede si insertas dos documentos con el mismo _id en insertMany()?",
+        "option_a": "Ambos se insertan con diferentes _id",
+        "option_b": "Se genera error y se detiene la inserción (con ordered: true por defecto)",
+        "option_c": "Se actualiza el primero",
+        "option_d": "MongoDB los fusiona automáticamente",
+        "option_e": "Se ignoran los duplicados silenciosamente",
+        "correct_answer": "b",
+        "explanation": "Con ordered: true (default), insertMany() se detiene al encontrar un error de _id duplicado, dejando sin insertar los documentos posteriores. Con ordered: false, intenta insertar todos excepto los duplicados y reporta errores al final.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "Para listings_limpio, ¿cómo insertas un documento con un subdocumento de ubicación geográfica?",
+        "option_a": "db.listings_limpio.insertOne({nombre: 'Casa', geo: {type: 'Point', coordinates: [40.4168, -3.7038]}})",
+        "option_b": "db.listings_limpio.insertOne({nombre: 'Casa', geo: POINT(40.4168, -3.7038)})",
+        "option_c": "db.listings_limpio.insertOne({nombre: 'Casa', lat: 40.4168, lon: -3.7038})",
+        "option_d": "db.listings_limpio.insertOne({nombre: 'Casa', geo: '40.4168,-3.7038'})",
+        "option_e": "db.listings_limpio.insertOne({nombre: 'Casa', geo: {lat: 40.4168, lng: -3.7038}})",
+        "correct_answer": "a",
+        "explanation": "MongoDB soporta datos geoespaciales usando GeoJSON. El formato correcto para un punto es {type: 'Point', coordinates: [longitud, latitud]}. Nota: longitud primero, luego latitud. Esto permite usar índices geoespaciales y consultas $near, $geoWithin, etc.",
+        "difficulty": "hard",
+        "dataset_reference": "listings_limpio"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "¿Cómo insertas un documento con un timestamp de MongoDB?",
+        "option_a": "db.coleccion.insertOne({ts: new Timestamp()})",
+        "option_b": "db.coleccion.insertOne({ts: Timestamp(1, 0)})",
+        "option_c": "db.coleccion.insertOne({ts: CURRENT_TIMESTAMP})",
+        "option_d": "db.coleccion.insertOne({ts: Date.now()})",
+        "option_e": "db.coleccion.insertOne({ts: new Date()})",
+        "correct_answer": "b",
+        "explanation": "Timestamp(segundos, contador) es el tipo BSON Timestamp usado internamente por MongoDB para replicación (no para fechas de aplicación). Para fechas usa new Date(). Timestamp() requiere dos parámetros: timestamp Unix y contador ordinal.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es mejor para fechas en aplicaciones: Date o Timestamp de BSON?",
+        "option_a": "Timestamp siempre es mejor",
+        "option_b": "Date para aplicaciones; Timestamp es para uso interno de MongoDB",
+        "option_c": "Son intercambiables",
+        "option_d": "Timestamp es más preciso",
+        "option_e": "Date está deprecado",
+        "correct_answer": "b",
+        "explanation": "BSON Date (new Date()) es para fechas de aplicación. BSON Timestamp es para uso interno de MongoDB (oplog, replicación). Timestamp tiene semántica diferente y no debe usarse para datos de aplicación. Date soporta operaciones de fecha estándar.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "¿Cómo insertas un documento con datos binarios (Binary) en MongoDB?",
+        "option_a": "db.coleccion.insertOne({archivo: BinData(0, 'base64string')})",
+        "option_b": "db.coleccion.insertOne({archivo: new Binary('data')})",
+        "option_c": "db.coleccion.insertOne({archivo: BLOB('data')})",
+        "option_d": "db.coleccion.insertOne({archivo: Buffer.from('data')})",
+        "option_e": "Opciones a y b son correctas",
+        "correct_answer": "e",
+        "explanation": "Tanto BinData(subtype, base64) (en shell) como new Binary(buffer, subtype) (en drivers) son válidos. Los datos binarios se almacenan eficientemente como BSON Binary. Útil para almacenar archivos pequeños, pero para archivos grandes usa GridFS.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "Para data_act_01_limpio, ¿cómo insertas un documento con un campo de tipo Long (64-bit)?",
+        "option_a": "db.data_act_01_limpio.insertOne({contador: NumberLong('9223372036854775807')})",
+        "option_b": "db.data_act_01_limpio.insertOne({contador: 9223372036854775807})",
+        "option_c": "db.data_act_01_limpio.insertOne({contador: BIGINT(9223372036854775807)})",
+        "option_d": "db.data_act_01_limpio.insertOne({contador: Long(9223372036854775807)})",
+        "option_e": "db.data_act_01_limpio.insertOne({contador: new Int64(9223372036854775807)})",
+        "correct_answer": "a",
+        "explanation": "NumberLong('string') se usa para enteros de 64 bits que exceden el rango seguro de JavaScript (2^53). Los números normales en JS son de 64-bit float. NumberLong asegura precisión total para enteros grandes, crítico para IDs, timestamps, contadores.",
+        "difficulty": "hard",
+        "dataset_reference": "data_act_01_limpio"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "¿Cómo insertas múltiples documentos usando bulkWrite()?",
+        "option_a": "db.coleccion.bulkWrite([{insertOne: {document: {...}}}, {insertOne: {document: {...}}}])",
+        "option_b": "db.coleccion.bulkWrite([{insert: {...}}, {insert: {...}}])",
+        "option_c": "db.coleccion.bulkWrite([{...}, {...}])",
+        "option_d": "db.coleccion.bulkWrite({insertMany: [{...}, {...}]})",
+        "option_e": "db.coleccion.bulkWrite([{operation: 'insert', doc: {...}}])",
+        "correct_answer": "a",
+        "explanation": "bulkWrite() usa array de operaciones donde cada operación es un objeto con el tipo (insertOne, updateOne, etc.) y parámetros. Sintaxis: [{insertOne: {document: {...}}}, ...]. Permite mezclar múltiples tipos de operaciones en una sola llamada.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es la ventaja de bulkWrite() sobre insertMany()?",
+        "option_a": "bulkWrite() es más rápido",
+        "option_b": "bulkWrite() permite combinar inserts, updates y deletes en una operación",
+        "option_c": "bulkWrite() no genera errores",
+        "option_d": "bulkWrite() soporta transacciones automáticas",
+        "option_e": "insertMany() está deprecado",
+        "correct_answer": "b",
+        "explanation": "bulkWrite() permite ejecutar múltiples tipos de operaciones (insertOne, updateOne, deleteOne, replaceOne) en una sola llamada al servidor. insertMany() solo inserta. bulkWrite() es más flexible para operaciones batch heterogéneas.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "¿Cómo verificas cuántos documentos se insertaron exitosamente con insertMany()?",
+        "option_a": "result.count",
+        "option_b": "result.insertedCount",
+        "option_c": "Object.keys(result.insertedIds).length",
+        "option_d": "Opciones b y c son correctas",
+        "option_e": "result.nInserted",
+        "correct_answer": "d",
+        "explanation": "insertMany() retorna un objeto con 'insertedCount' (número de docs insertados) y 'insertedIds' (objeto con los IDs). Puedes usar result.insertedCount directamente o contar las keys de insertedIds. Ambos dan el mismo resultado.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "Para infovuelos_limpio, ¿cómo insertas un vuelo con un campo de tipo RegExp?",
+        "option_a": "db.infovuelos_limpio.insertOne({codigo: /^IB\\d{4}$/})",
+        "option_b": "db.infovuelos_limpio.insertOne({codigo: new RegExp('^IB\\\\d{4}$')})",
+        "option_c": "db.infovuelos_limpio.insertOne({codigo: REGEX('^IB\\\\d{4}$')})",
+        "option_d": "Opciones a y b son correctas",
+        "option_e": "MongoDB no soporta RegExp en documentos",
+        "correct_answer": "d",
+        "explanation": "MongoDB soporta BSON RegExp. Puedes usar sintaxis literal /pattern/flags o new RegExp('pattern', 'flags'). Aunque raro almacenar regex en docs, es posible. Más común es usar regex en consultas con operador $regex.",
+        "difficulty": "hard",
+        "dataset_reference": "infovuelos_limpio"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Qué tipo de datos NO soporta MongoDB/BSON?",
+        "option_a": "Arrays",
+        "option_b": "Fechas",
+        "option_c": "Funciones JavaScript",
+        "option_d": "Binary data",
+        "option_e": "Todos son soportados",
+        "correct_answer": "c",
+        "explanation": "MongoDB no almacena funciones JavaScript en documentos (aunque el shell permite ejecutar funciones). BSON soporta: String, Number, Boolean, Date, Timestamp, Binary, ObjectId, Array, Document, Null, RegExp, pero no funciones por razones de seguridad y serialización.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "¿Cómo insertas un documento con validación de esquema opcional (sin Schema Validation)?",
+        "option_a": "db.coleccion.insertOne({cualquier_campo: 'cualquier_valor'})",
+        "option_b": "db.coleccion.insertOne({cualquier_campo: 'cualquier_valor'}, {validate: false})",
+        "option_c": "db.coleccion.novalidate.insertOne({cualquier_campo: 'cualquier_valor'})",
+        "option_d": "db.coleccion.insertOne({cualquier_campo: 'cualquier_valor'}, {bypassValidation: true})",
+        "option_e": "Opciones a y d son correctas",
+        "correct_answer": "e",
+        "explanation": "Por defecto MongoDB no valida esquemas (esquema flexible). Si has definido validación con $jsonSchema, puedes saltarla con {bypassDocumentValidation: true}. Sin validación definida, insertOne() acepta cualquier estructura.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "Para listings_limpio, ¿cómo insertas un documento con un array de documentos embebidos?",
+        "option_a": "db.listings_limpio.insertOne({titulo: 'Casa', reviews: [{autor: 'Juan', rating: 5}, {autor: 'Ana', rating: 4}]})",
+        "option_b": "db.listings_limpio.insertOne({titulo: 'Casa', reviews: [{autor: 'Juan', rating: 5}], [{autor: 'Ana', rating: 4}]})",
+        "option_c": "db.listings_limpio.insertOne({titulo: 'Casa', reviews: JSON.stringify([{autor: 'Juan'}])})",
+        "option_d": "db.listings_limpio.insertOne({titulo: 'Casa', reviews[0]: {autor: 'Juan'}, reviews[1]: {autor: 'Ana'}})",
+        "option_e": "No es posible tener arrays de objetos",
+        "correct_answer": "a",
+        "explanation": "MongoDB soporta arrays de documentos embebidos: [{doc1}, {doc2}, ...]. Es una estructura común y poderosa que permite modelar relaciones uno-a-muchos dentro de un documento. Cada elemento del array puede ser un documento completo con su propia estructura.",
+        "difficulty": "easy",
+        "dataset_reference": "listings_limpio"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Cuándo deberías usar documentos embebidos vs referencias en MongoDB?",
+        "option_a": "Siempre usar embebidos, MongoDB no soporta referencias",
+        "option_b": "Embebidos para datos que se acceden juntos; referencias para datos que se comparten o son muy grandes",
+        "option_c": "Siempre usar referencias como en SQL",
+        "option_d": "Depende del motor de almacenamiento",
+        "option_e": "No hay diferencia de performance",
+        "correct_answer": "b",
+        "explanation": "Usa embebidos cuando: datos se leen juntos, relación uno-a-pocos, datos no se comparten. Usa referencias cuando: datos muy grandes, se comparten entre docs, relación muchos-a-muchos, o se actualizan frecuentemente. El diseño depende de patrones de acceso.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "¿Cómo insertas un documento con un campo que es un array vacío?",
+        "option_a": "db.coleccion.insertOne({tags: []})",
+        "option_b": "db.coleccion.insertOne({tags: null})",
+        "option_c": "db.coleccion.insertOne({tags: EMPTY_ARRAY})",
+        "option_d": "db.coleccion.insertOne({tags: {}})",
+        "option_e": "No es posible, arrays deben tener al menos un elemento",
+        "correct_answer": "a",
+        "explanation": "MongoDB permite arrays vacíos: {campo: []}. Es diferente de null (indica sin valor) y de campo inexistente. Un array vacío puede crecer posteriormente con $push. Útil para inicializar listas que se llenarán después.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "Para data_act_01_limpio, ¿cómo insertas un documento con un MinKey o MaxKey?",
+        "option_a": "db.data_act_01_limpio.insertOne({limite: MinKey()})",
+        "option_b": "db.data_act_01_limpio.insertOne({limite: new MinKey()})",
+        "option_c": "db.data_act_01_limpio.insertOne({limite: MinKey})",
+        "option_d": "Opciones a y b son correctas",
+        "option_e": "MinKey y MaxKey no son tipos BSON válidos",
+        "correct_answer": "d",
+        "explanation": "MinKey y MaxKey son tipos BSON especiales que se comparan menor/mayor que cualquier otro valor. Sintaxis: MinKey() o new MinKey(). Útiles para consultas de rango y en operaciones de sharding. Raramente usados en aplicaciones normales.",
+        "difficulty": "hard",
+        "dataset_reference": "data_act_01_limpio"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es un documento 'capped collection' y cómo afecta a insertOne()?",
+        "option_a": "Una colección con validación de esquema estricta",
+        "option_b": "Una colección de tamaño fijo que sobrescribe docs antiguos cuando se llena",
+        "option_c": "Una colección comprimida",
+        "option_d": "Una colección encriptada",
+        "option_e": "Una colección temporal",
+        "correct_answer": "b",
+        "explanation": "Las capped collections tienen tamaño máximo fijo. Cuando se llena, MongoDB sobrescribe automáticamente los documentos más antiguos (comportamiento FIFO). Las inserciones son rápidas y mantienen orden de inserción. Útiles para logs, caché, historial limitado.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "¿Cómo insertas un documento garantizando que se escriba en el journal para durabilidad?",
+        "option_a": "db.coleccion.insertOne({...}, {w: 1, j: true})",
+        "option_b": "db.coleccion.insertOne({...}, {journal: true})",
+        "option_c": "db.coleccion.insertOne({...}, {durability: 'high'})",
+        "option_d": "db.coleccion.insertOne({...}, {fsync: true})",
+        "option_e": "db.coleccion.insertOne({...}, {w: 'majority'})",
+        "correct_answer": "a",
+        "explanation": "WriteConcern con {j: true} espera confirmación de que la operación se escribió en el journal (log de escritura adelantada). Esto garantiza durabilidad ante fallos. {w: 1, j: true} espera escritura en journal del primario. Más lento pero más seguro.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es el write concern {w: 0}?",
+        "option_a": "Modo más seguro de escritura",
+        "option_b": "Escritura sin esperar confirmación (fire and forget)",
+        "option_c": "Escritura en memoria sin journal",
+        "option_d": "Escritura solo en nodos secundarios",
+        "option_e": "Deshabilita escrituras",
+        "correct_answer": "b",
+        "explanation": "{w: 0} es 'unacknowledged write' o 'fire and forget'. El cliente no espera confirmación del servidor, maximizando throughput pero sin garantías de éxito. No recomendado en producción. {w: 1} espera ack del primario, {w: 'majority'} de la mayoría.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "Para infovuelos_limpio, ¿cómo insertas 1000 documentos de forma eficiente?",
+        "option_a": "Usar un loop con 1000 insertOne()",
+        "option_b": "db.infovuelos_limpio.insertMany([...1000 docs...])",
+        "option_c": "db.infovuelos_limpio.bulkWrite([{insertOne: {...}} × 1000])",
+        "option_d": "Opciones b y c son eficientes",
+        "option_e": "Usar mongoimport desde archivo JSON",
+        "correct_answer": "d",
+        "explanation": "insertMany() y bulkWrite() son eficientes al agrupar operaciones. Evita loops de insertOne() (1000 round-trips). Para datasets muy grandes, mongoimport es la herramienta más rápida. insertMany() tiene límite de 100,000 docs por operación.",
+        "difficulty": "medium",
+        "dataset_reference": "infovuelos_limpio"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Qué sucede con el performance de inserciones cuando agregas muchos índices a una colección?",
+        "option_a": "Mejora el performance de inserciones",
+        "option_b": "Las inserciones se vuelven más lentas porque cada índice debe actualizarse",
+        "option_c": "No hay efecto en el performance",
+        "option_d": "Los índices solo afectan las consultas",
+        "option_e": "MongoDB deshabilita índices durante inserciones masivas",
+        "correct_answer": "b",
+        "explanation": "Cada índice adicional ralentiza las inserciones porque MongoDB debe actualizar todos los índices al insertar. El trade-off es: índices aceleran queries pero ralentizan writes. Diseña índices basándote en patrones de lectura vs escritura de tu aplicación.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "¿Cómo insertas un documento especificando timeout personalizado?",
+        "option_a": "db.coleccion.insertOne({...}, {maxTimeMS: 5000})",
+        "option_b": "db.coleccion.insertOne({...}, {timeout: 5000})",
+        "option_c": "db.coleccion.insertOne({...}).timeout(5000)",
+        "option_d": "db.coleccion.insertOne({...}, {ttl: 5000})",
+        "option_e": "No es posible especificar timeout en inserciones",
+        "correct_answer": "a",
+        "explanation": "La opción maxTimeMS especifica el tiempo máximo en milisegundos para la operación. Si excede el timeout, MongoDB cancela la operación con error. Útil para prevenir operaciones que se cuelgan. Ejemplo: {maxTimeMS: 5000} para timeout de 5 segundos.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "Para listings_limpio, ¿cómo insertas un documento con un campo de tipo Code (JavaScript)?",
+        "option_a": "db.listings_limpio.insertOne({script: Code('function() { return 42; }')})",
+        "option_b": "db.listings_limpio.insertOne({script: new Code('function() { return 42; }')})",
+        "option_c": "db.listings_limpio.insertOne({script: 'function() { return 42; }'})",
+        "option_d": "Opciones a y b son correctas",
+        "option_e": "MongoDB no permite almacenar código JavaScript",
+        "correct_answer": "d",
+        "explanation": "BSON Code permite almacenar código JavaScript. Sintaxis: Code('codigo') o new Code('codigo'). Usado raramente, principalmente para funciones MapReduce o stored procedures. Por seguridad, no es común almacenar código en docs de aplicación.",
+        "difficulty": "hard",
+        "dataset_reference": "listings_limpio"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es el límite de anidamiento (nesting) de documentos en MongoDB?",
+        "option_a": "10 niveles",
+        "option_b": "50 niveles",
+        "option_c": "100 niveles",
+        "option_d": "No hay límite específico, pero está limitado por el tamaño máximo de 16MB",
+        "option_e": "MongoDB no permite documentos anidados",
+        "correct_answer": "d",
+        "explanation": "MongoDB no tiene límite explícito de niveles de anidamiento, pero está limitado por el tamaño máximo de documento (16MB) y consideraciones prácticas. Anidamiento excesivo complica consultas y actualizaciones. Generalmente se recomienda mantener estructura simple.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "¿Cómo insertas múltiples documentos asegurando atomicidad en MongoDB 4.0+?",
+        "option_a": "db.coleccion.insertMany([...], {atomic: true})",
+        "option_b": "Usar sesión con transacción: session.withTransaction(() => { db.col.insertMany([...]) })",
+        "option_c": "db.coleccion.transaction.insertMany([...])",
+        "option_d": "insertMany() es atómico por defecto",
+        "option_e": "No es posible atomicidad en MongoDB",
+        "correct_answer": "b",
+        "explanation": "MongoDB 4.0+ soporta transacciones multi-documento. Para atomicidad en múltiples operaciones, usa sesiones con transacciones. insertMany() de por sí no es una transacción (aunque cada insertOne() dentro es atómico). Para atomicidad total necesitas transacciones explícitas.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es el 'upsert' y cuándo se usa con operaciones de inserción?",
+        "option_a": "Un tipo especial de índice",
+        "option_b": "Una operación que inserta si no existe o actualiza si existe",
+        "option_c": "Un método de compresión",
+        "option_d": "Una validación de esquema",
+        "option_e": "insertOne() siempre hace upsert",
+        "correct_answer": "b",
+        "explanation": "Upsert (update + insert) inserta un documento si no existe o lo actualiza si existe. No está disponible en insertOne(), pero sí en updateOne/updateMany con opción {upsert: true}. Útil para operaciones idempotentes o cuando no sabes si el documento existe.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "Para data_act_01_limpio, ¿cómo insertas un documento con el _id como string UUID?",
+        "option_a": "db.data_act_01_limpio.insertOne({_id: UUID()})",
+        "option_b": "db.data_act_01_limpio.insertOne({_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890'})",
+        "option_c": "db.data_act_01_limpio.insertOne({_id: new UUID('a1b2c3d4-e5f6-7890-abcd-ef1234567890')})",
+        "option_d": "db.data_act_01_limpio.insertOne({_id: GUID('a1b2c3d4-e5f6-7890-abcd-ef1234567890')})",
+        "option_e": "Opciones b y c son posibles",
+        "correct_answer": "e",
+        "explanation": "El _id puede ser cualquier tipo BSON excepto arrays. Puedes usar string UUID: {_id: 'uuid-string'} o BSON UUID: {_id: UUID('...')} (en drivers que lo soporten). La mayoría usa ObjectId por defecto, pero UUIDs son válidos si necesitas compatibilidad con otros sistemas.",
+        "difficulty": "medium",
+        "dataset_reference": "data_act_01_limpio"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es la 'write performance' vs 'read performance' en el diseño de esquema?",
+        "option_a": "Son lo mismo",
+        "option_b": "Documentos embebidos optimizan lecturas; normalización con referencias optimiza escrituras",
+        "option_c": "Write performance siempre es más importante",
+        "option_d": "MongoDB optimiza ambos automáticamente",
+        "option_e": "El esquema no afecta el performance",
+        "correct_answer": "b",
+        "explanation": "Trade-off de diseño: documentos embebidos optimizan lecturas (un solo query) pero ralentizan escrituras (documentos más grandes). Referencias optimizan escrituras (docs pequeños) pero requieren múltiples queries ($lookup). Diseña según tu patrón de acceso dominante.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "¿Cómo insertas un documento y obtienes el _id generado inmediatamente?",
+        "option_a": "const result = db.coleccion.insertOne({...}); const id = result.insertedId;",
+        "option_b": "const id = db.coleccion.insertOne({...}).getId();",
+        "option_c": "db.coleccion.insertOne({...}, {returnId: true});",
+        "option_d": "const id = db.coleccion.insertOne({...})._id;",
+        "option_e": "No es posible obtener el _id inmediatamente",
+        "correct_answer": "a",
+        "explanation": "insertOne() retorna un objeto con la propiedad 'insertedId' que contiene el _id del documento insertado. Accedes con result.insertedId. Si no especificaste _id, será el ObjectId generado automáticamente por MongoDB.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Por qué MongoDB genera ObjectIds únicos globalmente sin coordinación central?",
+        "option_a": "Usa un servidor central para generar IDs",
+        "option_b": "ObjectId incluye timestamp, identificador de máquina y contador, garantizando unicidad",
+        "option_c": "Usa números aleatorios",
+        "option_d": "Solo es único dentro de una colección",
+        "option_e": "Requiere sincronización entre nodos",
+        "correct_answer": "b",
+        "explanation": "ObjectId (12 bytes): 4 bytes timestamp + 5 bytes identificador de proceso/máquina + 3 bytes contador incremental. Esta estructura garantiza unicidad global sin coordinación entre nodos, esencial para sistemas distribuidos. Permite generación local rápida.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "Para infovuelos_limpio, ¿cómo insertas 3 vuelos usando una sola llamada bulkWrite con manejo de errores?",
+        "option_a": "db.infovuelos_limpio.bulkWrite([{insertOne: {document: {...}}}, {...}, {...}], {ordered: false})",
+        "option_b": "db.infovuelos_limpio.bulkWrite([{insert: {...}}, {...}, {...}])",
+        "option_c": "db.infovuelos_limpio.insertMany([{...}, {...}, {...}])",
+        "option_d": "db.infovuelos_limpio.bulkInsert([{...}, {...}, {...}])",
+        "option_e": "Opciones a y c son correctas",
+        "correct_answer": "e",
+        "explanation": "Tanto bulkWrite() con insertOne operations como insertMany() sirven. bulkWrite() es más flexible (puede mezclar operaciones). {ordered: false} hace que continúe insertando si uno falla. insertMany() con {ordered: false} tiene el mismo comportamiento.",
+        "difficulty": "medium",
+        "dataset_reference": "infovuelos_limpio"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es el 'document validation' en MongoDB y cómo afecta a insertOne()?",
+        "option_a": "MongoDB no soporta validación",
+        "option_b": "Puedes definir reglas de validación con $jsonSchema que rechazan documentos que no cumplen",
+        "option_c": "Validación automática de tipos de datos",
+        "option_d": "Solo valida el _id",
+        "option_e": "Validación solo en el cliente",
+        "correct_answer": "b",
+        "explanation": "Desde MongoDB 3.6+, puedes definir validación de esquema con $jsonSchema al crear la colección. insertOne() rechaza documentos que no cumplen el schema. Puedes especificar validationLevel (strict/moderate) y validationAction (error/warn). Útil para integridad de datos.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 2,
+        "question_type": "syntax",
+        "question_text": "¿Cómo insertas un documento especificando el comportamiento ante conflictos de _id duplicado en bulkWrite?",
+        "option_a": "bulkWrite([...], {continueOnError: true})",
+        "option_b": "bulkWrite([...], {ordered: false})",
+        "option_c": "bulkWrite([...], {skipDuplicates: true})",
+        "option_d": "bulkWrite([...], {ignoreErrors: true})",
+        "option_e": "No es posible, siempre falla con duplicados",
+        "correct_answer": "b",
+        "explanation": "Con {ordered: false}, bulkWrite() continúa procesando operaciones posteriores incluso si algunas fallan por _id duplicado. {ordered: true} (default) se detiene en el primer error. Los errores se reportan en el resultado, pero las operaciones exitosas se completan.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 2,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es el límite de operaciones en un solo bulkWrite()?",
+        "option_a": "100 operaciones",
+        "option_b": "1,000 operaciones",
+        "option_c": "100,000 operaciones",
+        "option_d": "1,000,000 operaciones",
+        "option_e": "No hay límite explícito, pero está limitado por el tamaño de mensaje de 48MB",
+        "correct_answer": "e",
+        "explanation": "No hay límite explícito en número de operaciones, pero el tamaño total del mensaje está limitado a 48MB (maxMessageSizeBytes). Para grandes volúmenes, divide en múltiples bulkWrite(). MongoDB procesa en batches internos de 1000 operaciones.",
+        "difficulty": "hard"
+    },
+
+    # ==================== CATEGORÍA 3: CRUD - READ ====================
+    # Preguntas 91-100 (10 de 80 totales)
+
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cuál es la sintaxis correcta para encontrar todos los documentos de una colección?",
+        "option_a": "db.coleccion.findAll()",
+        "option_b": "db.coleccion.find()",
+        "option_c": "db.coleccion.select()",
+        "option_d": "SELECT * FROM coleccion",
+        "option_e": "db.coleccion.getAll()",
+        "correct_answer": "b",
+        "explanation": "db.coleccion.find() sin parámetros retorna todos los documentos de la colección (equivalente a SELECT * en SQL). Retorna un cursor que puedes iterar. Para limitar resultados usa .limit(n). findAll() y getAll() no existen en MongoDB.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo encuentras un único documento en MongoDB?",
+        "option_a": "db.coleccion.find().one()",
+        "option_b": "db.coleccion.findOne()",
+        "option_c": "db.coleccion.find().first()",
+        "option_d": "db.coleccion.getSingle()",
+        "option_e": "db.coleccion.find().limit(1)",
+        "correct_answer": "b",
+        "explanation": "findOne() retorna el primer documento que coincide con el filtro (o null si no hay coincidencias). No retorna un cursor, retorna el documento directamente. find().limit(1) retorna un cursor con un doc, no es lo mismo.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "Para infovuelos_limpio, ¿cómo encuentras todos los vuelos con origen 'Madrid'?",
+        "option_a": "db.infovuelos_limpio.find({origen: 'Madrid'})",
+        "option_b": "db.infovuelos_limpio.find({origen = 'Madrid'})",
+        "option_c": "db.infovuelos_limpio.find(origen: 'Madrid')",
+        "option_d": "db.infovuelos_limpio.find('origen', 'Madrid')",
+        "option_e": "db.infovuelos_limpio.where({origen: 'Madrid'})",
+        "correct_answer": "a",
+        "explanation": "La sintaxis correcta es find({campo: valor}). El filtro es un objeto JavaScript con pares clave-valor. MongoDB busca documentos donde el campo 'origen' sea exactamente 'Madrid' (case-sensitive). where() no existe en MongoDB.",
+        "difficulty": "easy",
+        "dataset_reference": "infovuelos_limpio"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo encuentras documentos donde un campo específico existe?",
+        "option_a": "db.coleccion.find({campo: {$exists: true}})",
+        "option_b": "db.coleccion.find({campo: {$notNull: true}})",
+        "option_c": "db.coleccion.find({campo: EXISTS})",
+        "option_d": "db.coleccion.find({campo: IS NOT NULL})",
+        "option_e": "db.coleccion.find({$has: 'campo'})",
+        "correct_answer": "a",
+        "explanation": "El operador $exists verifica si un campo existe en el documento. {campo: {$exists: true}} encuentra docs con el campo (incluso si es null). {$exists: false} encuentra docs sin el campo. Diferente de {campo: {$ne: null}} que excluye null.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "Para listings_limpio, ¿cómo encuentras listings con precio mayor a 100?",
+        "option_a": "db.listings_limpio.find({precio: {$gt: 100}})",
+        "option_b": "db.listings_limpio.find({precio > 100})",
+        "option_c": "db.listings_limpio.find({precio: '> 100'})",
+        "option_d": "db.listings_limpio.find({precio: {gt: 100}})",
+        "option_e": "db.listings_limpio.find().where(precio > 100)",
+        "correct_answer": "a",
+        "explanation": "El operador $gt (greater than) compara valores numéricos: {campo: {$gt: valor}}. Otros operadores: $lt (menor), $gte (mayor o igual), $lte (menor o igual), $eq (igual), $ne (diferente). No uses sintaxis tipo SQL.",
+        "difficulty": "easy",
+        "dataset_reference": "listings_limpio"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo encuentras documentos donde un campo está en un conjunto de valores?",
+        "option_a": "db.coleccion.find({campo: {$in: ['valor1', 'valor2', 'valor3']}})",
+        "option_b": "db.coleccion.find({campo: ['valor1', 'valor2', 'valor3']})",
+        "option_c": "db.coleccion.find({campo IN ('valor1', 'valor2', 'valor3')})",
+        "option_d": "db.coleccion.find({campo: {$or: ['valor1', 'valor2', 'valor3']}})",
+        "option_e": "db.coleccion.find({campo: {$anyOf: ['valor1', 'valor2', 'valor3']}})",
+        "correct_answer": "a",
+        "explanation": "El operador $in busca documentos donde el campo coincide con cualquier valor del array: {campo: {$in: [valores]}}. Es equivalente a múltiples $or pero más eficiente. $nin es el opuesto (not in).",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo combinas múltiples condiciones con AND en una consulta?",
+        "option_a": "db.coleccion.find({campo1: valor1, campo2: valor2})",
+        "option_b": "db.coleccion.find({$and: [{campo1: valor1}, {campo2: valor2}]})",
+        "option_c": "db.coleccion.find({campo1: valor1 AND campo2: valor2})",
+        "option_d": "Tanto a como b son correctas",
+        "option_e": "db.coleccion.find({campo1: valor1}).and({campo2: valor2})",
+        "correct_answer": "d",
+        "explanation": "Por defecto, múltiples campos en el filtro son AND implícito: {a: 1, b: 2}. También puedes usar $and explícito: {$and: [{a: 1}, {b: 2}]}. $and explícito es necesario cuando necesitas múltiples condiciones en el mismo campo.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "Para data_act_01_limpio, ¿cómo encuentras documentos donde precio está entre 50 y 100?",
+        "option_a": "db.data_act_01_limpio.find({precio: {$gte: 50, $lte: 100}})",
+        "option_b": "db.data_act_01_limpio.find({precio: {$between: [50, 100]}})",
+        "option_c": "db.data_act_01_limpio.find({precio BETWEEN 50 AND 100})",
+        "option_d": "db.data_act_01_limpio.find({precio: {$range: [50, 100]}})",
+        "option_e": "db.data_act_01_limpio.find({$and: [{precio: {$gte: 50}}, {precio: {$lte: 100}}]})",
+        "correct_answer": "a",
+        "explanation": "Combina $gte y $lte en el mismo campo: {campo: {$gte: min, $lte: max}}. MongoDB permite múltiples operadores en el mismo campo. La opción 'e' también funciona pero 'a' es más concisa. No existe $between en MongoDB.",
+        "difficulty": "medium",
+        "dataset_reference": "data_act_01_limpio"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo limitas el número de resultados retornados?",
+        "option_a": "db.coleccion.find().limit(10)",
+        "option_b": "db.coleccion.find({}, {limit: 10})",
+        "option_c": "db.coleccion.find().take(10)",
+        "option_d": "db.coleccion.find({$limit: 10})",
+        "option_e": "db.coleccion.find().max(10)",
+        "correct_answer": "a",
+        "explanation": "El método .limit(n) limita el número de documentos retornados por el cursor. Es un método de cursor, no parte del filtro. Ejemplo: find({...}).limit(10). Útil para paginación junto con .skip(). limit() debe ser después de find().",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo saltas los primeros N documentos en los resultados?",
+        "option_a": "db.coleccion.find().skip(N)",
+        "option_b": "db.coleccion.find().offset(N)",
+        "option_c": "db.coleccion.find({$skip: N})",
+        "option_d": "db.coleccion.find().ignore(N)",
+        "option_e": "db.coleccion.find({}, {skip: N})",
+        "correct_answer": "a",
+        "explanation": "El método .skip(n) salta los primeros n documentos del resultado. Usado con .limit() para paginación: find().skip(pagina * tamaño).limit(tamaño). ADVERTENCIA: skip() es lento con valores grandes porque MongoDB debe recorrer los documentos saltados.",
+        "difficulty": "easy"
+    }
+]
+
+# Total Batch 2: 50 preguntas
+# Categoría 2 (CRUD - Create): 40 preguntas (completando las 60 totales) ✅
+# Categoría 3 (CRUD - Read): 10 de 80 preguntas
