@@ -2,12 +2,13 @@
 question_bank.py - Banco de preguntas para MongoDB Quiz System
 Total aproximado: ~520 preguntas distribuidas en 9 categorías
 
-Progreso: 150/520 preguntas
+Progreso: 200/520 preguntas
 """
 
 # Categoría 1: Instalación y Entorno (30 preguntas) ✅
 # Categoría 2: CRUD - Create (60 preguntas) ✅
-# Categoría 3: CRUD - Read (60/80 preguntas)
+# Categoría 3: CRUD - Read (80 preguntas) ✅
+# Categoría 4: CRUD - Update (30/60 preguntas)
 
 QUESTIONS_BATCH_1 = [
     # ==================== CATEGORÍA 1: INSTALACIÓN Y ENTORNO ====================
@@ -1956,3 +1957,671 @@ QUESTIONS_BATCH_3 = [
 
 # Total Batch 3: 50 preguntas
 # Categoría 3 (CRUD - Read): 60 de 80 preguntas (10 del batch anterior + 50 de este batch)
+
+# ==================== BATCH 4: Preguntas 151-200 ====================
+# Categoría 3: CRUD - Read (20 preguntas finales)
+# Categoría 4: CRUD - Update (30 preguntas iniciales)
+
+QUESTIONS_BATCH_4 = [
+    # ==================== CATEGORÍA 3: CRUD - READ (últimas 20 preguntas) ====================
+    # Preguntas 151-170
+
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo buscas documentos dentro de un radio geográfico desde un punto (consulta geoespacial)?",
+        "option_a": "db.coleccion.find({ubicacion: {$near: {$geometry: {type: 'Point', coordinates: [lon, lat]}, $maxDistance: metros}}})",
+        "option_b": "db.coleccion.find({ubicacion: {$near: [lat, lon], $maxDistance: metros}})",
+        "option_c": "db.coleccion.find({ubicacion: {$within: {radius: metros, center: [lat, lon]}}})",
+        "option_d": "db.coleccion.find({ubicacion: {$geoNear: [lat, lon, metros]}})",
+        "option_e": "db.coleccion.nearSphere([lat, lon], metros)",
+        "correct_answer": "a",
+        "explanation": "$near busca documentos cercanos a un punto. Sintaxis con GeoJSON: {$near: {$geometry: {type: 'Point', coordinates: [lon, lat]}, $maxDistance: m}}. Requiere índice geoespacial 2dsphere. IMPORTANTE: longitud primero, luego latitud en GeoJSON.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 3,
+        "question_type": "conceptual",
+        "question_text": "¿Qué tipo de índice necesitas para consultas geoespaciales con GeoJSON?",
+        "option_a": "Índice normal",
+        "option_b": "Índice 2d",
+        "option_c": "Índice 2dsphere",
+        "option_d": "Índice text",
+        "option_e": "No se necesita índice",
+        "correct_answer": "c",
+        "explanation": "Para consultas geoespaciales con GeoJSON (formato moderno con type y coordinates), necesitas índice 2dsphere: db.coleccion.createIndex({ubicacion: '2dsphere'}). El índice 2d es para coordenadas planas legacy. 2dsphere soporta geometrías esféricas en el modelo WGS84.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "Para listings_limpio con coordenadas GeoJSON, ¿cómo buscas listings dentro de un polígono?",
+        "option_a": "db.listings_limpio.find({ubicacion: {$geoWithin: {$geometry: {type: 'Polygon', coordinates: [[[lon1,lat1], [lon2,lat2], ...]]}}}})",
+        "option_b": "db.listings_limpio.find({ubicacion: {$within: {polygon: [[lat1,lon1], [lat2,lon2], ...]}}})",
+        "option_c": "db.listings_limpio.find({ubicacion: {$inside: {type: 'Polygon', points: [...]}})",
+        "option_d": "db.listings_limpio.withinPolygon([[lon1,lat1], [lon2,lat2], ...])",
+        "option_e": "db.listings_limpio.find({ubicacion: {$polygon: [...]}})",
+        "correct_answer": "a",
+        "explanation": "$geoWithin encuentra documentos dentro de un área geográfica. Con GeoJSON Polygon: {$geoWithin: {$geometry: {type: 'Polygon', coordinates: [[[array de puntos]]]}}}. El polígono debe cerrarse (primer y último punto iguales). Requiere índice 2dsphere.",
+        "difficulty": "hard",
+        "dataset_reference": "listings_limpio"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo usas $where para consultas con JavaScript arbitrario?",
+        "option_a": "db.coleccion.find({$where: 'this.campo1 > this.campo2'})",
+        "option_b": "db.coleccion.find({$where: function() { return this.campo1 > this.campo2; }})",
+        "option_c": "db.coleccion.where('this.campo1 > this.campo2')",
+        "option_d": "Opciones a y b son correctas",
+        "option_e": "db.coleccion.find({$js: 'this.campo1 > this.campo2'})",
+        "correct_answer": "d",
+        "explanation": "$where permite JavaScript arbitrario: string o función. ADVERTENCIA: $where es lento porque ejecuta JS y no usa índices. Úsalo solo cuando otros operadores no funcionen. Alternativa moderna: $expr para expresiones que comparan campos.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo comparas dos campos del mismo documento en una consulta?",
+        "option_a": "db.coleccion.find({$expr: {$gt: ['$campo1', '$campo2']}})",
+        "option_b": "db.coleccion.find({campo1: {$gt: campo2}})",
+        "option_c": "db.coleccion.find({$where: 'this.campo1 > this.campo2'})",
+        "option_d": "Opciones a y c son correctas",
+        "option_e": "No es posible comparar campos",
+        "correct_answer": "d",
+        "explanation": "$expr permite comparar campos usando operadores de agregación: {$expr: {$gt: ['$campo1', '$campo2']}}. Nota el $ antes del nombre de campo. $where también funciona pero es más lento. $expr es preferido y puede usar índices en algunos casos.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "Para infovuelos_limpio, ¿cómo buscas vuelos donde el precio_descuento es menor que precio_original?",
+        "option_a": "db.infovuelos_limpio.find({$expr: {$lt: ['$precio_descuento', '$precio_original']}})",
+        "option_b": "db.infovuelos_limpio.find({precio_descuento: {$lt: '$precio_original'}})",
+        "option_c": "db.infovuelos_limpio.find({$where: 'this.precio_descuento < this.precio_original'})",
+        "option_d": "Opciones a y c son correctas",
+        "option_e": "db.infovuelos_limpio.find({$compare: ['precio_descuento', '<', 'precio_original']})",
+        "correct_answer": "d",
+        "explanation": "$expr con $lt es la forma moderna y eficiente: {$expr: {$lt: ['$campo1', '$campo2']}}. $where también funciona pero es más lento. Opción b no funciona porque no puedes referenciar campos directamente en operadores de comparación normales.",
+        "difficulty": "medium",
+        "dataset_reference": "infovuelos_limpio"
+    },
+    {
+        "category_id": 3,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es el operador $mod y cuándo lo usarías?",
+        "option_a": "Modifica valores",
+        "option_b": "Busca documentos donde campo % divisor == resto",
+        "option_c": "Calcula el módulo",
+        "option_d": "Es un operador de agregación",
+        "option_e": "No existe en MongoDB",
+        "correct_answer": "b",
+        "explanation": "$mod busca valores donde el resto de dividir por un número es específico: {campo: {$mod: [divisor, resto]}}. Ejemplo: {edad: {$mod: [2, 0]}} encuentra edades pares (divisible por 2 con resto 0). Útil para patrones numéricos.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo buscas documentos donde un número es divisible por 5?",
+        "option_a": "db.coleccion.find({numero: {$mod: [5, 0]}})",
+        "option_b": "db.coleccion.find({numero: {$divisibleBy: 5}})",
+        "option_c": "db.coleccion.find({numero % 5: 0})",
+        "option_d": "db.coleccion.find({$where: 'this.numero % 5 == 0'})",
+        "option_e": "Opciones a y d son correctas",
+        "correct_answer": "e",
+        "explanation": "$mod con resto 0 verifica divisibilidad: {campo: {$mod: [divisor, 0]}}. $where también funciona pero es menos eficiente. No existe $divisibleBy. Opción c tiene sintaxis inválida.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo buscas documentos donde un array está vacío o el campo no existe?",
+        "option_a": "db.coleccion.find({$or: [{array: {$size: 0}}, {array: {$exists: false}}]})",
+        "option_b": "db.coleccion.find({array: []})",
+        "option_c": "db.coleccion.find({array: {$in: [[], null]}})",
+        "option_d": "Opción a es la más correcta",
+        "option_e": "db.coleccion.find({array: {$empty: true}})",
+        "correct_answer": "d",
+        "explanation": "Para buscar array vacío O campo inexistente usa $or: {$or: [{campo: {$size: 0}}, {campo: {$exists: false}}]}. {array: []} solo encuentra arrays vacíos, no campos inexistentes. Esta distinción es importante en esquemas flexibles.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 3,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es el límite por defecto de documentos retornados por el cursor en el shell?",
+        "option_a": "10 documentos",
+        "option_b": "20 documentos",
+        "option_c": "50 documentos",
+        "option_d": "100 documentos",
+        "option_e": "No hay límite",
+        "correct_answer": "b",
+        "explanation": "El shell de MongoDB muestra 20 documentos por defecto al iterar un cursor. Escribe 'it' (iterate) para ver los siguientes 20. Este límite es solo del shell; en drivers puedes iterar todos. Para obtener todos usa .toArray() o especifica .limit().",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo obtienes solo el primer documento que coincide con el filtro sin retornar un cursor?",
+        "option_a": "db.coleccion.findOne({filtro})",
+        "option_b": "db.coleccion.find({filtro}).limit(1)",
+        "option_c": "db.coleccion.find({filtro}).first()",
+        "option_d": "db.coleccion.find({filtro})[0]",
+        "option_e": "db.coleccion.getOne({filtro})",
+        "correct_answer": "a",
+        "explanation": "findOne() retorna el primer documento directamente (no un cursor) o null si no hay coincidencias. find().limit(1) retorna un cursor con un doc. findOne() es más simple cuando solo necesitas un documento. No existen .first() ni getOne().",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 3,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es la 'collation' en MongoDB?",
+        "option_a": "Un método de compresión",
+        "option_b": "Reglas de comparación de strings para sorting y matching (locale, case sensitivity, etc.)",
+        "option_c": "Una técnica de indexación",
+        "option_d": "Un tipo de agregación",
+        "option_e": "No existe en MongoDB",
+        "correct_answer": "b",
+        "explanation": "Collation define reglas para comparar strings: locale, case sensitivity, accent sensitivity, etc. Ejemplo: {locale: 'es', strength: 2} para español case-insensitive. Aplica a ordenamiento, comparaciones y text search. Se especifica en find(), aggregate(), createIndex().",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "Para data_act_01_limpio, ¿cómo buscas nombres case-insensitive usando collation?",
+        "option_a": "db.data_act_01_limpio.find({nombre: 'JUAN'}).collation({locale: 'en', strength: 2})",
+        "option_b": "db.data_act_01_limpio.find({nombre: {$regex: /juan/i}})",
+        "option_c": "db.data_act_01_limpio.find({nombre: 'juan'}, {collation: {locale: 'en', strength: 2}})",
+        "option_d": "Opciones a y b son correctas",
+        "option_e": "db.data_act_01_limpio.find({nombre: {$caseInsensitive: 'JUAN'}})",
+        "correct_answer": "d",
+        "explanation": "Collation con strength: 2 ignora case: .collation({locale: 'en', strength: 2}). Regex con flag 'i' también funciona. Collation es más eficiente con índices apropiados. Regex puede ser lento sin índice. Ambos métodos son válidos.",
+        "difficulty": "hard",
+        "dataset_reference": "data_act_01_limpio"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo obtienes el número de documentos escaneados vs documentos retornados (para diagnóstico)?",
+        "option_a": "db.coleccion.find({filtro}).explain('executionStats')",
+        "option_b": "db.coleccion.find({filtro}).stats()",
+        "option_c": "db.coleccion.find({filtro}).count()",
+        "option_d": "db.coleccion.analyze({filtro})",
+        "option_e": "db.coleccion.find({filtro}).performance()",
+        "correct_answer": "a",
+        "explanation": "explain('executionStats') muestra: totalDocsExamined (escaneados), nReturned (retornados), executionTimeMillis, índices usados. Ideal para optimizar queries. Si totalDocsExamined >> nReturned, necesitas mejor índice. explain('queryPlanner') solo muestra el plan.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 3,
+        "question_type": "conceptual",
+        "question_text": "¿Qué indica si una consulta hace un COLLSCAN en explain()?",
+        "option_a": "Uso eficiente de índice",
+        "option_b": "Collection scan (escaneo completo de la colección) - ineficiente para colecciones grandes",
+        "option_c": "Búsqueda de colisiones",
+        "option_d": "Consulta colaborativa",
+        "option_e": "Error en la consulta",
+        "correct_answer": "b",
+        "explanation": "COLLSCAN significa collection scan: MongoDB escanea TODOS los documentos de la colección sin usar índice. Es lento en colecciones grandes. Si ves COLLSCAN en explain(), considera agregar un índice apropiado. IXSCAN indica uso de índice (eficiente).",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo especificas un hint para forzar el uso de un índice específico?",
+        "option_a": "db.coleccion.find({filtro}).hint({campo: 1})",
+        "option_b": "db.coleccion.find({filtro}).forceIndex('nombre_indice')",
+        "option_c": "db.coleccion.find({filtro}, {hint: {campo: 1}})",
+        "option_d": "Opciones a y c son correctas",
+        "option_e": "db.coleccion.find({filtro}).useIndex({campo: 1})",
+        "correct_answer": "d",
+        "explanation": ".hint({campos_del_indice}) o .hint('nombre_indice') fuerza el uso de un índice específico. Útil cuando MongoDB elige un índice subóptimo o para testing. Sintaxis: find().hint({campo: 1}) o como opción: find({}, {hint: {campo: 1}}).",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 3,
+        "question_type": "conceptual",
+        "question_text": "¿Cuándo deberías usar hint() para forzar un índice?",
+        "option_a": "Siempre",
+        "option_b": "Cuando el query planner de MongoDB elige un índice subóptimo o para testing",
+        "option_c": "Nunca, MongoDB siempre elige el mejor índice",
+        "option_d": "Solo en producción",
+        "option_e": "Solo en MongoDB Atlas",
+        "correct_answer": "b",
+        "explanation": "Normalmente MongoDB elige bien el índice. Usa hint() cuando: 1) testing de performance con diferentes índices, 2) el planner elige mal (raro, pero sucede con estadísticas desactualizadas), 3) necesitas consistencia en plan de ejecución. No abuses de hint(), el planner suele ser correcto.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "Para listings_limpio, ¿cómo limitas el tiempo máximo de ejecución de una consulta a 2 segundos?",
+        "option_a": "db.listings_limpio.find({filtro}).maxTimeMS(2000)",
+        "option_b": "db.listings_limpio.find({filtro}, {timeout: 2000})",
+        "option_c": "db.listings_limpio.find({filtro}).timeout(2000)",
+        "option_d": "db.listings_limpio.find({filtro}, {maxTime: 2000})",
+        "option_e": "No es posible limitar el tiempo",
+        "correct_answer": "a",
+        "explanation": ".maxTimeMS(milisegundos) establece timeout para la query. Si excede el tiempo, MongoDB cancela con error. Útil para prevenir queries lentas que bloqueen recursos. Ejemplo: .maxTimeMS(2000) para 2 segundos. También disponible en aggregate(), updateOne(), etc.",
+        "difficulty": "medium",
+        "dataset_reference": "listings_limpio"
+    },
+    {
+        "category_id": 3,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es el 'read preference' en MongoDB?",
+        "option_a": "El orden preferido de lectura de campos",
+        "option_b": "De qué nodo del replica set leer (primary, secondary, nearest, etc.)",
+        "option_c": "La prioridad de índices",
+        "option_d": "El formato de retorno preferido",
+        "option_e": "No existe en MongoDB",
+        "correct_answer": "b",
+        "explanation": "Read preference determina de qué nodo leer en un replica set: 'primary' (solo primario, default), 'secondary' (solo secundarios), 'primaryPreferred', 'secondaryPreferred', 'nearest' (menor latencia). Permite distribuir carga de lectura y optimizar latencia.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "¿Cómo iteras manualmente sobre un cursor en el shell?",
+        "option_a": "var cursor = db.coleccion.find(); while(cursor.hasNext()) { print(cursor.next()); }",
+        "option_b": "db.coleccion.find().forEach(doc => print(doc))",
+        "option_c": "for(var doc of db.coleccion.find()) { print(doc); }",
+        "option_d": "Todas las opciones anteriores son correctas",
+        "option_e": "db.coleccion.find().iterate()",
+        "correct_answer": "d",
+        "explanation": "Tres formas válidas de iterar cursores: 1) hasNext()/next() estilo tradicional, 2) forEach() con función callback, 3) for...of loop (JavaScript moderno). Todas funcionan en mongosh. Elige según preferencia de estilo.",
+        "difficulty": "medium"
+    },
+
+    # ==================== CATEGORÍA 4: CRUD - UPDATE ====================
+    # Preguntas 171-200 (30 de 60 totales)
+
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Cuál es la sintaxis correcta para actualizar un único documento?",
+        "option_a": "db.coleccion.updateOne({filtro}, {$set: {campo: 'nuevo_valor'}})",
+        "option_b": "db.coleccion.update({filtro}, {campo: 'nuevo_valor'})",
+        "option_c": "UPDATE coleccion SET campo = 'nuevo_valor' WHERE filtro",
+        "option_d": "db.coleccion.update({filtro}, {$set: {campo: 'nuevo_valor'}}, {multi: false})",
+        "option_e": "db.coleccion.modify({filtro}, {campo: 'nuevo_valor'})",
+        "correct_answer": "a",
+        "explanation": "updateOne({filtro}, {operadores_update}) actualiza el primer documento que coincide. Debes usar operadores de update como $set, no reemplazar el objeto completo (a menos que uses replaceOne). update() está deprecado, usa updateOne/updateMany.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Cuál es la diferencia entre updateOne() y updateMany()?",
+        "option_a": "No hay diferencia",
+        "option_b": "updateOne() actualiza solo el primer documento que coincide; updateMany() actualiza todos los que coinciden",
+        "option_c": "updateMany() es más rápido",
+        "option_d": "updateOne() requiere _id",
+        "option_e": "updateMany() está deprecado",
+        "correct_answer": "b",
+        "explanation": "updateOne() actualiza solo el PRIMER documento que coincide con el filtro. updateMany() actualiza TODOS los documentos que coinciden. Elige según necesites actualizar uno o múltiples. Ambos retornan matchedCount y modifiedCount.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Qué hace el operador $set?",
+        "option_a": "Establece o crea un campo con un valor",
+        "option_b": "Incrementa un valor",
+        "option_c": "Agrega un elemento a un array",
+        "option_d": "Elimina un campo",
+        "option_e": "Valida el esquema",
+        "correct_answer": "a",
+        "explanation": "$set actualiza el valor de un campo o lo crea si no existe. Sintaxis: {$set: {campo: valor}}. Es el operador de update más común. Puedes actualizar múltiples campos: {$set: {campo1: v1, campo2: v2}}. Sin $set, reemplazarías el documento completo.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "Para infovuelos_limpio, ¿cómo actualizas el precio de un vuelo específico por su _id?",
+        "option_a": "db.infovuelos_limpio.updateOne({_id: ObjectId('...')}, {$set: {precio: 150}})",
+        "option_b": "db.infovuelos_limpio.update({_id: '...'}, {precio: 150})",
+        "option_c": "db.infovuelos_limpio.updateOne({_id: ObjectId('...')}, {precio: 150})",
+        "option_d": "UPDATE infovuelos_limpio SET precio = 150 WHERE _id = '...'",
+        "option_e": "db.infovuelos_limpio.modify({_id: ObjectId('...')}, {$set: {precio: 150}})",
+        "correct_answer": "a",
+        "explanation": "updateOne() con filtro por _id y $set: {_id: ObjectId('id_string')} identifica el documento, {$set: {precio: 150}} actualiza el campo. Usa ObjectId() si el _id es ObjectId, no string plano. $set es necesario para actualizar campos específicos.",
+        "difficulty": "easy",
+        "dataset_reference": "infovuelos_limpio"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Cómo actualizas múltiples campos en una sola operación?",
+        "option_a": "db.coleccion.updateOne({filtro}, {$set: {campo1: v1, campo2: v2, campo3: v3}})",
+        "option_b": "db.coleccion.updateOne({filtro}, {$set: {campo1: v1}}); db.coleccion.updateOne({filtro}, {$set: {campo2: v2}})",
+        "option_c": "db.coleccion.updateOne({filtro}, {campo1: v1, campo2: v2})",
+        "option_d": "db.coleccion.updateOne({filtro}, [{$set: {campo1: v1}}, {$set: {campo2: v2}}])",
+        "option_e": "db.coleccion.update({filtro}, {$setAll: {campo1: v1, campo2: v2}})",
+        "correct_answer": "a",
+        "explanation": "$set puede actualizar múltiples campos simultáneamente: {$set: {c1: v1, c2: v2, ...}}. Es más eficiente que múltiples updates separados (una sola operación al servidor). Todos los campos se actualizan atómicamente.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Qué hace el operador $unset?",
+        "option_a": "Elimina un campo del documento",
+        "option_b": "Establece un campo a null",
+        "option_c": "Elimina el documento completo",
+        "option_d": "Deshacer un update anterior",
+        "option_e": "Limpia el valor del campo",
+        "correct_answer": "a",
+        "explanation": "$unset elimina un campo completamente del documento: {$unset: {campo: ''}}. El valor después del campo no importa (comúnmente se usa '' o 1). El campo desaparece del documento. Diferente de {$set: {campo: null}} que mantiene el campo con valor null.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "Para listings_limpio, ¿cómo eliminas el campo 'descripcion_temporal' de un documento?",
+        "option_a": "db.listings_limpio.updateOne({_id: ObjectId('...')}, {$unset: {descripcion_temporal: ''}})",
+        "option_b": "db.listings_limpio.updateOne({_id: ObjectId('...')}, {$delete: {descripcion_temporal: true}})",
+        "option_c": "db.listings_limpio.updateOne({_id: ObjectId('...')}, {$remove: 'descripcion_temporal'})",
+        "option_d": "db.listings_limpio.updateOne({_id: ObjectId('...')}, {$set: {descripcion_temporal: null}})",
+        "option_e": "db.listings_limpio.deleteField({_id: ObjectId('...')}, 'descripcion_temporal')",
+        "correct_answer": "a",
+        "explanation": "$unset elimina el campo: {$unset: {campo: valor}}. El valor puede ser cualquier cosa ('' es común). El campo se elimina completamente. Opción d establece el campo a null (el campo sigue existiendo). No existen $delete, $remove ni deleteField.",
+        "difficulty": "easy",
+        "dataset_reference": "listings_limpio"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Qué hace el operador $inc?",
+        "option_a": "Incluye un campo en la proyección",
+        "option_b": "Incrementa (o decrementa) el valor numérico de un campo",
+        "option_c": "Incrementa el contador de documentos",
+        "option_d": "Inicializa un campo",
+        "option_e": "Indexa un campo",
+        "correct_answer": "b",
+        "explanation": "$inc incrementa/decrementa un valor numérico: {$inc: {campo: cantidad}}. Valor positivo incrementa, negativo decrementa. Ejemplo: {$inc: {vistas: 1}} incrementa en 1, {$inc: {stock: -5}} decrementa en 5. Atómico y eficiente.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "Para data_act_01_limpio, ¿cómo incrementas el contador de vistas de un producto en 1?",
+        "option_a": "db.data_act_01_limpio.updateOne({_id: ObjectId('...')}, {$inc: {vistas: 1}})",
+        "option_b": "db.data_act_01_limpio.updateOne({_id: ObjectId('...')}, {$set: {vistas: vistas + 1}})",
+        "option_c": "db.data_act_01_limpio.updateOne({_id: ObjectId('...')}, {$increment: {vistas: 1}})",
+        "option_d": "db.data_act_01_limpio.updateOne({_id: ObjectId('...')}, {$add: {vistas: 1}})",
+        "option_e": "db.data_act_01_limpio.updateOne({_id: ObjectId('...')}, {vistas: {$plus: 1}})",
+        "correct_answer": "a",
+        "explanation": "$inc es el operador correcto para incrementar: {$inc: {campo: cantidad}}. Es atómico y no requiere leer el valor actual. Opción b tiene sintaxis inválida (no puedes referenciar el valor actual así). No existen $increment, $add ni $plus.",
+        "difficulty": "easy",
+        "dataset_reference": "data_act_01_limpio"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Qué hace el operador $mul?",
+        "option_a": "Multiplica el valor de un campo por un número",
+        "option_b": "Suma múltiples valores",
+        "option_c": "Actualiza múltiples documentos",
+        "option_d": "Multiplica arrays",
+        "option_e": "No existe en MongoDB",
+        "correct_answer": "a",
+        "explanation": "$mul multiplica el valor de un campo por un número: {$mul: {campo: multiplicador}}. Ejemplo: {$mul: {precio: 1.1}} aumenta el precio 10%. Si el campo no existe, se crea con valor 0. Útil para ajustes porcentuales.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Cómo reduces todos los precios en listings_limpio en un 20% (aplicar descuento)?",
+        "option_a": "db.listings_limpio.updateMany({}, {$mul: {precio: 0.8}})",
+        "option_b": "db.listings_limpio.updateMany({}, {$mul: {precio: 0.2}})",
+        "option_c": "db.listings_limpio.updateMany({}, {$dec: {precio: 0.2}})",
+        "option_d": "db.listings_limpio.updateMany({}, {$set: {precio: precio * 0.8}})",
+        "option_e": "db.listings_limpio.updateMany({}, {$inc: {precio: -0.2}})",
+        "correct_answer": "a",
+        "explanation": "Para reducir 20%, multiplica por 0.8 (80% del valor original): {$mul: {precio: 0.8}}. updateMany({}) sin filtro actualiza TODOS los documentos. $mul es el operador correcto para cambios porcentuales. 0.2 sería reducir a 20% (incorrecto).",
+        "difficulty": "medium",
+        "dataset_reference": "listings_limpio"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Qué hace el operador $min?",
+        "option_a": "Actualiza el campo solo si el nuevo valor es MENOR que el actual",
+        "option_b": "Encuentra el valor mínimo",
+        "option_c": "Reduce el valor al mínimo permitido",
+        "option_d": "Elimina el valor menor",
+        "option_e": "No existe en MongoDB",
+        "correct_answer": "a",
+        "explanation": "$min actualiza el campo solo si el nuevo valor es menor que el actual: {$min: {campo: valor}}. Si el campo no existe, lo crea con el valor. Útil para mantener el valor mínimo. $max es el opuesto (actualiza si el nuevo es mayor).",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Qué hace el operador $max?",
+        "option_a": "Actualiza el campo solo si el nuevo valor es MAYOR que el actual",
+        "option_b": "Encuentra el valor máximo",
+        "option_c": "Aumenta el valor al máximo permitido",
+        "option_d": "Elimina el valor mayor",
+        "option_e": "No existe en MongoDB",
+        "correct_answer": "a",
+        "explanation": "$max actualiza el campo solo si el nuevo valor es mayor que el actual: {$max: {campo: valor}}. Si el campo no existe, lo crea con el valor. Útil para mantener el valor máximo histórico. Ejemplo: {$max: {precio_max: 200}} mantiene el precio más alto visto.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "Para infovuelos_limpio, ¿cómo actualizas el precio_minimo solo si el nuevo precio es menor?",
+        "option_a": "db.infovuelos_limpio.updateOne({_id: ObjectId('...')}, {$min: {precio_minimo: 120}})",
+        "option_b": "db.infovuelos_limpio.updateOne({_id: ObjectId('...')}, {$set: {precio_minimo: Math.min(precio_minimo, 120)}})",
+        "option_c": "db.infovuelos_limpio.updateOne({_id: ObjectId('...')}, {$setMin: {precio_minimo: 120}})",
+        "option_d": "db.infovuelos_limpio.updateOne({_id: ObjectId('...')}, {$min: {precio_minimo: {$lt: 120}}})",
+        "option_e": "db.infovuelos_limpio.updateOne({_id: ObjectId('...')}, {$update: {precio_minimo: 'min', value: 120}})",
+        "correct_answer": "a",
+        "explanation": "$min compara y actualiza automáticamente: {$min: {campo: valor}}. Si 120 < precio_minimo actual, actualiza a 120. Si 120 >= actual, no hace nada. Es atómico y no requiere leer primero. Opción b tiene sintaxis inválida.",
+        "difficulty": "medium",
+        "dataset_reference": "infovuelos_limpio"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Qué hace el operador $rename?",
+        "option_a": "Renombra un campo",
+        "option_b": "Renombra la colección",
+        "option_c": "Renombra la base de datos",
+        "option_d": "Cambia el valor de un campo",
+        "option_e": "Renombra el _id",
+        "correct_answer": "a",
+        "explanation": "$rename cambia el nombre de un campo: {$rename: {nombreViejo: 'nombreNuevo'}}. El valor se mantiene. Si el campo de destino ya existe, se sobrescribe. Si el campo origen no existe, no hace nada. Útil para refactorizaciones de esquema.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Cómo renombras el campo 'titulo' a 'nombre' en todos los documentos de listings_limpio?",
+        "option_a": "db.listings_limpio.updateMany({}, {$rename: {titulo: 'nombre'}})",
+        "option_b": "db.listings_limpio.updateMany({}, {$rename: {titulo: {$to: 'nombre'}}})",
+        "option_c": "db.listings_limpio.renameField('titulo', 'nombre')",
+        "option_d": "db.listings_limpio.updateMany({}, {$set: {nombre: '$titulo'}, $unset: {titulo: ''}})",
+        "option_e": "ALTER TABLE listings_limpio RENAME COLUMN titulo TO nombre",
+        "correct_answer": "a",
+        "explanation": "$rename con updateMany actualiza todos: {$rename: {viejoNombre: 'nuevoNombre'}}. Cambia el nombre del campo en todos los documentos que lo tienen. El valor se preserva. No existe renameField() ni sintaxis SQL en MongoDB.",
+        "difficulty": "easy",
+        "dataset_reference": "listings_limpio"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Qué hace el operador $currentDate?",
+        "option_a": "Establece un campo con la fecha/hora actual del servidor",
+        "option_b": "Filtra por fecha actual",
+        "option_c": "Valida que una fecha sea actual",
+        "option_d": "Formatea la fecha actual",
+        "option_e": "No existe en MongoDB",
+        "correct_answer": "a",
+        "explanation": "$currentDate establece un campo con la fecha/hora actual del servidor: {$currentDate: {campo: true}} (Date) o {campo: {$type: 'timestamp'}} (Timestamp). Útil para campos lastModified, updatedAt. Usa la hora del servidor, no del cliente.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Cómo actualizas un documento y estableces automáticamente el campo 'ultima_modificacion' con la fecha actual?",
+        "option_a": "db.coleccion.updateOne({_id: ObjectId('...')}, {$set: {campo: valor}, $currentDate: {ultima_modificacion: true}})",
+        "option_b": "db.coleccion.updateOne({_id: ObjectId('...')}, {$set: {campo: valor, ultima_modificacion: new Date()}})",
+        "option_c": "db.coleccion.updateOne({_id: ObjectId('...')}, {$set: {campo: valor}, $timestamp: {ultima_modificacion: true}})",
+        "option_d": "Opciones a y b son correctas",
+        "option_e": "db.coleccion.updateOne({_id: ObjectId('...')}, {$set: {campo: valor}, $now: 'ultima_modificacion'})",
+        "correct_answer": "d",
+        "explanation": "Ambas funcionan: $currentDate usa fecha del servidor: {$currentDate: {campo: true}}. $set con new Date() usa fecha del cliente. $currentDate es preferible para consistencia (todos los nodos usan la misma hora). Puedes combinar múltiples operadores: {$set: {...}, $currentDate: {...}}.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Qué hace el operador $push en arrays?",
+        "option_a": "Agrega un elemento al final de un array",
+        "option_b": "Elimina un elemento del array",
+        "option_c": "Ordena el array",
+        "option_d": "Busca en el array",
+        "option_e": "Invierte el array",
+        "correct_answer": "a",
+        "explanation": "$push agrega un elemento al final de un array: {$push: {array: valor}}. Si el array no existe, lo crea. Permite duplicados. Para evitar duplicados usa $addToSet. $push puede combinarse con modificadores como $each, $slice, $sort, $position.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "Para data_act_01_limpio, ¿cómo agregas un nuevo comentario al array de comentarios?",
+        "option_a": "db.data_act_01_limpio.updateOne({_id: ObjectId('...')}, {$push: {comentarios: {autor: 'Juan', texto: 'Excelente'}}})",
+        "option_b": "db.data_act_01_limpio.updateOne({_id: ObjectId('...')}, {$add: {comentarios: {autor: 'Juan', texto: 'Excelente'}}})",
+        "option_c": "db.data_act_01_limpio.updateOne({_id: ObjectId('...')}, {$append: {comentarios: {autor: 'Juan', texto: 'Excelente'}}})",
+        "option_d": "db.data_act_01_limpio.updateOne({_id: ObjectId('...')}, {$set: {comentarios: [...comentarios, {autor: 'Juan'}]}})",
+        "option_e": "db.data_act_01_limpio.updateOne({_id: ObjectId('...')}, {$insert: {comentarios: {autor: 'Juan', texto: 'Excelente'}}})",
+        "correct_answer": "a",
+        "explanation": "$push agrega al array: {$push: {array: valor}}. El valor puede ser cualquier tipo, incluyendo objetos. $push funciona atómicamente sin necesidad de leer primero el array. No existen $add, $append ni $insert para arrays.",
+        "difficulty": "easy",
+        "dataset_reference": "data_act_01_limpio"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Qué hace el operador $addToSet?",
+        "option_a": "Agrega un elemento al array solo si no existe (evita duplicados)",
+        "option_b": "Crea un nuevo conjunto",
+        "option_c": "Agrega múltiples elementos",
+        "option_d": "Es lo mismo que $push",
+        "option_e": "Elimina elementos del array",
+        "correct_answer": "a",
+        "explanation": "$addToSet agrega un elemento al array solo si no existe ya: {$addToSet: {array: valor}}. Evita duplicados. Si el valor ya está en el array, no hace nada. Útil para conjuntos de valores únicos como tags. Si el array no existe, lo crea.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 4,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es la diferencia principal entre $push y $addToSet?",
+        "option_a": "No hay diferencia",
+        "option_b": "$push permite duplicados; $addToSet evita duplicados",
+        "option_c": "$addToSet es más rápido",
+        "option_d": "$push solo funciona con números",
+        "option_e": "$addToSet está deprecado",
+        "correct_answer": "b",
+        "explanation": "$push SIEMPRE agrega el elemento, permitiendo duplicados. $addToSet agrega solo si el valor NO existe, evitando duplicados. Usa $push para listas con orden (ej: comentarios cronológicos). Usa $addToSet para conjuntos únicos (ej: tags).",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "Para listings_limpio, ¿cómo agregas un tag 'wifi' solo si no existe ya?",
+        "option_a": "db.listings_limpio.updateOne({_id: ObjectId('...')}, {$addToSet: {tags: 'wifi'}})",
+        "option_b": "db.listings_limpio.updateOne({_id: ObjectId('...')}, {$push: {tags: 'wifi'}})",
+        "option_c": "db.listings_limpio.updateOne({_id: ObjectId('...')}, {$pushUnique: {tags: 'wifi'}})",
+        "option_d": "db.listings_limpio.updateOne({_id: ObjectId('...')}, {$addIfNotExists: {tags: 'wifi'}})",
+        "option_e": "db.listings_limpio.updateOne({_id: ObjectId('...')}, {$set: {tags: {$unique: 'wifi'}}})",
+        "correct_answer": "a",
+        "explanation": "$addToSet garantiza unicidad: {$addToSet: {array: valor}}. Si 'wifi' ya está en tags, no hace nada. Si no está, lo agrega. Ideal para tags, categorías, conjuntos. $push agregaría el duplicado. No existen $pushUnique ni $addIfNotExists.",
+        "difficulty": "easy",
+        "dataset_reference": "listings_limpio"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Qué hace el operador $pull?",
+        "option_a": "Elimina todos los elementos de un array que coinciden con una condición",
+        "option_b": "Extrae un elemento del array",
+        "option_c": "Obtiene valores del array",
+        "option_d": "Tira elementos al final",
+        "option_e": "No existe en MongoDB",
+        "correct_answer": "a",
+        "explanation": "$pull elimina TODOS los elementos del array que coinciden con la condición: {$pull: {array: valor}} o {$pull: {array: {condición}}}. Elimina múltiples coincidencias en una operación. Para eliminar por posición usa $pop o $unset con índice.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Cómo eliminas todos los comentarios de un usuario específico del array de comentarios?",
+        "option_a": "db.coleccion.updateOne({_id: ObjectId('...')}, {$pull: {comentarios: {autor: 'Juan'}}})",
+        "option_b": "db.coleccion.updateOne({_id: ObjectId('...')}, {$remove: {comentarios: {autor: 'Juan'}}})",
+        "option_c": "db.coleccion.updateOne({_id: ObjectId('...')}, {$delete: {comentarios: {autor: 'Juan'}}})",
+        "option_d": "db.coleccion.updateOne({_id: ObjectId('...')}, {$unset: {'comentarios.autor': 'Juan'}})",
+        "option_e": "db.coleccion.updateOne({_id: ObjectId('...')}, {$pop: {comentarios: {autor: 'Juan'}}})",
+        "correct_answer": "a",
+        "explanation": "$pull con condición elimina todos los elementos que coinciden: {$pull: {array: {campo: valor}}}. Elimina todos los subdocumentos donde autor === 'Juan'. Muy útil para arrays de objetos. No existen $remove ni $delete.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Qué hace el operador $pop?",
+        "option_a": "Elimina el primer elemento (con -1) o el último (con 1) de un array",
+        "option_b": "Elimina elementos por valor",
+        "option_c": "Elimina duplicados",
+        "option_d": "Elimina todos los elementos",
+        "option_e": "No existe en MongoDB",
+        "correct_answer": "a",
+        "explanation": "$pop elimina elementos por posición: {$pop: {array: 1}} elimina el último, {$pop: {array: -1}} elimina el primero. Solo acepta 1 o -1. Para eliminar por valor usa $pull. Para eliminar por índice usa $unset con dot notation.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Cómo eliminas el último elemento de un array de tags?",
+        "option_a": "db.coleccion.updateOne({_id: ObjectId('...')}, {$pop: {tags: 1}})",
+        "option_b": "db.coleccion.updateOne({_id: ObjectId('...')}, {$pop: {tags: -1}})",
+        "option_c": "db.coleccion.updateOne({_id: ObjectId('...')}, {$pop: {tags: 'last'}})",
+        "option_d": "db.coleccion.updateOne({_id: ObjectId('...')}, {$removeLast: {tags: true}})",
+        "option_e": "db.coleccion.updateOne({_id: ObjectId('...')}, {$shift: {tags: 1}})",
+        "correct_answer": "a",
+        "explanation": "$pop con 1 elimina el ÚLTIMO elemento: {$pop: {array: 1}}. Con -1 elimina el PRIMERO: {$pop: {array: -1}}. Solo acepta estos valores. Recuerda: 1 = último (como array.pop()), -1 = primero (como array.shift()).",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Cómo agregas múltiples elementos a un array en una sola operación?",
+        "option_a": "db.coleccion.updateOne({_id: ObjectId('...')}, {$push: {array: {$each: ['elem1', 'elem2', 'elem3']}}})",
+        "option_b": "db.coleccion.updateOne({_id: ObjectId('...')}, {$pushAll: {array: ['elem1', 'elem2', 'elem3']}})",
+        "option_c": "db.coleccion.updateOne({_id: ObjectId('...')}, {$push: {array: ['elem1', 'elem2', 'elem3']}})",
+        "option_d": "db.coleccion.updateOne({_id: ObjectId('...')}, {$addMany: {array: ['elem1', 'elem2', 'elem3']}})",
+        "option_e": "db.coleccion.updateOne({_id: ObjectId('...')}, {$insertMany: {array: ['elem1', 'elem2', 'elem3']}})",
+        "correct_answer": "a",
+        "explanation": "$push con modificador $each agrega múltiples elementos: {$push: {array: {$each: [valores]}}}. $pushAll está deprecado. Sin $each, opción c agregaría el array completo como un solo elemento (array anidado). $each es el método correcto.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "Para infovuelos_limpio, ¿cómo agregas múltiples escalas de una vez al array escalas?",
+        "option_a": "db.infovuelos_limpio.updateOne({_id: ObjectId('...')}, {$push: {escalas: {$each: ['MAD', 'BCN', 'PAR']}}})",
+        "option_b": "db.infovuelos_limpio.updateOne({_id: ObjectId('...')}, {$push: {escalas: ['MAD', 'BCN', 'PAR']}})",
+        "option_c": "db.infovuelos_limpio.updateOne({_id: ObjectId('...')}, {$pushMany: {escalas: ['MAD', 'BCN', 'PAR']}})",
+        "option_d": "db.infovuelos_limpio.updateOne({_id: ObjectId('...')}, {$addAll: {escalas: ['MAD', 'BCN', 'PAR']}})",
+        "option_e": "db.infovuelos_limpio.updateOne({_id: ObjectId('...')}, {$set: {escalas: {$concat: ['MAD', 'BCN', 'PAR']}}})",
+        "correct_answer": "a",
+        "explanation": "$push con $each agrega múltiples elementos individualmente: {$push: {array: {$each: [v1, v2, v3]}}}. Opción b agregaría el array completo como un elemento (escalas tendría [['MAD', 'BCN', 'PAR']]). $each es esencial para agregar múltiples elementos.",
+        "difficulty": "medium",
+        "dataset_reference": "infovuelos_limpio"
+    }
+]
+
+# Total Batch 4: 50 preguntas
+# Categoría 3 (CRUD - Read): 20 preguntas finales (completando las 80) ✅
+# Categoría 4 (CRUD - Update): 30 de 60 preguntas
