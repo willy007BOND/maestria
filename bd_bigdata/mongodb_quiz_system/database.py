@@ -294,8 +294,11 @@ def get_exam_answers(exam_id: int) -> List[Dict]:
 
 # ==================== FUNCIONES PARA STUDY_PROGRESS ====================
 
-def update_study_progress(category_id: int, is_correct: bool):
-    """Actualiza el progreso de estudio de una categoría"""
+def update_study_progress(category_id: int, questions_answered_delta: int = 1,
+                         questions_correct_delta: int = 0):
+    """
+    Actualiza el progreso de estudio de una categoría con deltas
+    """
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -307,18 +310,18 @@ def update_study_progress(category_id: int, is_correct: bool):
         # Actualizar
         cursor.execute('''
             UPDATE study_progress
-            SET questions_answered = questions_answered + 1,
+            SET questions_answered = questions_answered + ?,
                 questions_correct = questions_correct + ?,
                 last_study_date = CURRENT_TIMESTAMP
             WHERE category_id = ?
-        ''', (1 if is_correct else 0, category_id))
+        ''', (questions_answered_delta, questions_correct_delta, category_id))
     else:
         # Insertar
         cursor.execute('''
             INSERT INTO study_progress
             (category_id, questions_answered, questions_correct, last_study_date)
-            VALUES (?, 1, ?, CURRENT_TIMESTAMP)
-        ''', (category_id, 1 if is_correct else 0))
+            VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+        ''', (category_id, questions_answered_delta, questions_correct_delta))
 
     conn.commit()
     conn.close()
@@ -409,6 +412,53 @@ def get_overall_stats() -> Dict:
         'total_questions_correct': total_correct,
         'overall_accuracy': round(overall_accuracy, 2)
     }
+
+# ==================== FUNCIONES ADICIONALES PARA APP.PY ====================
+
+def insert_exam(total_questions: int, correct_answers: int, score: float,
+                selected_categories: str, time_spent_seconds: int) -> int:
+    """
+    Inserta un nuevo examen con todos los datos
+    (Versión alternativa de create_exam compatible con app.py)
+    """
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO exams
+        (total_questions, correct_answers, score, selected_categories, time_spent_seconds)
+        VALUES (?, ?, ?, ?, ?)
+    ''', (total_questions, correct_answers, score, selected_categories, time_spent_seconds))
+    exam_id = cursor.lastrowid
+    conn.commit()
+    conn.close()
+    return exam_id
+
+def get_study_progress_all() -> List[Dict]:
+    """
+    Alias para get_study_progress() - obtiene el progreso de todas las categorías
+    """
+    return get_study_progress()
+
+def get_exam_history(limit: int = 20) -> List[Dict]:
+    """
+    Obtiene el historial de exámenes con un límite específico
+    """
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM exams ORDER BY exam_date DESC LIMIT ?', (limit,))
+    exams = []
+    for row in cursor.fetchall():
+        exam = dict(row)
+        if exam.get('selected_categories'):
+            try:
+                exam['selected_categories'] = json.loads(exam['selected_categories'])
+            except:
+                exam['selected_categories'] = []
+        else:
+            exam['selected_categories'] = []
+        exams.append(exam)
+    conn.close()
+    return exams
 
 if __name__ == '__main__':
     # Inicializar la base de datos si se ejecuta directamente

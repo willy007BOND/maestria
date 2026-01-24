@@ -64,22 +64,40 @@ Sistema de evaluación interactivo para estudiar MongoDB con 520 preguntas distr
 
 ## Uso
 
-1. **Iniciar el servidor:**
+### Método 1: Script de inicio rápido (Recomendado para macOS/Linux)
+
+```bash
+./start_server.sh
+```
+
+Este script automáticamente:
+- Activa el ambiente conda 'data'
+- Verifica si existe la BD (si no, la crea)
+- Inicia el servidor Flask
+
+### Método 2: Manual
+
+1. **Activar ambiente conda:**
+   ```bash
+   conda activate data
+   ```
+
+2. **Iniciar el servidor:**
    ```bash
    python app.py
    ```
 
-2. **Abrir en el navegador:**
+3. **Abrir en el navegador:**
    ```
    http://127.0.0.1:5000
    ```
 
-3. **Flujo de uso:**
-   - Selecciona las categorías que quieres estudiar (o déjalo vacío para todas)
-   - Responde el examen de 20 preguntas
-   - Revisa tus resultados y las explicaciones
-   - Consulta tu progreso por categoría
-   - Revisa el historial de exámenes anteriores
+### Flujo de uso de la aplicación:
+- Selecciona las categorías que quieres estudiar (o déjalo vacío para todas)
+- Responde el examen de 20 preguntas
+- Revisa tus resultados y las explicaciones
+- Consulta tu progreso por categoría
+- Revisa el historial de exámenes anteriores
 
 ## Estructura del Proyecto
 
