@@ -6368,3 +6368,740 @@ QUESTIONS_BATCH_9 = [
 # Total Batch 9: 40 preguntas ✅
 # Categoría 8 (Otras Funcionalidades): 40 preguntas ✅
 # Total acumulado: 472 preguntas de 520
+
+# ============================================================================
+# BATCH 10: CATEGORÍA 9 - OPERACIONES AVANZADAS (40 preguntas)
+# ============================================================================
+
+QUESTIONS_BATCH_10 = [
+    # ==================== CATEGORÍA 9: OPERACIONES AVANZADAS ====================
+
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es un replica set?",
+        "option_a": "Una copia de seguridad",
+        "option_b": "Grupo de instancias MongoDB que mantienen el mismo dataset con alta disponibilidad",
+        "option_c": "Un tipo de índice",
+        "option_d": "Solo para MongoDB Atlas",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Replica set: grupo de mongod que replican datos. Uno es primary (recibe writes), otros secundaries (replican). Si primary falla, automático election de nuevo primary. Mínimo 3 nodos recomendado (o 2 + arbiter). Proporciona: high availability, data redundancy, disaster recovery.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué roles tienen los miembros de un replica set?",
+        "option_a": "Todos son iguales",
+        "option_b": "Primary (writes/reads), Secondary (replican, pueden reads), Arbiter (solo vota, no data)",
+        "option_c": "Solo Primary y Secondary",
+        "option_d": "Master y Slave",
+        "option_e": "No hay roles",
+        "correct_answer": "b",
+        "explanation": "Primary: ÚNICO que recibe writes, puede reads. Secondary: replican primary vía oplog, pueden reads (con readPreference). Arbiter: participa en elections, NO almacena data (ahorra recursos). También: Hidden (no visible a clientes), Delayed (replicación con delay), Priority 0 (nunca primary).",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es el oplog en replicación?",
+        "option_a": "Un archivo de log",
+        "option_b": "Capped collection (local.oplog.rs) que registra todas las operaciones de escritura para replicación",
+        "option_c": "Un tipo de índice",
+        "option_d": "Solo para debugging",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Oplog (operations log): capped collection en DB local. Primary registra todas las writes. Secondaries leen oplog y aplican operaciones. Idempotente (aplicar múltiples veces = mismo resultado). Tamaño configurable. Si secondary se atrasa más que tamaño oplog, necesita resync inicial.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué sucede cuando el primary de un replica set falla?",
+        "option_a": "El sistema se detiene",
+        "option_b": "Automatic election: un secondary se convierte en primary (típicamente <12 segundos)",
+        "option_c": "Requiere intervención manual",
+        "option_d": "Los datos se pierden",
+        "option_e": "Solo funciona en Atlas",
+        "correct_answer": "b",
+        "explanation": "Election automática: cuando primary falla o no responde, secondaries votan por nuevo primary. Majority vote requerido. Típicamente <12 segundos. Durante election: NO writes (reads dependen de readConcern). Después: nuevo primary acepta writes. IMPORTANTE: mayoría de nodos debe estar disponible.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es sharding?",
+        "option_a": "Una forma de backup",
+        "option_b": "Método de distribución horizontal de datos across múltiples servidores (particionamiento)",
+        "option_c": "Un tipo de índice",
+        "option_d": "Solo para grandes empresas",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Sharding: particiona datos horizontalmente across múltiples servidores (shards). Cada shard: subset de datos. Permite: escalar horizontalmente, más throughput, más storage. Componentes: config servers (metadata), mongos (router), shards (data). Para datasets muy grandes (>100GB+).",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es mongos?",
+        "option_a": "Una versión de MongoDB",
+        "option_b": "Query router en sharded cluster que direcciona queries a shards correctos",
+        "option_c": "Un comando",
+        "option_d": "Un tipo de índice",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "mongos: routing service en sharded cluster. Clientes conectan a mongos (no directamente a shards). mongos lee metadata de config servers y enruta queries a shards apropiados. Stateless: puede tener múltiples mongos (load balancing). Agrega resultados de múltiples shards.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es un shard key?",
+        "option_a": "Una contraseña",
+        "option_b": "Campo(s) usado para particionar y distribuir datos across shards",
+        "option_c": "Un tipo de índice",
+        "option_d": "Solo para seguridad",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Shard key: campo(s) que determina cómo distribuir documentos. INMUTABLE después de elegir. Debe tener índice. Tipos: ranged (rangos de valores), hashed (hash del valor). CRÍTICO: mala elección = hotspots, distribución desigual. Buenos shard keys: alta cardinalidad, distribución uniforme, queries usan shard key.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es el database profiler?",
+        "option_a": "Un tipo de índice",
+        "option_b": "Herramienta que registra operaciones de DB para análisis de performance",
+        "option_c": "Un backup tool",
+        "option_d": "Solo para desarrollo",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Profiler: registra operaciones (queries, writes) en system.profile collection. Niveles: 0 (off), 1 (solo slow ops), 2 (todas ops). Configurable threshold (milisegundos). Útil para: identificar slow queries, optimizar. CUIDADO: nivel 2 impacta performance. En producción: nivel 1 con threshold apropiado.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "syntax",
+        "question_text": "¿Cómo activas el profiler para queries >100ms?",
+        "option_a": "db.setProfilingLevel(1, {slowms: 100})",
+        "option_b": "db.enableProfiling(100)",
+        "option_c": "db.profiler.start({threshold: 100})",
+        "option_d": "mongod --profile 1 --slowms 100",
+        "option_e": "No se puede configurar",
+        "correct_answer": "a",
+        "explanation": "setProfilingLevel(level, options). Level: 0/1/2. slowms: threshold. Para ver: db.getProfilingStatus(). Para leer: db.system.profile.find(). Para filtrar: {millis: {$gt: 100}}. Limit collection size: capped. También: db.setProfilingLevel(0) para desactivar.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es explain() y para qué sirve?",
+        "option_a": "Documenta queries",
+        "option_b": "Retorna plan de ejecución de query (índices usados, docs examinados, tiempo)",
+        "option_c": "Ejecuta queries más rápido",
+        "option_d": "Un tipo de índice",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "explain(): analiza query sin ejecutar (o ejecutando según modo). Modos: 'queryPlanner' (plan), 'executionStats' (ejecuta + stats), 'allPlansExecution' (todos planes considerados). Info: índices, docs examined/returned, execution time. ESENCIAL para optimización. Identifica: missing indexes, inefficient queries.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "syntax",
+        "question_text": "¿Cómo usas explain() con execution stats?",
+        "option_a": "db.collection.find({filtro}).explain('executionStats')",
+        "option_b": "db.collection.explain().find({filtro})",
+        "option_c": "db.collection.find({filtro}).stats()",
+        "option_d": "Tanto a como b son correctas",
+        "option_e": "No se puede",
+        "correct_answer": "d",
+        "explanation": "Dos sintaxis: cursor.explain(verbosity) o db.collection.explain(verbosity).find(). Verbosity: 'queryPlanner', 'executionStats', 'allPlansExecution'. executionStats: ejecuta query, retorna stats reales. Analiza: totalDocsExamined, totalKeysExamined, executionTimeMillis, nReturned.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué indica en explain() que totalDocsExamined >> nReturned?",
+        "option_a": "Query muy eficiente",
+        "option_b": "Query posiblemente ineficiente, examina muchos docs pero retorna pocos (probablemente falta índice)",
+        "option_c": "Es normal",
+        "option_d": "No importa",
+        "option_e": "Error en la query",
+        "correct_answer": "b",
+        "explanation": "totalDocsExamined vs nReturned: ratio importante. Ideal: ~1:1. Si examina 10000 docs pero retorna 10: INEFICIENTE. Causas: sin índice apropiado, índice no selectivo, query no usa índice. Solución: crear/mejorar índice. COLLSCAN (collection scan) es señal de alerta.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es un índice compuesto (compound) y cuándo usarlo?",
+        "option_a": "Un índice de múltiples colecciones",
+        "option_b": "Índice en múltiples campos, orden importa (queries deben usar prefix del índice)",
+        "option_c": "Un índice complejo",
+        "option_d": "Solo para texto",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Compound index: múltiples campos {a: 1, b: 1, c: 1}. Soporta queries con prefixes: {a}, {a,b}, {a,b,c} pero NO {b}, {c}, {b,c}. ORDEN IMPORTA: equality first, sort/range last. Más eficiente que múltiples single-field indexes. Regla ESR: Equality, Sort, Range.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es el ESR rule para índices compuestos?",
+        "option_a": "Un tipo de índice",
+        "option_b": "Regla de orden: Equality (=), Sort (ordenamiento), Range (>, <) para mejor performance",
+        "option_c": "Un comando",
+        "option_d": "Solo para aggregation",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "ESR: orden óptimo campos en compound index. E (Equality): campos con = primero. S (Sort): campos de ordenamiento. R (Range): campos con range queries ($gt, $lt) último. Ejemplo: query {status: 'active', date: {$gt: X}}.sort({name: 1}) → índice {status: 1, name: 1, date: 1}.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es index selectivity?",
+        "option_a": "Cantidad de índices",
+        "option_b": "Medida de cuán únicos son los valores (alta selectividad = pocos duplicados, más eficiente)",
+        "option_c": "Velocidad del índice",
+        "option_d": "Tamaño del índice",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Selectivity: ratio de valores únicos vs total docs. Alta selectividad (ej: email, _id): muy eficiente. Baja selectividad (ej: boolean, gender): menos eficiente. Para baja selectividad: considera partial index o compound index. Índices con alta selectividad filtran más docs.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es read concern?",
+        "option_a": "Preocupación por lectura",
+        "option_b": "Nivel de consistencia/isolation para operaciones de lectura",
+        "option_c": "Un tipo de índice",
+        "option_d": "Solo para writes",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Read concern: garantías de consistencia en reads. Niveles: 'local' (data local, puede rollback), 'majority' (acknowledged por majority, durable), 'linearizable' (linearizable reads), 'available' (no waiting), 'snapshot' (en transacciones). Balance: consistencia vs latencia.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué diferencia hay entre 'local' y 'majority' read concern?",
+        "option_a": "No hay diferencia",
+        "option_b": "'local' puede leer datos que podrían hacer rollback; 'majority' solo lee datos durables (majority acknowledged)",
+        "option_c": "'majority' es más rápido",
+        "option_d": "'local' es más seguro",
+        "option_e": "Solo funciona en standalone",
+        "correct_answer": "b",
+        "explanation": "'local': lee desde primary local, puede incluir writes no replicados (si primary falla, rollback). 'majority': lee solo data acknowledged por majority (durable, no rollback). 'majority' más latencia pero más seguro. Para strong consistency: 'majority'. Default: 'local'.",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es causal consistency?",
+        "option_a": "Un tipo de índice",
+        "option_b": "Garantiza que reads ven writes en orden causal (si A writes luego B reads, B ve write de A)",
+        "option_c": "Solo para logs",
+        "option_d": "No relacionado con MongoDB",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Causal consistency (3.6+): garantiza orden causal de operaciones. Requiere: sessions, majority read/write concern. Útil cuando: múltiples apps, reads después de writes, distributed. Ejemplo: write luego immediate read ve el write (sin causal, read podría ver stale data de secondary).",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es el working set en MongoDB?",
+        "option_a": "Conjunto de operaciones",
+        "option_b": "Subset de datos frecuentemente accedidos que deben caber en RAM para performance óptimo",
+        "option_c": "Un tipo de colección",
+        "option_d": "Solo para sharding",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Working set: datos + índices frecuentemente usados. CRÍTICO: debe caber en RAM. Si working set > RAM: disk I/O constante (muy lento). MongoDB usa memory-mapped files. Monitorea: page faults. Solución: más RAM o reducir working set (indexes, data).",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué herramientas de monitoreo proporciona MongoDB?",
+        "option_a": "Ninguna",
+        "option_b": "mongostat (stats tiempo real), mongotop (time en colecciones), db.serverStatus(), Cloud Manager/Ops Manager",
+        "option_c": "Solo logs",
+        "option_d": "Solo Atlas",
+        "option_e": "Requiere tools externos",
+        "correct_answer": "b",
+        "explanation": "mongostat: stats cada segundo (inserts, queries, updates, etc.). mongotop: tiempo por colección. db.serverStatus(): métricas completas. db.stats(), collection.stats(). También: MongoDB Cloud Manager (SaaS), Ops Manager (on-prem), Atlas monitoring. Prometheus exporter disponible.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es mongodump y mongorestore?",
+        "option_a": "Comandos obsoletos",
+        "option_b": "Herramientas para backup (dump) y restauración (restore) de datos BSON",
+        "option_c": "Solo para desarrollo",
+        "option_d": "Herramientas de debugging",
+        "option_e": "No existen",
+        "correct_answer": "b",
+        "explanation": "mongodump: export BSON backup de DB/colección. mongorestore: import desde dump. Útil para: backups, migración, testing. Formato BSON (no human-readable, preserva tipos). Para JSON: mongoexport/mongoimport. mongodump no es snapshot consistente (usa para dev, no prod crítico).",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es la diferencia entre mongodump y snapshot?",
+        "option_a": "Son iguales",
+        "option_b": "mongodump: logical backup (documenta por documento); snapshot: filesystem/volume backup (más rápido, consistente)",
+        "option_c": "mongodump es más rápido",
+        "option_d": "snapshot no existe",
+        "option_e": "No hay diferencia",
+        "correct_answer": "b",
+        "explanation": "mongodump: logical backup, puede hacerse en línea pero no point-in-time consistente. Snapshot: filesystem-level (LVM, EBS), instantáneo, consistente. Para prod: snapshots + oplog. mongodump: pequeños DBs, dev/test. Snapshots: producción, grandes datasets. Cloud provider snapshots recomendados.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es authentication en MongoDB?",
+        "option_a": "No existe",
+        "option_b": "Proceso de verificar identidad del usuario antes de permitir acceso",
+        "option_c": "Un tipo de índice",
+        "option_d": "Solo para Atlas",
+        "option_e": "Automático",
+        "correct_answer": "b",
+        "explanation": "Authentication: verifica quién eres. Mecanismos: SCRAM (default, username/password), x.509 (certificates), LDAP, Kerberos. Crea usuarios con roles. IMPORTANTE: MongoDB SIN auth acepta cualquier conexión (NUNCA en producción expuesta). Habilita auth con --auth o security.authorization en config.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es authorization en MongoDB?",
+        "option_a": "Igual que authentication",
+        "option_b": "Proceso de determinar qué acciones puede realizar un usuario autenticado (roles y permisos)",
+        "option_c": "No existe",
+        "option_d": "Solo para Enterprise",
+        "option_e": "Automático",
+        "correct_answer": "b",
+        "explanation": "Authorization: qué puedes hacer. Basado en roles: read, readWrite, dbAdmin, userAdmin, root. Roles por DB. Built-in roles + custom roles. Principio least privilege: mínimos permisos necesarios. Authentication (quién) + Authorization (qué) = seguridad completa.",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué son los built-in roles en MongoDB?",
+        "option_a": "No existen roles",
+        "option_b": "Roles predefinidos: read, readWrite, dbAdmin, userAdmin, clusterAdmin, root, etc.",
+        "option_c": "Solo custom roles permitidos",
+        "option_d": "Un tipo de índice",
+        "option_e": "Solo en Atlas",
+        "correct_answer": "b",
+        "explanation": "Built-in roles: read (read data), readWrite (read+write), dbAdmin (admin operations), userAdmin (manage users), clusterAdmin (cluster management), root (superuser). Por DB excepto cluster roles. Usa roles específicos, evita root. Puedes crear custom roles para necesidades específicas.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es encryption at rest?",
+        "option_a": "Encriptación durante transporte",
+        "option_b": "Encriptación de datos almacenados en disco",
+        "option_c": "Un tipo de índice",
+        "option_d": "Solo para passwords",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Encryption at rest: encripta data files en disco. Protege si: roban discos, acceso físico no autorizado. MongoDB: WiredTiger encryption (Enterprise/Atlas). Requiere key management. También: TLS/SSL para encryption in transit. Defense in depth: ambos tipos de encriptación.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es TLS/SSL en MongoDB?",
+        "option_a": "Un tipo de backup",
+        "option_b": "Protocolo de encriptación para comunicación client-server (encryption in transit)",
+        "option_c": "Un rol",
+        "option_d": "Solo para Atlas",
+        "option_e": "No necesario",
+        "correct_answer": "b",
+        "explanation": "TLS/SSL: encripta comunicación entre cliente-servidor y entre nodos de replica set/sharded cluster. Protege: man-in-the-middle, eavesdropping. Requiere: certificates. Configura: net.tls en config. ESENCIAL en producción, especialmente si conexiones atraviesan redes públicas.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es el storage engine en MongoDB?",
+        "option_a": "Un motor de búsqueda",
+        "option_b": "Componente que gestiona cómo datos se almacenan en disco (WiredTiger es default)",
+        "option_c": "Un tipo de índice",
+        "option_d": "Una herramienta externa",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Storage engine: capa de almacenamiento. WiredTiger (default desde 3.2): compresión, document-level locking, encryption. MMAPv1 (deprecado). WiredTiger: mejor performance, concurrencia, compresión. In-memory engine también disponible (Enterprise). Storage engine define: formato archivos, concurrency, compresión.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué ventajas tiene WiredTiger?",
+        "option_a": "Ninguna especial",
+        "option_b": "Document-level locking (más concurrencia), compresión, snapshots, checkpoints, encryption",
+        "option_c": "Solo compresión",
+        "option_d": "Es más antiguo",
+        "option_e": "No hay ventajas",
+        "correct_answer": "b",
+        "explanation": "WiredTiger: document-level locking (vs collection-level en MMAPv1, mucho mejor concurrencia). Compresión: snappy (default), zlib, zstd. Checkpoints: snapshots consistentes cada 60s. Journaling eficiente. Encryption at rest (Enterprise). Cache configurable. Mucho mejor que MMAPv1.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es journaling en MongoDB?",
+        "option_a": "Un tipo de log",
+        "option_b": "Write-ahead log que garantiza durabilidad (recovery tras crash)",
+        "option_c": "Solo para debugging",
+        "option_d": "No existe",
+        "option_e": "Opcional sin importancia",
+        "correct_answer": "b",
+        "explanation": "Journal: write-ahead log de operaciones. Antes de aplicar a data files, escribe a journal. En crash: replica desde journal. WiredTiger: journal en disco cada 50-100ms (configurable). Garantiza durabilidad con write concern {j: true}. CRÍTICO para evitar pérdida de datos en crash.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es el replication lag?",
+        "option_a": "Lag de red",
+        "option_b": "Retraso entre primary y secondary en aplicar operaciones del oplog",
+        "option_c": "Un error",
+        "option_d": "Solo en sharding",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Replication lag: cuánto se atrasa secondary respecto a primary. Medido en segundos. Causas: secondary sobrecargado, network slow, disk slow, operaciones pesadas. Monitorea: rs.printSecondaryReplicationInfo(). Alto lag: reads de secondary ven stale data, risk de secondary no poder catch up si primary falla.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es un initial sync en replicación?",
+        "option_a": "Primera conexión",
+        "option_b": "Proceso de copiar dataset completo cuando nuevo secondary se une o secondary está muy atrasado",
+        "option_c": "Un tipo de backup",
+        "option_d": "Solo al instalar",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Initial sync: copia completa de datos de otro miembro. Ocurre cuando: nuevo member, secondary muy atrasado (oplog no cubre), after restore de backup. Proceso: clone data, apply oplog ops durante clone, build indexes. Costoso (tiempo, recursos, network). Evita: mantén oplog suficientemente grande.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es balancing en sharded cluster?",
+        "option_a": "Balance de carga",
+        "option_b": "Proceso automático de migrar chunks entre shards para distribuir datos uniformemente",
+        "option_c": "Un tipo de índice",
+        "option_d": "Manual solamente",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Balancer: background process que migra chunks entre shards. Objetivo: distribución uniforme de chunks. Ejecuta cuando: diferencia de chunks entre shards supera threshold. Configurable: balancing window (horario), enable/disable. Migración puede impactar performance. Monitorea: sh.status().",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es un chunk en sharding?",
+        "option_a": "Un pedazo de código",
+        "option_b": "Rango continuo de shard key values que se migra como unidad atómica",
+        "option_c": "Un tipo de índice",
+        "option_d": "Un nodo",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Chunk: rango de shard key values (ej: {userId: 1000 to 2000}). MongoDB divide collection en chunks (~64MB default). Balancer migra chunks entre shards. Chunk split: cuando chunk crece mucho. Hot chunks: chunks con mucha actividad (problema de shard key mal elegido).",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué son los config servers en sharded cluster?",
+        "option_a": "Servidores de configuración de apps",
+        "option_b": "Replica set que almacena metadata del cluster (qué chunks en qué shards, etc.)",
+        "option_c": "Un tipo de shard",
+        "option_d": "Solo para monitoring",
+        "option_e": "No existen",
+        "correct_answer": "b",
+        "explanation": "Config servers: replica set (CSRS - Config Server Replica Set) con metadata del sharded cluster. Info: chunks, shards, collections sharded. mongos consulta config servers para routing. CRÍTICOS: sin config servers disponibles, cluster no funciona. Mínimo 3 config servers recomendado.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué métricas son importantes para monitorear en producción?",
+        "option_a": "Solo espacio en disco",
+        "option_b": "CPU, RAM (working set), disk I/O, replication lag, connections, slow queries, lock %",
+        "option_c": "Solo número de documentos",
+        "option_d": "MongoDB se monitorea automáticamente",
+        "option_e": "No necesita monitoreo",
+        "correct_answer": "b",
+        "explanation": "Métricas clave: CPU (no >80% sostenido), RAM (working set fit?), disk I/O (IOPS, queue depth), replication lag (<10s), connections (near max?), slow queries (profiler), lock % (contention), page faults (memoria insuficiente). Herramientas: mongostat, Cloud/Ops Manager, Prometheus+Grafana.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es un arbiter y cuándo usarlo?",
+        "option_a": "Un tipo de primary",
+        "option_b": "Miembro de replica set que solo vota en elections (no almacena data), útil para número impar de voters con presupuesto limitado",
+        "option_c": "Un tipo de índice",
+        "option_d": "Un backup",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Arbiter: vota en elections pero NO replica data. Lightweight (poco recursos). Útil: cuando solo puedes tener 2 data-bearing nodes pero necesitas 3 para majority. CUIDADO: sin arbiter = más resiliente (con 2 data nodes + arbiter, si 1 data node falla, no hay automatic failover). Mejor: 3 data nodes sin arbiter.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es un hidden member en replica set?",
+        "option_a": "Un nodo secreto",
+        "option_b": "Secondary que replica pero no es visible a clientes (para reporting, backups sin impactar tráfico normal)",
+        "option_c": "Un nodo sin datos",
+        "option_d": "Solo para testing",
+        "option_e": "No existe",
+        "correct_answer": "b",
+        "explanation": "Hidden member: priority 0 (nunca primary) + hidden: true (no aparece en queries automáticas). Usa para: reporting queries sin impactar primary, backups, analytics. Mantiene replicación actualizada. Clientes no ven hidden member (a menos que especifiquen directamente). Útil en producción.",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Qué es un delayed member?",
+        "option_a": "Un member lento",
+        "option_b": "Secondary con delay intencional en replicación (ej: 1 hora atrás) para protección contra errores humanos",
+        "option_c": "Un error",
+        "option_d": "No existe",
+        "option_e": "Un backup",
+        "correct_answer": "b",
+        "explanation": "Delayed member: replica con delay configurable (ej: slaveDelay: 3600 = 1 hora). Útil para: recovery de errores humanos (delete accidental), puedes recover estado de hace X tiempo. También hidden y priority 0. NO reemplazo de backups (continuous, limitado por oplog).",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 9,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es la mejor práctica para tamaño de oplog?",
+        "option_a": "Lo más pequeño posible",
+        "option_b": "Suficientemente grande para cubrir ventana de mantenimiento + problemas (típicamente 2-7 días de operaciones)",
+        "option_c": "1GB siempre",
+        "option_d": "No importa",
+        "option_e": "Default es suficiente",
+        "correct_answer": "b",
+        "explanation": "Oplog: suficientemente grande para cubrir: maintenance (upgrades), network issues, secondary failures. Típico: 2-7 días. Muy pequeño: secondary puede quedar atrás irreversiblemente (require initial sync). Configurable: oplogSizeMB. Monitorea: cuánto tiempo cubre oplog actual. Default: 5% disk o 50GB (el mayor).",
+        "difficulty": "hard"
+    }
+]
+
+# Total Batch 10: 40 preguntas ✅
+# Categoría 9 (Operaciones Avanzadas): 40 preguntas ✅
+# Total acumulado: 512 preguntas de 520
+
+# ============================================================
+# BATCH 11: PREGUNTAS FINALES (CATEGORÍAS MIXTAS)
+# ============================================================
+
+FINAL_BATCH = [
+    # Preguntas adicionales de Agregación (Categoría 6)
+    {
+        "category_id": 6,
+        "question_type": "syntax",
+        "question_text": "En infovuelos_limpio, ¿cómo obtener el promedio de distancia por aerolínea, mostrando solo aerolíneas con promedio > 1000?",
+        "option_a": "db.infovuelos.aggregate([{$group: {_id: '$AIRLINE', avg_dist: {$avg: '$DISTANCE'}}}, {$match: {avg_dist: {$gt: 1000}}}])",
+        "option_b": "db.infovuelos.aggregate([{$match: {DISTANCE: {$gt: 1000}}}, {$group: {_id: '$AIRLINE', avg_dist: {$avg: '$DISTANCE'}}}])",
+        "option_c": "db.infovuelos.aggregate([{$group: {_id: '$AIRLINE', avg_dist: {$avg: '$DISTANCE'}}}, {$sort: {avg_dist: -1}}])",
+        "option_d": "db.infovuelos.find({DISTANCE: {$gt: 1000}}).group({AIRLINE: 1})",
+        "option_e": "db.infovuelos.aggregate([{$avg: '$DISTANCE'}, {$match: {$gt: 1000}}])",
+        "correct_answer": "a",
+        "explanation": "$match DESPUÉS de $group filtra resultados agregados. Opción b filtra antes (distancia individual > 1000, no promedio). $match después de $group usa campos calculados en $group.",
+        "dataset_reference": "infovuelos_limpio",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 6,
+        "question_type": "syntax",
+        "question_text": "En listings_limpio, ¿cómo obtener el top 3 de barrios con más listings de tipo 'Entire home/apt', ordenados por cantidad?",
+        "option_a": "db.listings.aggregate([{$match: {room_type: 'Entire home/apt'}}, {$group: {_id: '$neighbourhood', count: {$sum: 1}}}, {$sort: {count: -1}}, {$limit: 3}])",
+        "option_b": "db.listings.find({room_type: 'Entire home/apt'}).limit(3)",
+        "option_c": "db.listings.aggregate([{$group: {_id: '$neighbourhood'}}, {$limit: 3}])",
+        "option_d": "db.listings.aggregate([{$sort: {neighbourhood: 1}}, {$limit: 3}])",
+        "option_e": "db.listings.count({room_type: 'Entire home/apt'})",
+        "correct_answer": "a",
+        "explanation": "Pipeline correcto: $match filtra por tipo, $group agrupa por barrio y cuenta, $sort ordena por count descendente, $limit toma top 3. Orden de stages es crítico en aggregation.",
+        "dataset_reference": "listings_limpio",
+        "difficulty": "medium"
+    },
+
+    # Preguntas adicionales de PyMongo (Categoría 7)
+    {
+        "category_id": 7,
+        "question_type": "syntax",
+        "question_text": "¿Cómo crear un índice compuesto en PyMongo sobre campos 'ciudad' (ascendente) y 'fecha' (descendente)?",
+        "option_a": "collection.create_index([('ciudad', 1), ('fecha', -1)])",
+        "option_b": "collection.index(['ciudad', 'fecha'])",
+        "option_c": "collection.create_index({'ciudad': 1, 'fecha': -1})",
+        "option_d": "collection.createIndex([('ciudad', 1), ('fecha', -1)])",
+        "option_e": "collection.ensureIndex('ciudad', 'fecha')",
+        "correct_answer": "a",
+        "explanation": "create_index() en PyMongo acepta lista de tuplas: [(campo, dirección), ...]. 1 = ascendente, -1 = descendente. Opción c usa dict (no garantiza orden en Python < 3.7).",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 7,
+        "question_type": "syntax",
+        "question_text": "En PyMongo, ¿cómo usar update_many() con $inc para incrementar 'views' en 1 para todos los documentos de categoría 'tech'?",
+        "option_a": "collection.update_many({'category': 'tech'}, {'$inc': {'views': 1}})",
+        "option_b": "collection.update({'category': 'tech'}, {'views': 1})",
+        "option_c": "collection.update_many({'category': 'tech'}, {'views': {'$inc': 1}})",
+        "option_d": "collection.increment({'category': 'tech'}, {'views': 1})",
+        "option_e": "collection.update_many({'$inc': {'views': 1}}, {'category': 'tech'})",
+        "correct_answer": "a",
+        "explanation": "update_many(filtro, actualización). $inc va en actualización: {'$inc': {'campo': valor}}. Opción e invierte los argumentos. $inc incrementa valor existente.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+
+    # Preguntas adicionales de CRUD - Read (Categoría 3)
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "En data_act_01_limpio, ¿cómo buscar documentos donde 'tags' (array) contenga 'urgent' Y 'priority', y proyectar solo 'title' y 'tags'?",
+        "option_a": "db.data.find({tags: {$all: ['urgent', 'priority']}}, {title: 1, tags: 1, _id: 0})",
+        "option_b": "db.data.find({tags: ['urgent', 'priority']}, {title: 1, tags: 1})",
+        "option_c": "db.data.find({$and: [{tags: 'urgent'}, {tags: 'priority'}]}, {title: 1, tags: 1})",
+        "option_d": "db.data.find({tags: {$in: ['urgent', 'priority']}}, {title: 1, tags: 1, _id: 0})",
+        "option_e": "db.data.find({tags: 'urgent', tags: 'priority'}, {title: 1, tags: 1})",
+        "correct_answer": "a",
+        "explanation": "$all requiere que array contenga TODOS los elementos especificados. $in requiere al menos uno. Proyección: 1 incluye campo, 0 excluye (excluir _id explícitamente). Opción b busca array exacto.",
+        "dataset_reference": "data_act_01_limpio",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 3,
+        "question_type": "syntax",
+        "question_text": "En infovuelos_limpio, ¿cómo buscar vuelos con DEPARTURE_DELAY entre -10 y 30 (inclusive), ordenados por DEPARTURE_TIME?",
+        "option_a": "db.infovuelos.find({DEPARTURE_DELAY: {$gte: -10, $lte: 30}}).sort({DEPARTURE_TIME: 1})",
+        "option_b": "db.infovuelos.find({DEPARTURE_DELAY: {$between: [-10, 30]}}).sort({DEPARTURE_TIME: 1})",
+        "option_c": "db.infovuelos.find({$and: [{DEPARTURE_DELAY: {$gte: -10}}, {DEPARTURE_DELAY: {$lt: 30}}]}).sort({DEPARTURE_TIME: 1})",
+        "option_d": "db.infovuelos.find({DEPARTURE_DELAY: [-10, 30]}).sort({DEPARTURE_TIME: 1})",
+        "option_e": "db.infovuelos.find({DEPARTURE_DELAY: {$in: [-10, 30]}}).sort({DEPARTURE_TIME: 1})",
+        "correct_answer": "a",
+        "explanation": "$gte (mayor o igual) y $lte (menor o igual) para rangos inclusivos. Pueden combinarse en mismo objeto. $between no existe en MongoDB. $in busca valores exactos en array.",
+        "dataset_reference": "infovuelos_limpio",
+        "difficulty": "medium"
+    },
+
+    # Preguntas adicionales de CRUD - Update (Categoría 4)
+    {
+        "category_id": 4,
+        "question_type": "syntax",
+        "question_text": "¿Cómo agregar elemento 'premium' al array 'features' solo si no existe ya, para documentos con price > 100?",
+        "option_a": "db.collection.updateMany({price: {$gt: 100}}, {$addToSet: {features: 'premium'}})",
+        "option_b": "db.collection.updateMany({price: {$gt: 100}}, {$push: {features: 'premium'}})",
+        "option_c": "db.collection.updateMany({price: {$gt: 100}}, {$set: {features: {$push: 'premium'}}})",
+        "option_d": "db.collection.update({price: {$gt: 100}}, {$addToSet: {features: 'premium'}})",
+        "option_e": "db.collection.updateMany({price: {$gt: 100}}, {$add: {features: 'premium'}})",
+        "correct_answer": "a",
+        "explanation": "$addToSet agrega a array solo si valor no existe (evita duplicados). $push siempre agrega (permite duplicados). updateMany actualiza múltiples docs. update (sin Many) solo actualiza primero.",
+        "dataset_reference": "N/A",
+        "difficulty": "hard"
+    },
+
+    # Pregunta adicional de Instalación y Entorno (Categoría 1)
+    {
+        "category_id": 1,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es el puerto por defecto de MongoDB y cómo cambiarlo?",
+        "option_a": "3306, no se puede cambiar",
+        "option_b": "27017, se cambia con --port o en mongod.conf (net.port)",
+        "option_c": "8080, se cambia en settings",
+        "option_d": "5432, no se puede cambiar",
+        "option_e": "27017, solo se puede cambiar reinstalando",
+        "correct_answer": "b",
+        "explanation": "Puerto default: 27017. Se cambia con flag --port al iniciar mongod, o configurando net.port en mongod.conf. También: 27018 para mongos, 27019 para config servers (convenciones). Clientes deben especificar puerto custom en connection string.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    }
+]
+
+# Total Batch 11: 8 preguntas ✅
+# Distribución final:
+# - Categoría 1 (Instalación): +1 = 31 preguntas
+# - Categoría 3 (CRUD Read): +2 = 82 preguntas
+# - Categoría 4 (CRUD Update): +1 = 61 preguntas
+# - Categoría 6 (Agregación): +2 = 102 preguntas
+# - Categoría 7 (PyMongo): +2 = 62 preguntas
+# Total acumulado: 520 preguntas ✅✅✅
+
+# ============================================================
+# COMPILACIÓN FINAL DE TODAS LAS PREGUNTAS
+# ============================================================
+
+ALL_QUESTIONS = (
+    QUESTIONS_BATCH_1 +
+    QUESTIONS_BATCH_2 +
+    QUESTIONS_BATCH_3 +
+    QUESTIONS_BATCH_4 +
+    QUESTIONS_BATCH_5 +
+    QUESTIONS_BATCH_6 +
+    QUESTIONS_BATCH_7 +
+    QUESTIONS_BATCH_8 +
+    QUESTIONS_BATCH_9 +
+    QUESTIONS_BATCH_10 +
+    FINAL_BATCH
+)
+
+# Función auxiliar para obtener todas las preguntas
+def get_all_questions():
+    """Retorna la lista completa de 520 preguntas"""
+    return ALL_QUESTIONS
+
+# Función para obtener preguntas por categoría
+def get_questions_by_category(category_id):
+    """Retorna preguntas filtradas por categoría"""
+    return [q for q in ALL_QUESTIONS if q['category_id'] == category_id]
+
+# Función para obtener estadísticas del banco de preguntas
+def get_question_stats():
+    """Retorna estadísticas del banco de preguntas"""
+    stats = {
+        'total': len(ALL_QUESTIONS),
+        'by_category': {},
+        'by_type': {'conceptual': 0, 'syntax': 0},
+        'by_difficulty': {'easy': 0, 'medium': 0, 'hard': 0}
+    }
+
+    for question in ALL_QUESTIONS:
+        # Por categoría
+        cat_id = question['category_id']
+        if cat_id not in stats['by_category']:
+            stats['by_category'][cat_id] = 0
+        stats['by_category'][cat_id] += 1
+
+        # Por tipo
+        stats['by_type'][question['question_type']] += 1
+
+        # Por dificultad
+        stats['by_difficulty'][question['difficulty']] += 1
+
+    return stats
+
+# Verificación final
+if __name__ == "__main__":
+    stats = get_question_stats()
+    print(f"Total de preguntas: {stats['total']}")
+    print("\nPor categoría:")
+    for cat_id, count in sorted(stats['by_category'].items()):
+        print(f"  Categoría {cat_id}: {count} preguntas")
+    print("\nPor tipo:")
+    for q_type, count in stats['by_type'].items():
+        print(f"  {q_type}: {count} preguntas")
+    print("\nPor dificultad:")
+    for diff, count in stats['by_difficulty'].items():
+        print(f"  {diff}: {count} preguntas")
