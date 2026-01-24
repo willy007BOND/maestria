@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}MongoDB Quiz - Detalle de Examen #{{ exam.id }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <div class="mb-3">
+            <a href="{{ url_for('history') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver al historial
+            </a>
+        </div>
+
+        <div class="card shadow-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0">
+                    <i class="bi bi-file-earmark-text-fill"></i> Examen #{{ exam.id }}
+                </h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <p><strong>Fecha:</strong><br>{{ exam.exam_date }}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p><strong>Puntuación:</strong><br>
+                            <span class="fs-4 {% if exam.score >= 70 %}text-success{% elif exam.score >= 50 %}text-warning{% else %}text-danger{% endif %}">
+                                {{ "%.1f"|format(exam.score) }}%
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <p><strong>Correctas:</strong><br>
+                            {{ exam.correct_answers }} / {{ exam.total_questions }}
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <p><strong>Tiempo:</strong><br>
+                            {{ exam.time_spent_seconds // 60 }}:{{ "%02d"|format(exam.time_spent_seconds % 60) }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="mb-3">Revisión de respuestas</h4>
+
+        {% for result in results %}
+        <div class="card shadow-sm mb-3 {% if result.is_correct %}border-success{% else %}border-danger{% endif %}">
+            <div class="card-header {% if result.is_correct %}bg-success-subtle{% else %}bg-danger-subtle{% endif %}">
+                <h5 class="mb-0">
+                    {% if result.is_correct %}
+                        <i class="bi bi-check-circle-fill text-success"></i> Correcta
+                    {% else %}
+                        <i class="bi bi-x-circle-fill text-danger"></i> Incorrecta
+                    {% endif %}
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="fw-bold mb-3">{{ result.question.question_text }}</p>
+
+                <div class="options-review mb-3">
+                    {% for option in ['a', 'b', 'c', 'd', 'e'] %}
+                    <div class="option-review mb-2 p-2 rounded
+                        {% if option == result.question.correct_answer %}bg-success-subtle{% endif %}
+                        {% if option == result.user_answer and not result.is_correct %}bg-danger-subtle{% endif %}">
+                        <strong>{{ option|upper }})</strong> {{ result.question['option_' + option] }}
+
+                        {% if option == result.question.correct_answer %}
+                            <span class="badge bg-success ms-2">Correcta</span>
+                        {% endif %}
+                        {% if option == result.user_answer %}
+                            <span class="badge bg-primary ms-2">Tu respuesta</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% if not result.is_correct %}
+                <div class="alert alert-info mb-0">
+                    <h6><i class="bi bi-info-circle-fill"></i> Explicación:</h6>
+                    <p class="mb-0">{{ result.question.explanation }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="text-center my-4">
+            <a href="{{ url_for('history') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver al historial
+            </a>
+            <a href="{{ url_for('index') }}" class="btn btn-success">
+                <i class="bi bi-play-circle-fill"></i> Nuevo examen
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

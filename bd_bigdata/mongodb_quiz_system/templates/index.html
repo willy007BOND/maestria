@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}MongoDB Quiz - Inicio{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <!-- Hero Section -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 mb-3">
+                <i class="bi bi-database-fill text-success"></i>
+                MongoDB Quiz System
+            </h1>
+            <p class="lead text-muted">
+                Sistema de evaluación interactivo con 520 preguntas de MongoDB
+            </p>
+        </div>
+
+        <!-- Statistics Card -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="bi bi-info-circle-fill text-info"></i> Acerca del sistema
+                </h5>
+                <div class="row text-center mt-3">
+                    <div class="col-md-4 mb-3">
+                        <div class="stat-box">
+                            <h2 class="text-success">520</h2>
+                            <p class="text-muted">Preguntas totales</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="stat-box">
+                            <h2 class="text-primary">9</h2>
+                            <p class="text-muted">Categorías</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="stat-box">
+                            <h2 class="text-warning">20</h2>
+                            <p class="text-muted">Preguntas por examen</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Configuration Form -->
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-gear-fill"></i> Configurar examen
+                </h5>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('start_exam') }}" method="POST" id="examForm">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">
+                            <i class="bi bi-funnel-fill"></i> Selecciona las categorías:
+                        </label>
+                        <p class="text-muted small">
+                            Deja vacío para incluir todas las categorías o selecciona las que quieras estudiar.
+                        </p>
+
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="selectAll">
+                            <label class="form-check-label fw-bold" for="selectAll">
+                                Seleccionar todas
+                            </label>
+                        </div>
+
+                        <hr>
+
+                        {% for category in categories %}
+                        <div class="form-check mb-2">
+                            <input class="form-check-input category-checkbox" type="checkbox"
+                                   name="categories" value="{{ category.id }}" id="cat{{ category.id }}">
+                            <label class="form-check-label" for="cat{{ category.id }}">
+                                <strong>{{ category.name }}</strong>
+                                <br>
+                                <small class="text-muted">{{ category.description }}</small>
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="bi bi-play-circle-fill"></i> Comenzar examen
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="row mt-4">
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-graph-up display-4 text-primary"></i>
+                        <h5 class="card-title mt-3">Ver progreso</h5>
+                        <p class="card-text text-muted">
+                            Revisa tu rendimiento por categoría
+                        </p>
+                        <a href="{{ url_for('progress') }}" class="btn btn-outline-primary">
+                            <i class="bi bi-arrow-right-circle"></i> Ir a progreso
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-clock-history display-4 text-secondary"></i>
+                        <h5 class="card-title mt-3">Historial</h5>
+                        <p class="card-text text-muted">
+                            Consulta tus exámenes anteriores
+                        </p>
+                        <a href="{{ url_for('history') }}" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-right-circle"></i> Ver historial
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Select All checkbox functionality
+    document.getElementById('selectAll').addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('.category-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
+
+    // Update "Select All" based on individual checkboxes
+    document.querySelectorAll('.category-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const allCheckboxes = document.querySelectorAll('.category-checkbox');
+            const checkedCheckboxes = document.querySelectorAll('.category-checkbox:checked');
+            document.getElementById('selectAll').checked =
+                allCheckboxes.length === checkedCheckboxes.length;
+        });
+    });
+</script>
+{% endblock %}

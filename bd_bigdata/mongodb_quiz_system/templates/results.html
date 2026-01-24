@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}MongoDB Quiz - Resultados{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <!-- Results Summary -->
+        <div class="card shadow-lg mb-4">
+            <div class="card-header {% if score >= 70 %}bg-success{% elif score >= 50 %}bg-warning{% else %}bg-danger{% endif %} text-white">
+                <h2 class="mb-0 text-center">
+                    <i class="bi bi-trophy-fill"></i> Resultados del Examen
+                </h2>
+            </div>
+            <div class="card-body text-center py-5">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="result-stat">
+                            <i class="bi bi-check-circle-fill text-success display-3"></i>
+                            <h3 class="mt-2">{{ correct_count }}</h3>
+                            <p class="text-muted">Correctas</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="result-stat">
+                            <i class="bi bi-x-circle-fill text-danger display-3"></i>
+                            <h3 class="mt-2">{{ total_questions - correct_count }}</h3>
+                            <p class="text-muted">Incorrectas</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="result-stat">
+                            <i class="bi bi-percent display-3 text-primary"></i>
+                            <h3 class="mt-2">{{ "%.1f"|format(score) }}%</h3>
+                            <p class="text-muted">Puntuación</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="result-stat">
+                            <i class="bi bi-clock-fill display-3 text-info"></i>
+                            <h3 class="mt-2">{{ time_spent // 60 }}:{{ "%02d"|format(time_spent % 60) }}</h3>
+                            <p class="text-muted">Tiempo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Message -->
+                <div class="alert {% if score >= 70 %}alert-success{% elif score >= 50 %}alert-warning{% else %}alert-danger{% endif %} mt-4" role="alert">
+                    {% if score >= 90 %}
+                        <h4><i class="bi bi-star-fill"></i> Excelente!</h4>
+                        <p class="mb-0">Dominas muy bien MongoDB. ¡Felicitaciones!</p>
+                    {% elif score >= 70 %}
+                        <h4><i class="bi bi-hand-thumbs-up-fill"></i> Muy bien!</h4>
+                        <p class="mb-0">Tienes un buen conocimiento de MongoDB. Sigue practicando.</p>
+                    {% elif score >= 50 %}
+                        <h4><i class="bi bi-lightbulb-fill"></i> Bien!</h4>
+                        <p class="mb-0">Vas por buen camino. Repasa los temas donde tuviste dificultades.</p>
+                    {% else %}
+                        <h4><i class="bi bi-book-fill"></i> Sigue estudiando</h4>
+                        <p class="mb-0">Necesitas repasar más. Revisa las explicaciones de cada pregunta.</p>
+                    {% endif %}
+                </div>
+
+                <div class="mt-4">
+                    <a href="{{ url_for('index') }}" class="btn btn-success btn-lg me-2">
+                        <i class="bi bi-arrow-clockwise"></i> Nuevo examen
+                    </a>
+                    <a href="{{ url_for('progress') }}" class="btn btn-outline-primary btn-lg">
+                        <i class="bi bi-graph-up"></i> Ver progreso
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Results -->
+        <h3 class="mb-4">
+            <i class="bi bi-list-check"></i> Revisión detallada
+        </h3>
+
+        {% for result in results %}
+        <div class="card shadow-sm mb-3 {% if result.is_correct %}border-success{% else %}border-danger{% endif %}">
+            <div class="card-header {% if result.is_correct %}bg-success-subtle{% else %}bg-danger-subtle{% endif %}">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        {% if result.is_correct %}
+                            <i class="bi bi-check-circle-fill text-success"></i> Correcta
+                        {% else %}
+                            <i class="bi bi-x-circle-fill text-danger"></i> Incorrecta
+                        {% endif %}
+                    </h5>
+                    <div>
+                        <span class="badge bg-{{ 'success' if result.question.difficulty == 'easy' else 'warning' if result.question.difficulty == 'medium' else 'danger' }}">
+                            {{ result.question.difficulty|capitalize }}
+                        </span>
+                        <span class="badge bg-secondary">
+                            {{ result.question.question_type|capitalize }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="fw-bold mb-3">{{ result.question.question_text }}</p>
+
+                <div class="options-review mb-3">
+                    {% for option in ['a', 'b', 'c', 'd', 'e'] %}
+                    <div class="option-review mb-2 p-2 rounded
+                        {% if option == result.question.correct_answer %}bg-success-subtle{% endif %}
+                        {% if option == result.user_answer and not result.is_correct %}bg-danger-subtle{% endif %}">
+                        <strong>{{ option|upper }})</strong> {{ result.question['option_' + option] }}
+
+                        {% if option == result.question.correct_answer %}
+                            <span class="badge bg-success ms-2">Correcta</span>
+                        {% endif %}
+                        {% if option == result.user_answer %}
+                            <span class="badge bg-primary ms-2">Tu respuesta</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% if not result.is_correct %}
+                <div class="alert alert-info mb-0">
+                    <h6><i class="bi bi-info-circle-fill"></i> Explicación:</h6>
+                    <p class="mb-0">{{ result.question.explanation }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Bottom Actions -->
+        <div class="text-center my-5">
+            <a href="{{ url_for('index') }}" class="btn btn-success btn-lg me-2">
+                <i class="bi bi-arrow-clockwise"></i> Nuevo examen
+            </a>
+            <a href="{{ url_for('history') }}" class="btn btn-outline-secondary btn-lg">
+                <i class="bi bi-clock-history"></i> Ver historial
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
