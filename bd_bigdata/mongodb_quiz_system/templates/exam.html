@@ -163,18 +163,43 @@
         e.returnValue = '';
     });
 
-    // Remove confirmation when submitting
-    document.getElementById('examForm').addEventListener('submit', function() {
-        window.removeEventListener('beforeunload', arguments.callee);
-    });
+    // Handle form submission
+    let isSubmitting = false;
+    document.getElementById('examForm').addEventListener('submit', function(e) {
+        if (isSubmitting) {
+            return; // Ya se está enviando
+        }
 
-    // Scroll to top when clicking submit
-    document.getElementById('submitBtn').addEventListener('click', function(e) {
-        const unanswered = totalQuestions - document.querySelectorAll('input[type="radio"]:checked').length / 5;
-        if (unanswered > 0) {
-            if (!confirm(`Tienes ${unanswered} preguntas sin responder. ¿Deseas enviar el examen de todos modos?`)) {
-                e.preventDefault();
+        // Count unique questions with answers
+        const answeredQuestions = new Set();
+        radioInputs.forEach(input => {
+            if (input.checked) {
+                answeredQuestions.add(input.name);
             }
+        });
+
+        const unanswered = totalQuestions - answeredQuestions.size;
+        if (unanswered > 0) {
+            if (!confirm(`Tienes ${unanswered} pregunta(s) sin responder. ¿Deseas enviar el examen de todos modos?`)) {
+                e.preventDefault();
+                return false;
+            }
+        }
+
+        // Si llegamos aquí, el envío fue confirmado
+        isSubmitting = true;
+        window.removeEventListener('beforeunload', arguments.callee);
+
+        // Limpiar respuestas guardadas del localStorage
+        if (typeof QuizApp !== 'undefined' && QuizApp.clearSavedAnswers) {
+            QuizApp.clearSavedAnswers();
+        }
+
+        // Mostrar spinner en el botón
+        const submitBtn = document.getElementById('submitBtn');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Procesando...';
         }
     });
 </script>

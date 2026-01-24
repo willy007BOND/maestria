@@ -183,34 +183,17 @@ function enableKeyboardShortcuts() {
 // ============================================================
 
 /**
- * Validate exam form before submission
+ * Prepare exam form for submission
+ * Note: Validation is now handled in exam.html template
  */
 function validateExamForm() {
     const form = document.getElementById('examForm');
     if (!form) return;
 
-    form.addEventListener('submit', function(e) {
-        const totalQuestions = document.querySelectorAll('.question-card').length;
-        const answeredQuestions = new Set();
-
-        document.querySelectorAll('input[type="radio"]:checked').forEach(input => {
-            answeredQuestions.add(input.name);
-        });
-
-        const unanswered = totalQuestions - answeredQuestions.size;
-
-        if (unanswered > 0) {
-            const confirmSubmit = confirm(
-                `Tienes ${unanswered} pregunta(s) sin responder.\n\n¿Estás seguro de que deseas enviar el examen?`
-            );
-
-            if (!confirmSubmit) {
-                e.preventDefault();
-                return false;
-            }
-        }
-
-        // Clear saved answers on successful submission
+    // Just clear saved answers when form is successfully submitted
+    // Validation is handled in the template to avoid duplicate handlers
+    form.addEventListener('submit', function() {
+        // Clear saved answers from localStorage
         clearSavedAnswers();
     });
 }
@@ -332,8 +315,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 
-    // Add loading indicator to forms
-    document.querySelectorAll('form').forEach(form => {
+    // Add loading indicator to forms (except exam form which has custom handling)
+    document.querySelectorAll('form:not(#examForm)').forEach(form => {
         form.addEventListener('submit', function() {
             const submitBtn = this.querySelector('button[type="submit"]');
             if (submitBtn) {
