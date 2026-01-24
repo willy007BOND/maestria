@@ -37,7 +37,7 @@ Bases de datos y Big Data. Contiene datasets procesados, notebooks de limpieza d
 
 Sistema de evaluación interactivo desarrollado con Python y SQLite para estudiar MongoDB de forma dinámica.
 
-**Estado: En Desarrollo Activo** ⚙️
+**Estado: COMPLETO Y FUNCIONAL** ✅
 
 **Tecnologías:**
 - **Backend:** Python 3.11 + Flask 3.1.2
@@ -130,6 +130,7 @@ mongodb_quiz_system/
 - Esquema de 5 tablas con relaciones
 - Funciones CRUD para todas las entidades
 - Sistema de estadísticas y progreso
+- 520 preguntas distribuidas en 9 categorías
 
 ✅ **Módulo `database.py`**
 - Inicialización de base de datos
@@ -139,20 +140,54 @@ mongodb_quiz_system/
 - Sistema de progreso por categoría
 - Estadísticas generales
 
----
+✅ **Módulo `question_bank.py`**
+- 520 preguntas completas (201 conceptuales, 319 de sintaxis)
+- Distribución: 118 fáciles, 260 medias, 142 difíciles
+- Basadas en datasets reales (infovuelos, listings, data_act_01)
 
-#### **Funcionalidades Pendientes**
+✅ **Módulo `quiz_generator.py`**
+- Generador de exámenes aleatorios de 20 preguntas
+- Filtrado por categorías seleccionadas
+- Balanceo automático de dificultades
+- Resúmenes de distribución
 
-🔄 **En progreso:**
-- Generación de banco de ~500 preguntas
+✅ **Script `init_db.py`**
+- Inicialización completa de base de datos
+- Carga automática de 520 preguntas
+- Configuración de 9 categorías
+- Inicialización de progreso
 
-⏳ **Por implementar:**
-- Módulo quiz_generator.py (selector de categorías)
-- Aplicación Flask (app.py) con rutas
-- Templates HTML (index, exam, results, progress)
-- CSS y JavaScript para interactividad
-- Script de inicialización (init_db.py)
-- Pruebas de la aplicación completa
+✅ **Aplicación Flask `app.py`**
+- Ruta principal (/) con selector de categorías
+- Generación y presentación de exámenes (/start_exam)
+- Procesamiento de respuestas (/submit_exam)
+- Dashboard de progreso (/progress)
+- Historial de exámenes (/history)
+- Detalle de exámenes específicos (/exam/<id>)
+- Manejo de errores (404, 500)
+
+✅ **Templates HTML (9 archivos)**
+- base.html: Template base con navbar Bootstrap
+- index.html: Página principal con selección de categorías
+- exam.html: Interfaz de examen con timer y progreso
+- results.html: Resultados detallados con explicaciones
+- progress.html: Dashboard con gráficos de progreso
+- history.html: Lista de exámenes anteriores
+- exam_detail.html: Detalles de examen específico
+- 404.html, 500.html: Páginas de error personalizadas
+
+✅ **Frontend completo**
+- static/css/style.css: Estilos personalizados MongoDB
+- static/js/quiz.js: Funcionalidad interactiva JavaScript
+- Diseño responsive con Bootstrap 5
+- Validación de formularios en tiempo real
+- LocalStorage para recuperar respuestas
+- Animaciones y transiciones suaves
+
+✅ **Documentación**
+- README.md completo con instrucciones de uso
+- .gitignore configurado
+- Comentarios en código
 
 ---
 
@@ -164,6 +199,48 @@ mongodb_quiz_system/
 - **Historial:** Almacenamiento persistente de todos los exámenes
 - **Estadísticas:** Dashboard con progreso por categoría
 - **Datasets reales:** Preguntas de sintaxis basadas en infovuelos_limpio, listings_limpio, data_act_01_limpio
+- **Interfaz moderna:** Responsive con Bootstrap 5, iconos Bootstrap Icons
+- **Timer:** Contador de tiempo durante el examen
+- **Progreso en vivo:** Barra de progreso de respuestas contestadas
+- **Recuperación:** LocalStorage para no perder respuestas al refrescar
+
+---
+
+#### **Cómo usar la aplicación**
+
+1. **Inicializar la base de datos (primera vez):**
+   ```bash
+   cd bd_bigdata/mongodb_quiz_system
+   python init_db.py
+   ```
+
+2. **Iniciar el servidor:**
+   ```bash
+   python app.py
+   ```
+
+3. **Abrir en navegador:**
+   ```
+   http://127.0.0.1:5000
+   ```
+
+4. **Flujo de uso:**
+   - Selecciona categorías o deja vacío para todas
+   - Responde el examen de 20 preguntas
+   - Revisa resultados con explicaciones
+   - Consulta tu progreso en /progress
+   - Ve historial en /history
+
+---
+
+#### **Tecnologías utilizadas**
+
+- **Backend:** Python 3.11 + Flask 3.1.2
+- **Base de datos:** SQLite
+- **Frontend:** HTML5, CSS3, JavaScript ES6
+- **Framework CSS:** Bootstrap 5.3
+- **Iconos:** Bootstrap Icons 1.11
+- **Arquitectura:** MVC (Model-View-Controller)
 
 ### 📁 `/vision_computador`
 Proyectos y ejercicios relacionados con Visión por Computador.
