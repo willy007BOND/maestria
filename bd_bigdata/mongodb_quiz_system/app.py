@@ -310,8 +310,8 @@ if __name__ == '__main__':
     print("🚀 MONGODB QUIZ SYSTEM")
     print("="*60)
     print("\n📌 Servidor iniciando...")
-    print("🌐 URL: http://127.0.0.1:5000")
+    print("🌐 URL: http://127.0.0.1:5001")
     print("📊 Base de datos: mongodb_quiz.db")
     print("\n✨ Presiona Ctrl+C para detener el servidor\n")
 
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)

@@ -89,8 +89,10 @@ Este script automáticamente:
 
 3. **Abrir en el navegador:**
    ```
-   http://127.0.0.1:5000
+   http://127.0.0.1:5001
    ```
+
+   **Nota:** Usamos el puerto 5001 porque macOS usa el puerto 5000 para AirPlay Receiver.
 
 ### Flujo de uso de la aplicación:
 - Selecciona las categorías que quieres estudiar (o déjalo vacío para todas)

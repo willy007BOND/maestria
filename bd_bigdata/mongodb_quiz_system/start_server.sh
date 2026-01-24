@@ -21,8 +21,9 @@ fi
 # Iniciar servidor
 echo ""
 echo "🌐 Iniciando servidor Flask..."
-echo "📍 URL: http://127.0.0.1:5000"
+echo "📍 URL: http://127.0.0.1:5001"
 echo ""
+echo "💡 Nota: Usando puerto 5001 (puerto 5000 usado por AirPlay en macOS)"
 echo "✨ Presiona Ctrl+C para detener el servidor"
 echo ""
 
