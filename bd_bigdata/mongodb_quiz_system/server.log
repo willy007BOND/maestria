@@ -1,0 +1,36 @@
+============================================================
+🚀 BD BIG DATA QUIZ
+============================================================
+
+📌 Servidor iniciando...
+🌐 URL: http://127.0.0.1:5001
+📊 Base de datos: mongodb_quiz.db
+📚 Total: 570 preguntas en 14 categorías
+
+✨ Presiona Ctrl+C para detener el servidor
+
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.1.9:5001
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 294-674-873
+ * Detected change in '/Users/willdev/github/UNIR/maestria/bd_bigdata/mongodb_quiz_system/extraer_preguntas_tests.py', reloading
+============================================================
+🚀 BD BIG DATA QUIZ
+============================================================
+
+📌 Servidor iniciando...
+🌐 URL: http://127.0.0.1:5001
+📊 Base de datos: mongodb_quiz.db
+📚 Total: 570 preguntas en 14 categorías
+
+✨ Presiona Ctrl+C para detener el servidor
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 294-674-873

@@ -377,6 +377,375 @@ TESTS_DATA = {
             "correct": "a",
             "explanation": "Al igual que en SQL, limit limita el número de registros que se visualizan en una consulta."
         }
+    ],
+
+    "Test 4 - Agregación MongoDB": [
+        {
+            "question": "¿Para qué son útiles las funciones de agregación?",
+            "options": {
+                "a": "Para agrupar datos.",
+                "b": "Para realizar cálculos.",
+                "c": "Para crear nuevas colecciones.",
+                "d": "Todas las anteriores son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Las funciones de agregación, entre otras cosas, permiten agrupar datos, realizar cálculos y crear nuevas colecciones a partir de los resultados de sus operaciones."
+        },
+        {
+            "question": "¿Qué método puede utilizarse en MongoDB para agregar información de documentos en una collection?",
+            "options": {
+                "a": "sum.",
+                "b": "Aggregate, a partir de la versión 2.2.",
+                "c": "Map-Reduce.",
+                "d": "Las respuestas B y C son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Estos son los métodos que se han desarrollado en este tema."
+        },
+        {
+            "question": "¿Cuál de las siguientes son operaciones específicas de agregación?",
+            "options": {
+                "a": "sum.",
+                "b": "Map-Reduce.",
+                "c": "count.",
+                "d": "Las respuestas A y C son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Sum y count son funciones de agregación de por sí. Mongo las utiliza para cumplir operaciones específicas en Aggregate."
+        },
+        {
+            "question": "¿Cuál es el objetivo principal de la función map?",
+            "options": {
+                "a": "Generar los pares clave-valor.",
+                "b": "Realizar operaciones con los atributos de la colección.",
+                "c": "Opinar sobre los pares clave-valor.",
+                "d": "Crear una nueva colección.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "a",
+            "explanation": "Map genera los pares clave-valor en función de los datos que procesa."
+        },
+        {
+            "question": "¿Cuál es el objetivo principal de la función reduce?",
+            "options": {
+                "a": "Generar los pares clave-valor.",
+                "b": "Realizar operaciones con los atributos de la colección.",
+                "c": "Operar sobre los pares clave-valor, reduce lo que hace es operar sobre ellos para cumplir su objetivo como función de reducción.",
+                "d": "Crear una nueva colección.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "Una vez generados los pares clave-valor, reduce lo que hace es operar sobre ellos para cumplir su objetivo como función de reducción."
+        },
+        {
+            "question": "¿Qué comando se utiliza en una función map para generar el par clave-valor que será procesado posteriormente?",
+            "options": {
+                "a": "generate.",
+                "b": "return.",
+                "c": "emit.",
+                "d": "yield.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "emit es la función que genera el par clave-valor que será procesado en el momento de generarse."
+        },
+        {
+            "question": "¿Cuál de las siguientes es una ventaja del framework de agregación de MongoDB?",
+            "options": {
+                "a": "Rendimiento.",
+                "b": "Potencia.",
+                "c": "Simplicidad.",
+                "d": "Las respuestas A y C son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Aggregation básicamente permite conseguir mejor rendimiento y simplicidad a la hora de hacer las agregaciones. Potencia no es que sea siempre un daño en una agregación, incluso habrá agregaciones que no sean lo suficientemente adecuadas para pensar en su uso."
+        },
+        {
+            "question": "¿En qué está modelado el framework de agregación?",
+            "options": {
+                "a": "Funciones.",
+                "b": "Etapas.",
+                "c": "Sentencias SQL.",
+                "d": "Agrupaciones.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "Recordemos que el framework de agregación está modelado en el concepto de tuberías de procesamiento de datos, es decir, los documentos entran en una tubería de varias etapas que transforman los documentos en un resultado agregado."
+        },
+        {
+            "question": "¿Qué campo es obligatorio especificar en framework de agregación?",
+            "options": {
+                "a": "_id.",
+                "b": "Object.",
+                "c": "$sum.",
+                "d": "$group.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "$group es el campo obligatorio que debe especificarse en el framework de agregación."
+        },
+        {
+            "question": "¿Cuál de los siguientes es un operador del framework de agregación?",
+            "options": {
+                "a": "$gt.",
+                "b": "$map.",
+                "c": "$glear.",
+                "d": "Todos los anteriores son correctos.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Los tres son operadores de agregación del framework."
+        }
+    ],
+
+    "Test 5 - Backup, Índices, Replicación y Sharding": [
+        {
+            "question": "¿Qué comando de MongoDB permite crear una copia de respaldo de una base de datos?",
+            "options": {
+                "a": "mongorestore.",
+                "b": "mongodump.",
+                "c": "backup.",
+                "d": "mongod.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "Este comando permite crear una copia de seguridad «dump» de la base de datos."
+        },
+        {
+            "question": "¿Qué comando de MongoDB permite recuperar una base de datos a partir de una copia de seguridad?",
+            "options": {
+                "a": "mongorestore.",
+                "b": "save.",
+                "c": "mongos.",
+                "d": "copydb.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "a",
+            "explanation": "Este comando permite restaurar una base de datos que previamente ha sido guardada «dump»."
+        },
+        {
+            "question": "¿Qué elementos de la base de datos mejoran el rendimiento de consultas a collection?",
+            "options": {
+                "a": "Índices.",
+                "b": "Replica sets.",
+                "c": "Query routers.",
+                "d": "Las respuestas B y C son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "a",
+            "explanation": "Los índices son elementos que permiten indexar los documentos de la base de datos para mejorar las búsquedas."
+        },
+        {
+            "question": "¿Qué característica de MongoDB permite tener redundancia y aumentar la disponibilidad de los datos?",
+            "options": {
+                "a": "Seguridad.",
+                "b": "Sharding.",
+                "c": "Índices.",
+                "d": "Replicación.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Recuerda que la replicación es una característica de MongoDB que permite la redundancia de datos e incrementa su disponibilidad."
+        },
+        {
+            "question": "¿Cuál es el modelo básico de replicación en MongoDB?",
+            "options": {
+                "a": "Sharding.",
+                "b": "Replica set.",
+                "c": "Maestro-Esclavo.",
+                "d": "Shards.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "La arquitectura básica de replicación en MongoDB sigue un modelo Maestro-Esclavo."
+        },
+        {
+            "question": "¿Cómo se llama al refinamiento del modelo Maestro-Esclavo implementado en MongoDB?",
+            "options": {
+                "a": "Result set.",
+                "b": "Replica set.",
+                "c": "Sharding.",
+                "d": "Replicación.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "Este método permite una recuperación a fallos de forma automática, y es la forma recomendada de implementar replicación de datos en MongoDB."
+        },
+        {
+            "question": "¿Cómo se denomina al nodo de un replica set que no almacena datos y solamente puede votar en las elecciones de nodo primario?",
+            "options": {
+                "a": "Secundario.",
+                "b": "Árbitro.",
+                "c": "Shard.",
+                "d": "Config server.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "Este es utilizado solamente para decidir qué nodo debe ser asignado como primario."
+        },
+        {
+            "question": "¿Qué otro nombre recibe el método de escalabilidad horizontal, en el que los datos son separados y distribuidos entre varios servidores?",
+            "options": {
+                "a": "Escalabilidad vertical.",
+                "b": "Elastic computing.",
+                "c": "Sharding.",
+                "d": "Replicación.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "Sharding o escalabilidad horizontal."
+        },
+        {
+            "question": "¿Qué nombre reciben los nodos que almacenan datos en un sharded cluster?",
+            "options": {
+                "a": "Data stores.",
+                "b": "Config servers.",
+                "c": "Query routers.",
+                "d": "Shards.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Están a cargo de almacenar la información. Cada shard es un replica set, por lo que brinda alta disponibilidad y consistencia de datos."
+        },
+        {
+            "question": "¿Cuántos config servers debe haber en un entorno de producción?",
+            "options": {
+                "a": "Uno.",
+                "b": "Tres.",
+                "c": "Un máximo de cinco.",
+                "d": "Depende del número de servidores disponibles.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "Los sharded clusters en un entorno de producción tienen exactamente tres config servers."
+        }
+    ],
+
+    "Test 6 - Drivers MongoDB": [
+        {
+            "question": "¿Cuál es el objetivo de un driver?",
+            "options": {
+                "a": "«Traducir» las llamadas que se hacen desde un lenguaje de programación a un «lenguaje» que entienda la base de datos.",
+                "b": "Proporcionar un objeto de conexión.",
+                "c": "Proporcionar una serie de «funciones» que permitan al programador interactuar con la base de datos.",
+                "d": "Todas las anteriores son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Todas las afirmaciones anteriores son características de los drivers."
+        },
+        {
+            "question": "¿Dónde se debería acudir si se quiere desarrollar una aplicación con base de datos MongoDB para gestionar una conexión?",
+            "options": {
+                "a": "A la página oficial del lenguaje de programación con el que estamos desarrollando.",
+                "b": "A la página de documentación oficial de MongoDB, en el apartado de drivers.",
+                "c": "A la página oficial del sistema operativo donde estemos desarrollando.",
+                "d": "Todas las anteriores son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "MongoDB proporciona información detallada de todos los drivers de conexión que existen, lo recomendable es utilizar dicha información para crear nuestras propias aplicaciones."
+        },
+        {
+            "question": "¿Cuál de los siguientes lenguajes de programación soporta MongoDB?",
+            "options": {
+                "a": "C.",
+                "b": "Java.",
+                "c": "PHP.",
+                "d": "Todos los anteriores son correctos.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Los tres lenguajes soportan programar para MongoDB."
+        },
+        {
+            "question": "¿Cuál es la mejor forma de descargar el driver de Java?",
+            "options": {
+                "a": "Utilizando Maven.",
+                "b": "Buscando en Google.",
+                "c": "Repositorio.",
+                "d": "Las respuestas A y C son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Tanto Maven como los repositorios oficiales ofrecen las librerías de Java necesarias para trabajar con MongoDB."
+        },
+        {
+            "question": "Si no se especifica en el driver ningún parámetro, ¿dónde se realiza la conexión?",
+            "options": {
+                "a": "A localhost u puerto 27017.",
+                "b": "Puerto 27017.",
+                "c": "Localhost.",
+                "d": "Es obligatorio definir un servidor y un puerto.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "a",
+            "explanation": "Al instalar MongoDB, por defecto, este levanta una instancia de servidor en localhost sobre el puerto 27017. El driver por defecto conoce esta información y la usa para conectarse si el usuario no indica ninguna información de conexión diferente."
+        },
+        {
+            "question": "¿Cuál es el formato de documentos utilizado por el driver de Java?",
+            "options": {
+                "a": "BSON.",
+                "b": "JSON.",
+                "c": "CSV.",
+                "d": "XML.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "a",
+            "explanation": "Java utiliza el formato BSON para manipular los documentos de MongoDB."
+        },
+        {
+            "question": "¿Cuál es la mejor forma de instalar el driver de Node.js?",
+            "options": {
+                "a": "Usando Maven.",
+                "b": "Buscando en Google.",
+                "c": "Usando NPM.",
+                "d": "Todas las anteriores son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "NPM es el instalador de paquetes útil para Node.js, por medio de este es posible instalar el driver para que Node.js conecte con MongoDB."
+        },
+        {
+            "question": "¿Qué es PyMongo?",
+            "options": {
+                "a": "Una base de datos NoSQL.",
+                "b": "El driver de MongoDB para Python.",
+                "c": "Una base de datos SQL.",
+                "d": "El driver de lenguaje de programación Py.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "La librería de Python para trabajar y conectar con MongoDB se llama PyMongo."
+        },
+        {
+            "question": "¿Cómo podemos descargar el driver de Python para Mongo?",
+            "options": {
+                "a": "Utilizando NPM.",
+                "b": "Utilizando Maven.",
+                "c": "Buscando en Google.",
+                "d": "Utilizando PIP.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "El driver de Python está disponible en el repositorio de paquetes de PIP, por ello es la forma más sencilla de instalar dicho driver para conectar con MongoDB desde Python."
+        },
+        {
+            "question": "¿Cuál de estos comandos son válidos para acceder a una colección de mongo?",
+            "options": {
+                "a": "db.myCollection",
+                "b": "db['myCollection']",
+                "c": "db.getCollection('myCollection')",
+                "d": "Todas son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Todos los comandos anteriores permiten acceder a una colección en MongoDB."
+        }
     ]
 }
 

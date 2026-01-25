@@ -1,8 +1,14 @@
 """
-question_bank.py - Banco de preguntas para MongoDB Quiz System
-Total aproximado: ~520 preguntas distribuidas en 9 categorías
+question_bank.py - Banco de preguntas para BD Big Data Quiz
+Total: 570 preguntas
 
-Progreso: 250/520 preguntas
+Categorías:
+- Categorías 1-9: Preguntas de MongoDB (520 preguntas)
+- Categoría 10: Test 1 - Fundamentos de Datos (10 preguntas)
+- Categoría 11: Test 2 - NoSQL y MongoDB (10 preguntas)
+- Categoría 12: Test 3 - MongoDB CRUD (10 preguntas)
+- Categoría 13: Test 4 - Agregación MongoDB (10 preguntas)
+- Categoría 14: Test 5 - Backup, Índices, Replicación y Sharding (10 preguntas)
 """
 
 # Categoría 1: Instalación y Entorno (30 preguntas) ✅
@@ -7040,6 +7046,753 @@ FINAL_BATCH = [
 # Total acumulado: 520 preguntas ✅✅✅
 
 # ============================================================
+# CATEGORÍA 10: TEST 1 - FUNDAMENTOS DE DATOS
+# ============================================================
+# Preguntas extraídas del Test 1 del curso
+# Total: 10 preguntas conceptuales
+
+TEST_1_FUNDAMENTOS_DATOS = [
+    {
+        "category_id": 10,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es la unidad semántica mínima que puede almacenarse o comunicarse?",
+        "option_a": "Dato.",
+        "option_b": "Información.",
+        "option_c": "Conocimiento.",
+        "option_d": "Las respuestas A y B son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "a",
+        "explanation": "El dato es la mínima expresión semántica que puede almacenarse.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 10,
+        "question_type": "conceptual",
+        "question_text": "¿Qué métodos pueden utilizarse para la transformación de información a conocimiento?",
+        "option_a": "Contextualización, agregación y cálculo.",
+        "option_b": "Repercusión, conexión y conversación.",
+        "option_c": "Categorización, corrección y agregación.",
+        "option_d": "Análisis, investigación y discusión.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "b",
+        "explanation": "Son los métodos que, entre otros, permiten la transformación adecuada de la información en conocimiento.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 10,
+        "question_type": "conceptual",
+        "question_text": "¿Qué métrica de calidad describe la proporción en la que un conjunto de datos contiene a la población que representa?",
+        "option_a": "Precisión.",
+        "option_b": "Consistencia.",
+        "option_c": "Completitud.",
+        "option_d": "Interpretabilidad.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "c",
+        "explanation": "Solo puede ser la completitud la métrica que indique lo representativo que son los datos con respecto a una población.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 10,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál de los siguientes es un ejemplo de método de captura manual?",
+        "option_a": "Web scraping.",
+        "option_b": "Encuestas.",
+        "option_c": "Acceso a bases de datos relacionales.",
+        "option_d": "Lectura de termómetro digital.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "b",
+        "explanation": "Excepto las encuestas, los otros métodos pueden ser automatizados; la encuesta, por su parte, no.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 10,
+        "question_type": "conceptual",
+        "question_text": "¿En qué categoría de captura de datos entra la lectura de información del acelerómetro y giroscopio de un teléfono móvil?",
+        "option_a": "Captura manual.",
+        "option_b": "Procesamiento de documentos.",
+        "option_c": "Acceso a datos públicos.",
+        "option_d": "Sensores.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "El acelerómetro y el giroscopio son los sensores que vienen integrados en el teléfono para capturar el movimiento del teléfono y su posición o inclinación, por ende, los sensores determinan la captura de este tipo de datos.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 10,
+        "question_type": "conceptual",
+        "question_text": "¿Qué elemento es utilizado para delimitar valores en un fichero CSV?",
+        "option_a": "Coma.",
+        "option_b": "CRLF.",
+        "option_c": "Comillas dobles.",
+        "option_d": "Espacio.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "a",
+        "explanation": "Dentro de los limitares posibles de CSV, la coma es uno de ellos.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 10,
+        "question_type": "conceptual",
+        "question_text": "¿Sobre qué estructuras se basa el formato JSON?",
+        "option_a": "Objetos y diccionarios.",
+        "option_b": "Tablas hash.",
+        "option_c": "Objetos y arrays.",
+        "option_d": "Listas enlazadas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "c",
+        "explanation": "Los objetos y los arrays son los elementos que conforman la estructura de JSON.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 10,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál de las siguientes condiciones sobre XML es verdadera?",
+        "option_a": "Un documento solo puede tener un elemento raíz.",
+        "option_b": "El contenido de un elemento debe ser otro elemento.",
+        "option_c": "Todo elemento debe tener un atributo llamado «id».",
+        "option_d": "Los atributos deben de ser de tipo numérico.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "a",
+        "explanation": "Es la única afirmación que es cierta, un documento XML solo puede tener un único elemento raíz.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 10,
+        "question_type": "conceptual",
+        "question_text": "¿Qué nombre recibe un conjunto de datos persistente utilizado por un sistema de software?",
+        "option_a": "Archivo.",
+        "option_b": "Base de datos.",
+        "option_c": "Registro.",
+        "option_d": "Las respuestas A y B son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "La persistencia se puede dar o bien en una base de datos o bien en un archivo.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 10,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es la instrucción de SQL para consultar información?",
+        "option_a": "SELECT.",
+        "option_b": "INSERT.",
+        "option_c": "UPDATE.",
+        "option_d": "DELETE.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "a",
+        "explanation": "La instrucción SELECT permite consultar información en cualquier base de datos.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    }
+]
+
+# ============================================================
+# CATEGORÍA 11: TEST 2 - NOSQL Y MONGODB
+# ============================================================
+# Preguntas extraídas del Test 2 del curso
+# Total: 10 preguntas conceptuales
+
+TEST_2_NOSQL_MONGODB = [
+    {
+        "category_id": 11,
+        "question_type": "conceptual",
+        "question_text": "¿Qué tipo de base de datos NoSQL se caracteriza por operaciones de lectura y escritura básicas, además de ser apropiadas para entornos de gestión de caché?",
+        "option_a": "Almacén clave-valor simple.",
+        "option_b": "Almacén clave-valor sofisticado.",
+        "option_c": "Base de datos relacional.",
+        "option_d": "Almacén de documentos.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "a",
+        "explanation": "Son el tipo de bases de datos que soportan operaciones de lectura y escritura básicas.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 11,
+        "question_type": "conceptual",
+        "question_text": "¿En qué categoría de base de datos NoSQL se clasifica a MongoDB?",
+        "option_a": "Almacén clave-valor simple.",
+        "option_b": "Almacén clave-valor sofisticado.",
+        "option_c": "Base de datos relacional.",
+        "option_d": "Almacén de documentos.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "MongoDB es una base de datos basada en documentos.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 11,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál de las siguientes afirmaciones es correcta?",
+        "option_a": "Cassandra se caracteriza porque todos sus nodos actúan por igual y se agrupan en anillo.",
+        "option_b": "Cassandra y Neo4j están desarrolladas en Java.",
+        "option_c": "Neo4j es una base de datos transaccional compatible con ACID y que almacena y procesa grafos nativos.",
+        "option_d": "Todas las afirmaciones anteriores son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "Todas estas afirmaciones son correctas.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 11,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es el equivalente a un registro en MongoDB?",
+        "option_a": "Base de datos.",
+        "option_b": "Collection.",
+        "option_c": "Tabla.",
+        "option_d": "Documento.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "El documento es la mínima agrupación de datos en MongoDB.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 11,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es el término equivalente a una tabla en MongoDB?",
+        "option_a": "Base de datos.",
+        "option_b": "Collection.",
+        "option_c": "Registro.",
+        "option_d": "Documento.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "b",
+        "explanation": "La colección agrupa varios documentos y es lo más similar a las tablas en un modelo relacional.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 11,
+        "question_type": "conceptual",
+        "question_text": "¿Cuándo se detalla el uso de la primera base de datos NoSQL?",
+        "option_a": "En 2007, cuando Amazon liberó DynamoDB.",
+        "option_b": "Con Carlo Strozzi en 1998.",
+        "option_c": "En 1965 con MultiValue.",
+        "option_d": "Eric Evans en 2009.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "c",
+        "explanation": "Las bases de datos MultiValue fueron desarrolladas por TRW en 1965.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 11,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál de las siguientes es una ventaja de las bases de datos NoSQL?",
+        "option_a": "No generan cuellos de botella.",
+        "option_b": "Tecnología madura.",
+        "option_c": "Responden a la necesidad de escalabilidades horizontal demandada cada vez por más empresas y, además, de manera sencilla.",
+        "option_d": "Las respuestas A y C son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "Estas dos afirmaciones describen dos problemas que resuelven las bases de datos NoSQL: el cuello de botella al almacenar los datos y la escalabilidad de dichas bases de datos cuando aumenta el volumen de datos.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 11,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál de las siguientes afirmaciones es correcta?",
+        "option_a": "Todo sistema distribuido no puede garantizar a la vez que haya consistencia, disponibilidad y tolerancia a particiones.",
+        "option_b": "Un sistema distribuido garantiza al menos disponibilidad y consistencia.",
+        "option_c": "Un sistema distribuido que garantiza la consistencia y la tolerancia a particiones no sacrifica por ello la disponibilidad.",
+        "option_d": "Todas las afirmaciones anteriores son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "a",
+        "explanation": "Este es uno de los principios que describe el teorema CAP.",
+        "dataset_reference": "N/A",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 11,
+        "question_type": "conceptual",
+        "question_text": "¿Qué patrón de diseño de MongoDB permite incluir un documento dentro de otro?",
+        "option_a": "Uno-a-uno con documentos embebidos.",
+        "option_b": "Uno-a-uno con documentos referidos.",
+        "option_c": "Uno-a-varios con documentos referidos.",
+        "option_d": "Las respuestas B y C son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "a",
+        "explanation": "Los documentos embebidos hacen referencia al uso de un documento dentro de otro, la relación es uno a uno en este caso.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 11,
+        "question_type": "conceptual",
+        "question_text": "¿Qué patrón de diseño de MongoDB permite incluir una lista de referencias a otros documentos dentro de un documento principal?",
+        "option_a": "Uno-a-uno con documentos embebidos.",
+        "option_b": "Uno-a-uno con documentos referidos.",
+        "option_c": "Uno-a-varios con documentos referidos.",
+        "option_d": "Las respuestas B y C son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "Este patrón describe el uso de referencias entre documentos para representar las relaciones. Estas relaciones pueden ser uno a uno o uno a muchos.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    }
+]
+
+# ============================================================
+# CATEGORÍA 12: TEST 3 - MONGODB CRUD
+# ============================================================
+# Preguntas extraídas del Test 3 del curso
+# Total: 10 preguntas conceptuales
+
+TEST_3_MONGODB_CRUD = [
+    {
+        "category_id": 12,
+        "question_type": "conceptual",
+        "question_text": "¿Qué comando de la consola de MongoDB se utiliza para indicar la base de datos con la que se trabajará?",
+        "option_a": "select.",
+        "option_b": "find.",
+        "option_c": "use.",
+        "option_d": "Las respuestas A y C son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "c",
+        "explanation": "use permite «usar» la base de datos con la que se quiere trabajar.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 12,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál de las siguientes afirmaciones es correcta?",
+        "option_a": "MongoBooster es una herramienta GUI multiplataforma que facilita la construcción de consultas.",
+        "option_b": "MongoDB Compass es una herramienta no propietaria para la manipulación externa de bases de datos MongoDB.",
+        "option_c": "MongoBooster y MongoDB Compass proporcionan información estadística y de rendimiento de una base de datos MongoDB.",
+        "option_d": "Todas las afirmaciones anteriores son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "Las tres afirmaciones son correctas sobre los productos MongoBooster y MongoDB Compass.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 12,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál será el resultado al insertar un documento que posee un atributo más al resto de atributos de la colección?",
+        "option_a": "Dará un fallo al insertar los datos porque el modelo de datos es diferente.",
+        "option_b": "Insertará los datos a la colección.",
+        "option_c": "Insertará los datos a la colección y creará el nuevo atributo vacío en el resto de documentos.",
+        "option_d": "Insertará los datos a la colección, pero sin el nuevo atributo para cumplir con el modelo.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "b",
+        "explanation": "Los documentos dentro de las colecciones no responden a ningún modelo de datos, por ello, se pueden insertar documentos con atributos diferentes.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 12,
+        "question_type": "conceptual",
+        "question_text": "¿Qué comando puede utilizarse en MongoDB para la creación de un nuevo documento dentro de una collection?",
+        "option_a": "save.",
+        "option_b": "insert.",
+        "option_c": "create.",
+        "option_d": "Las respuestas A y B son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "Tanto save como insert permiten crear un nuevo documento en una colección. La acción es la misma en determinados casos, pero cada opción tiene un comportamiento diferente.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 12,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es el nombre del atributo especial en las collections de MongoDB que ayuda a identificar de manera única a cada documento?",
+        "option_a": "_id.",
+        "option_b": "_ID.",
+        "option_c": "Primary_key.",
+        "option_d": "Identifier.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "a",
+        "explanation": "Este es el nombre del atributo; si en la consulta no se indica, lo crea MongoDB, y si se indica, el valor debe ser único entre los documentos.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 12,
+        "question_type": "conceptual",
+        "question_text": "¿Qué método permite modificar los datos de un documento sin tener que incluir el documento completo como argumento?",
+        "option_a": "save.",
+        "option_b": "store.",
+        "option_c": "update.",
+        "option_d": "set.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "c",
+        "explanation": "Al igual que en SQL, update permite actualizar el documento utilizando una condición y los nuevos a valores a actualizar.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 12,
+        "question_type": "conceptual",
+        "question_text": "La operación MongoDB equivalente a JOIN en SQL es:",
+        "option_a": "Se puede conseguir concatenando sentencias find en la misma operación.",
+        "option_b": "El aggregation framework.",
+        "option_c": "MongoDB no tiene operación equivalente a JOIN hasta su versión 3.2.",
+        "option_d": "Ninguna de las anteriores es cierta.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "b",
+        "explanation": "Hay funciones de agregación que nos permiten simular el JOIN de SQL.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 12,
+        "question_type": "conceptual",
+        "question_text": "¿Qué situación tiene que darse para que el comando save actualice un documento?",
+        "option_a": "Que el argumento contenga un identificador existente en la collection.",
+        "option_b": "Que el segundo argumento en el comando sea el valor true.",
+        "option_c": "Que el argumento se parezca en más de un 50 % a un documento en la collection.",
+        "option_d": "save no puede utilizarse para actualizar documentos.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "a",
+        "explanation": "save no permite ningún parámetro de búsqueda. Comprueba si existe un documento con el mismo _id que guardaste. Cuando existe, lo reemplaza. Cuando no existe tal documento, inserta el documento como uno nuevo. Cuando el documento que inserta no tiene _id campo, genera uno con un ObjectId recién creado antes de insertarlo.",
+        "dataset_reference": "N/A",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 12,
+        "question_type": "conceptual",
+        "question_text": "¿Qué comando se utiliza en MongoDB para eliminar un conjunto de documentos?",
+        "option_a": "save.",
+        "option_b": "delete.",
+        "option_c": "remove.",
+        "option_d": "unset.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "b",
+        "explanation": "Delete permite borrar documentos que cumplan determinada condición. Remove, por su parte, borra el primero documento que cumpla dicha condición.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 12,
+        "question_type": "conceptual",
+        "question_text": "¿Qué comando puede aplicarse sobre el resultado de una consulta en MongoDB para restringir el número de documentos retornados?",
+        "option_a": "limit.",
+        "option_b": "restrict.",
+        "option_c": "skip.",
+        "option_d": "sort.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "a",
+        "explanation": "Al igual que en SQL, limit limita el número de registros que se visualizan en una consulta.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    }
+]
+
+# ============================================================
+# CATEGORÍA 13: TEST 4 - AGREGACIÓN MONGODB
+# ============================================================
+# Preguntas extraídas del Test 4 del curso
+# Total: 10 preguntas conceptuales
+
+TEST_4_AGREGACION_MONGODB = [
+    {
+        "category_id": 13,
+        "question_type": "conceptual",
+        "question_text": "¿Para qué son útiles las funciones de agregación?",
+        "option_a": "Para agrupar datos.",
+        "option_b": "Para realizar cálculos.",
+        "option_c": "Para crear nuevas colecciones.",
+        "option_d": "Todas las anteriores son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "Las funciones de agregación, entre otras cosas, permiten agrupar datos, realizar cálculos y crear nuevas colecciones a partir de los resultados de sus operaciones.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 13,
+        "question_type": "conceptual",
+        "question_text": "¿Qué método puede utilizarse en MongoDB para agregar información de documentos en una collection?",
+        "option_a": "sum.",
+        "option_b": "Aggregate, a partir de la versión 2.2.",
+        "option_c": "Map-Reduce.",
+        "option_d": "Las respuestas B y C son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "Estos son los métodos que se han desarrollado en este tema.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 13,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál de las siguientes son operaciones específicas de agregación?",
+        "option_a": "sum.",
+        "option_b": "Map-Reduce.",
+        "option_c": "count.",
+        "option_d": "Las respuestas A y C son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "Sum y count son funciones de agregación de por sí. Mongo las utiliza para cumplir operaciones específicas en Aggregate.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 13,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es el objetivo principal de la función map?",
+        "option_a": "Generar los pares clave-valor.",
+        "option_b": "Realizar operaciones con los atributos de la colección.",
+        "option_c": "Opinar sobre los pares clave-valor.",
+        "option_d": "Crear una nueva colección.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "a",
+        "explanation": "Map genera los pares clave-valor en función de los datos que procesa.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 13,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es el objetivo principal de la función reduce?",
+        "option_a": "Generar los pares clave-valor.",
+        "option_b": "Realizar operaciones con los atributos de la colección.",
+        "option_c": "Operar sobre los pares clave-valor, reduce lo que hace es operar sobre ellos para cumplir su objetivo como función de reducción.",
+        "option_d": "Crear una nueva colección.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "c",
+        "explanation": "Una vez generados los pares clave-valor, reduce lo que hace es operar sobre ellos para cumplir su objetivo como función de reducción.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 13,
+        "question_type": "conceptual",
+        "question_text": "¿Qué comando se utiliza en una función map para generar el par clave-valor que será procesado posteriormente?",
+        "option_a": "generate.",
+        "option_b": "return.",
+        "option_c": "emit.",
+        "option_d": "yield.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "c",
+        "explanation": "emit es la función que genera el par clave-valor que será procesado en el momento de generarse.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 13,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál de las siguientes es una ventaja del framework de agregación de MongoDB?",
+        "option_a": "Rendimiento.",
+        "option_b": "Potencia.",
+        "option_c": "Simplicidad.",
+        "option_d": "Las respuestas A y C son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "Aggregation básicamente permite conseguir mejor rendimiento y simplicidad a la hora de hacer las agregaciones. Potencia no es que sea siempre un daño en una agregación, incluso habrá agregaciones que no sean lo suficientemente adecuadas para pensar en su uso.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 13,
+        "question_type": "conceptual",
+        "question_text": "¿En qué está modelado el framework de agregación?",
+        "option_a": "Funciones.",
+        "option_b": "Etapas.",
+        "option_c": "Sentencias SQL.",
+        "option_d": "Agrupaciones.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "b",
+        "explanation": "Recordemos que el framework de agregación está modelado en el concepto de tuberías de procesamiento de datos, es decir, los documentos entran en una tubería de varias etapas que transforman los documentos en un resultado agregado.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 13,
+        "question_type": "conceptual",
+        "question_text": "¿Qué campo es obligatorio especificar en framework de agregación?",
+        "option_a": "_id.",
+        "option_b": "Object.",
+        "option_c": "$sum.",
+        "option_d": "$group.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "$group es el campo obligatorio que debe especificarse en el framework de agregación.",
+        "dataset_reference": "N/A",
+        "difficulty": "hard"
+    },
+    {
+        "category_id": 13,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál de los siguientes es un operador del framework de agregación?",
+        "option_a": "$gt.",
+        "option_b": "$map.",
+        "option_c": "$glear.",
+        "option_d": "Todos los anteriores son correctos.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "Los tres son operadores de agregación del framework.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    }
+]
+
+# ============================================================
+# CATEGORÍA 14: TEST 5 - BACKUP, ÍNDICES, REPLICACIÓN Y SHARDING
+# ============================================================
+# Preguntas extraídas del Test 5 del curso
+# Total: 10 preguntas conceptuales
+
+TEST_5_BACKUP_INDICES_REPLICACION = [
+    {
+        "category_id": 14,
+        "question_type": "conceptual",
+        "question_text": "¿Qué comando de MongoDB permite crear una copia de respaldo de una base de datos?",
+        "option_a": "mongorestore.",
+        "option_b": "mongodump.",
+        "option_c": "backup.",
+        "option_d": "mongod.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "b",
+        "explanation": "Este comando permite crear una copia de seguridad «dump» de la base de datos.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 14,
+        "question_type": "conceptual",
+        "question_text": "¿Qué comando de MongoDB permite recuperar una base de datos a partir de una copia de seguridad?",
+        "option_a": "mongorestore.",
+        "option_b": "save.",
+        "option_c": "mongos.",
+        "option_d": "copydb.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "a",
+        "explanation": "Este comando permite restaurar una base de datos que previamente ha sido guardada «dump».",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 14,
+        "question_type": "conceptual",
+        "question_text": "¿Qué elementos de la base de datos mejoran el rendimiento de consultas a collection?",
+        "option_a": "Índices.",
+        "option_b": "Replica sets.",
+        "option_c": "Query routers.",
+        "option_d": "Las respuestas B y C son correctas.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "a",
+        "explanation": "Los índices son elementos que permiten indexar los documentos de la base de datos para mejorar las búsquedas.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 14,
+        "question_type": "conceptual",
+        "question_text": "¿Qué característica de MongoDB permite tener redundancia y aumentar la disponibilidad de los datos?",
+        "option_a": "Seguridad.",
+        "option_b": "Sharding.",
+        "option_c": "Índices.",
+        "option_d": "Replicación.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "Recuerda que la replicación es una característica de MongoDB que permite la redundancia de datos e incrementa su disponibilidad.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 14,
+        "question_type": "conceptual",
+        "question_text": "¿Cuál es el modelo básico de replicación en MongoDB?",
+        "option_a": "Sharding.",
+        "option_b": "Replica set.",
+        "option_c": "Maestro-Esclavo.",
+        "option_d": "Shards.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "c",
+        "explanation": "La arquitectura básica de replicación en MongoDB sigue un modelo Maestro-Esclavo.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 14,
+        "question_type": "conceptual",
+        "question_text": "¿Cómo se llama al refinamiento del modelo Maestro-Esclavo implementado en MongoDB?",
+        "option_a": "Result set.",
+        "option_b": "Replica set.",
+        "option_c": "Sharding.",
+        "option_d": "Replicación.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "b",
+        "explanation": "Este método permite una recuperación a fallos de forma automática, y es la forma recomendada de implementar replicación de datos en MongoDB.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 14,
+        "question_type": "conceptual",
+        "question_text": "¿Cómo se denomina al nodo de un replica set que no almacena datos y solamente puede votar en las elecciones de nodo primario?",
+        "option_a": "Secundario.",
+        "option_b": "Árbitro.",
+        "option_c": "Shard.",
+        "option_d": "Config server.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "b",
+        "explanation": "Este es utilizado solamente para decidir qué nodo debe ser asignado como primario.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 14,
+        "question_type": "conceptual",
+        "question_text": "¿Qué otro nombre recibe el método de escalabilidad horizontal, en el que los datos son separados y distribuidos entre varios servidores?",
+        "option_a": "Escalabilidad vertical.",
+        "option_b": "Elastic computing.",
+        "option_c": "Sharding.",
+        "option_d": "Replicación.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "c",
+        "explanation": "Sharding o escalabilidad horizontal.",
+        "dataset_reference": "N/A",
+        "difficulty": "easy"
+    },
+    {
+        "category_id": 14,
+        "question_type": "conceptual",
+        "question_text": "¿Qué nombre reciben los nodos que almacenan datos en un sharded cluster?",
+        "option_a": "Data stores.",
+        "option_b": "Config servers.",
+        "option_c": "Query routers.",
+        "option_d": "Shards.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "d",
+        "explanation": "Están a cargo de almacenar la información. Cada shard es un replica set, por lo que brinda alta disponibilidad y consistencia de datos.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    },
+    {
+        "category_id": 14,
+        "question_type": "conceptual",
+        "question_text": "¿Cuántos config servers debe haber en un entorno de producción?",
+        "option_a": "Uno.",
+        "option_b": "Tres.",
+        "option_c": "Un máximo de cinco.",
+        "option_d": "Depende del número de servidores disponibles.",
+        "option_e": "Ninguna de las anteriores.",
+        "correct_answer": "b",
+        "explanation": "Los sharded clusters en un entorno de producción tienen exactamente tres config servers.",
+        "dataset_reference": "N/A",
+        "difficulty": "medium"
+    }
+]
+
+# Total acumulado: 570 preguntas (520 originales + 50 tests) ✅✅✅
+
+# ============================================================
 # COMPILACIÓN FINAL DE TODAS LAS PREGUNTAS
 # ============================================================
 
@@ -7054,12 +7807,17 @@ ALL_QUESTIONS = (
     QUESTIONS_BATCH_8 +
     QUESTIONS_BATCH_9 +
     QUESTIONS_BATCH_10 +
-    FINAL_BATCH
+    FINAL_BATCH +
+    TEST_1_FUNDAMENTOS_DATOS +
+    TEST_2_NOSQL_MONGODB +
+    TEST_3_MONGODB_CRUD +
+    TEST_4_AGREGACION_MONGODB +
+    TEST_5_BACKUP_INDICES_REPLICACION
 )
 
 # Función auxiliar para obtener todas las preguntas
 def get_all_questions():
-    """Retorna la lista completa de 520 preguntas"""
+    """Retorna la lista completa de 570 preguntas (520 originales + 50 de tests)"""
     return ALL_QUESTIONS
 
 # Función para obtener preguntas por categoría

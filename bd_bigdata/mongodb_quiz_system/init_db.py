@@ -3,8 +3,8 @@ init_db.py - Script de inicialización de la base de datos MongoDB Quiz System
 
 Este script:
 1. Crea la base de datos y todas las tablas
-2. Inserta las 9 categorías de MongoDB
-3. Carga las 520 preguntas del banco
+2. Inserta las categorías (9 de MongoDB + categorías de tests)
+3. Carga las preguntas del banco (520 originales + preguntas de tests)
 4. Inicializa el progreso de estudio para cada categoría
 """
 
@@ -18,7 +18,7 @@ from database import (
 )
 from question_bank import get_all_questions, get_question_stats
 
-# Definición de las 9 categorías basadas en las sesiones de MongoDB
+# Definición de las categorías (9 de MongoDB + categorías de tests)
 CATEGORIES = [
     {
         "name": "Instalación y Entorno",
@@ -64,6 +64,31 @@ CATEGORIES = [
         "name": "Operaciones Avanzadas",
         "description": "Replicación, sharding, backup, seguridad y operaciones en producción",
         "session_number": 8
+    },
+    {
+        "name": "Test 1 - Fundamentos de Datos",
+        "description": "Preguntas sobre fundamentos de datos: datos vs información, calidad, captura, formatos (CSV, JSON, XML) y bases de datos",
+        "session_number": 1
+    },
+    {
+        "name": "Test 2 - NoSQL y MongoDB",
+        "description": "Preguntas sobre bases de datos NoSQL, MongoDB, tipos de BD NoSQL, teorema CAP y patrones de diseño en MongoDB",
+        "session_number": 2
+    },
+    {
+        "name": "Test 3 - MongoDB CRUD",
+        "description": "Preguntas sobre operaciones CRUD en MongoDB: comandos, herramientas GUI, inserción, actualización, eliminación y consultas",
+        "session_number": 3
+    },
+    {
+        "name": "Test 4 - Agregación MongoDB",
+        "description": "Preguntas sobre funciones de agregación, Map-Reduce, framework de agregación, operadores y pipeline de agregación",
+        "session_number": 4
+    },
+    {
+        "name": "Test 5 - Backup, Índices, Replicación y Sharding",
+        "description": "Preguntas sobre mongodump, mongorestore, índices, replica sets, sharding y arquitectura distribuida en MongoDB",
+        "session_number": 5
     }
 ]
 
@@ -146,7 +171,7 @@ def initialize_study_progress():
     conn = get_connection()
     cursor = conn.cursor()
 
-    for i in range(1, 10):  # 9 categorías
+    for i in range(1, len(CATEGORIES) + 1):  # Todas las categorías
         try:
             cursor.execute('''
                 INSERT INTO study_progress (category_id, questions_answered, questions_correct)

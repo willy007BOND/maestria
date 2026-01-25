@@ -1,5 +1,5 @@
 """
-app.py - Aplicación Flask para MongoDB Quiz System
+app.py - Aplicación Flask para BD Big Data Quiz
 
 Rutas:
 - /: Página principal con selección de categorías
@@ -307,11 +307,12 @@ def internal_error(error):
 
 if __name__ == '__main__':
     print("="*60)
-    print("🚀 MONGODB QUIZ SYSTEM")
+    print("🚀 BD BIG DATA QUIZ")
     print("="*60)
     print("\n📌 Servidor iniciando...")
     print("🌐 URL: http://127.0.0.1:5001")
     print("📊 Base de datos: mongodb_quiz.db")
+    print("📚 Total: 570 preguntas en 14 categorías")
     print("\n✨ Presiona Ctrl+C para detener el servidor\n")
 
     app.run(debug=True, host='0.0.0.0', port=5001)
