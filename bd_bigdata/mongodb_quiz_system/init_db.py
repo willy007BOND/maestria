@@ -109,6 +109,11 @@ CATEGORIES = [
         "name": "Test 9 - Redis",
         "description": "Preguntas sobre Redis: estructuras de datos, comandos, cliente redis-cli, colecciones, patrón pub/sub y cluster",
         "session_number": 9
+    },
+    {
+        "name": "Test 10 - Cloud Computing y Docker",
+        "description": "Preguntas sobre cloud computing (IaaS, PaaS, SaaS), modelos de cloud, Docker, hipervisores, imágenes y contenedores",
+        "session_number": 10
     }
 ]
 

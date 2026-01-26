@@ -1,6 +1,6 @@
 """
 question_bank.py - Banco de preguntas para BD Big Data Quiz
-Total: 610 preguntas
+Total: 620 preguntas
 
 Categorías:
 - Categorías 1-9: Preguntas de MongoDB (520 preguntas)
@@ -13,6 +13,7 @@ Categorías:
 - Categoría 16: Test 7 - Cassandra (10 preguntas)
 - Categoría 17: Test 8 - Grafo (Neo4j) (10 preguntas)
 - Categoría 18: Test 9 - Redis (10 preguntas)
+- Categoría 19: Test 10 - Cloud Computing y Docker (10 preguntas)
 """
 
 # Categoría 1: Instalación y Entorno (30 preguntas) ✅
@@ -7870,7 +7871,26 @@ TEST_9_REDIS = [
     {"category_id": 18, "question_type": "conceptual", "question_text": "¿Qué afirmación es verdadera?", "option_a": "Dentro de un cluster de Redis, un servidor determinado se denomina cliente.", "option_b": "Cada nodo puede ser un nodo primario (maestro), pero no un nodo secundario (esclavo).", "option_c": "La administración del cluster se realiza en una capa de la arquitectura del cluster de Redis.", "option_d": "El almacenamiento de datos de series de tiempo es otra tarea común en Redis.", "option_e": "Ninguna de las anteriores.", "correct_answer": "d", "explanation": "Redis dispone de un módulo que permite tratar datos de series de tiempo.", "dataset_reference": "N/A", "difficulty": "medium"}
 ]
 
-# Total acumulado: 610 preguntas (520 originales + 90 tests) ✅✅✅✅✅
+# ============================================================
+# CATEGORÍA 19: TEST 10 - CLOUD COMPUTING Y DOCKER
+# ============================================================
+# Preguntas extraídas del Test 10 del curso
+# Total: 10 preguntas conceptuales
+
+TEST_10_CLOUD_DOCKER = [
+    {"category_id": 19, "question_type": "conceptual", "question_text": "¿Cuáles son los beneficios del cloud computing?", "option_a": "Escalabilidad, flexibilidad, seguridad, pago por uso.", "option_b": "Flexibilidad, pago por uso y seguridad.", "option_c": "Escalabilidad y portabilidad.", "option_d": "Ninguno de los anteriores.", "option_e": "Ninguna de las anteriores.", "correct_answer": "a", "explanation": "El cloud computing ofrece escalabilidad, flexibilidad, seguridad y modelo de pago por uso como principales beneficios.", "dataset_reference": "N/A", "difficulty": "easy"},
+    {"category_id": 19, "question_type": "conceptual", "question_text": "¿Cuántos modelos de cloud existen?", "option_a": "Dos: público y privado.", "option_b": "Tres: público, privado y de pago.", "option_c": "Tres: público, privado e híbrido.", "option_d": "Ninguno de los anteriores.", "option_e": "Ninguna de las anteriores.", "correct_answer": "c", "explanation": "Existen tres modelos principales de cloud: público, privado e híbrido.", "dataset_reference": "N/A", "difficulty": "easy"},
+    {"category_id": 19, "question_type": "conceptual", "question_text": "Una afirmación verdadera sobre SaaS:", "option_a": "SaaS es ofrecer servicios de sistemas operativos virtualizados.", "option_b": "Se centra en alojar e implementar software del cliente en el cloud para que este luego lo use a demanda.", "option_c": "Significa Software como Servicio y ofrece al cliente licencia de todo tipo de software.", "option_d": "El cliente usa este servicio como repositorio para guardar todo el software que compra la compañía y así no instalarlo en sus servidores principales.", "option_e": "Ninguna de las anteriores.", "correct_answer": "b", "explanation": "SaaS se centra en alojar e implementar software del cliente en el cloud para que este luego lo use a demanda.", "dataset_reference": "N/A", "difficulty": "medium"},
+    {"category_id": 19, "question_type": "conceptual", "question_text": "¿En qué se parecen PaaS e IaaS?", "option_a": "En nada, cada uno ofrece servicios totalmente diferentes.", "option_b": "PaaS ofrece determinados servicios como parte de un contexto de plataforma; IaaS, por su parte, puede que ofrezca servicios similares, pero de forma independiente.", "option_c": "Ambos ofrecen servicios parecidos, solo que uno le da un enfoque más corporativo y el otro se centra más en resolver problemas puntuales del cliente.", "option_d": "Ninguna de las anteriores es correcta.", "option_e": "Ninguna de las anteriores.", "correct_answer": "b", "explanation": "PaaS ofrece determinados servicios como parte de un contexto de plataforma; IaaS, por su parte, puede que ofrezca servicios similares, pero de forma independiente.", "dataset_reference": "N/A", "difficulty": "medium"},
+    {"category_id": 19, "question_type": "conceptual", "question_text": "¿Qué clase de servicio se podría considerar Google Docs?", "option_a": "IaaS.", "option_b": "PaaS.", "option_c": "SaaS.", "option_d": "PaaS y SaaS.", "option_e": "Ninguna de las anteriores.", "correct_answer": "c", "explanation": "Google Docs es un servicio SaaS (Software como Servicio), ya que ofrece software de ofimática a través de la web.", "dataset_reference": "N/A", "difficulty": "easy"},
+    {"category_id": 19, "question_type": "conceptual", "question_text": "El encargado de gestionar los recursos físicos y distribuirlos de forma equitativa para que las virtualizaciones hagan uso de ellos es:", "option_a": "Docker.", "option_b": "Cloud computing.", "option_c": "SaaS.", "option_d": "Hipervisor.", "option_e": "Ninguna de las anteriores.", "correct_answer": "d", "explanation": "El hipervisor es el encargado de gestionar los recursos físicos y distribuirlos de forma equitativa para que las virtualizaciones hagan uso de ellos.", "dataset_reference": "N/A", "difficulty": "medium"},
+    {"category_id": 19, "question_type": "conceptual", "question_text": "Los componentes de Docker son:", "option_a": "Los registros.", "option_b": "Las imágenes.", "option_c": "Los contenedores.", "option_d": "Todos los anteriores son correctos.", "option_e": "Ninguna de las anteriores.", "correct_answer": "d", "explanation": "Docker está compuesto por registros, imágenes y contenedores. Todos estos componentes trabajan juntos para crear un ecosistema de contenedores.", "dataset_reference": "N/A", "difficulty": "medium"},
+    {"category_id": 19, "question_type": "conceptual", "question_text": "Para trabajar con contenedores en Docker, ¿qué es lo primero que debemos descargar?", "option_a": "El propio contenedor.", "option_b": "Imágenes.", "option_c": "Registros.", "option_d": "Ninguno de los anteriores.", "option_e": "Ninguna de las anteriores.", "correct_answer": "b", "explanation": "Antes de trabajar con contenedores en Docker, primero debemos descargar imágenes, que son las plantillas para crear contenedores.", "dataset_reference": "N/A", "difficulty": "easy"},
+    {"category_id": 19, "question_type": "conceptual", "question_text": "¿Qué hace el comando docker rm id_contenedor?", "option_a": "Borra todos los contenedores que se hayan creado previamente.", "option_b": "Borra el contenedor y limpia la imagen para crear nuevos contenedores.", "option_c": "Borra el contenedor cuyo id corresponde con el descrito siempre que esté detenido.", "option_d": "Borra un contenedor cuyo id es id_contenedor.", "option_e": "Ninguna de las anteriores.", "correct_answer": "c", "explanation": "El comando docker rm id_contenedor borra el contenedor cuyo id corresponde con el descrito, siempre que esté detenido.", "dataset_reference": "N/A", "difficulty": "medium"},
+    {"category_id": 19, "question_type": "conceptual", "question_text": "¿Qué hace el comando docker images?", "option_a": "Muestra la lista de imágenes creadas o existentes.", "option_b": "Muestra las imágenes con sus correspondientes contenedores asociados.", "option_c": "Muestra las imágenes que se están ejecutando.", "option_d": "Ninguna de las anteriores.", "option_e": "Ninguna de las anteriores.", "correct_answer": "a", "explanation": "El comando docker images muestra la lista de imágenes creadas o existentes en el sistema.", "dataset_reference": "N/A", "difficulty": "easy"}
+]
+
+# Total acumulado: 620 preguntas (520 originales + 100 tests) ✅✅✅✅✅✅
 
 # ============================================================
 # COMPILACIÓN FINAL DE TODAS LAS PREGUNTAS
@@ -7896,12 +7916,13 @@ ALL_QUESTIONS = (
     TEST_6_DRIVERS_MONGODB +
     TEST_7_CASSANDRA +
     TEST_8_GRAFO_NEO4J +
-    TEST_9_REDIS
+    TEST_9_REDIS +
+    TEST_10_CLOUD_DOCKER
 )
 
 # Función auxiliar para obtener todas las preguntas
 def get_all_questions():
-    """Retorna la lista completa de 610 preguntas (520 originales + 90 de tests)"""
+    """Retorna la lista completa de 620 preguntas (520 originales + 100 de tests)"""
     return ALL_QUESTIONS
 
 # Función para obtener preguntas por categoría

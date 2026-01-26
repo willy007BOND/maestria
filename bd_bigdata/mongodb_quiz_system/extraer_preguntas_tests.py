@@ -1115,6 +1115,129 @@ TESTS_DATA = {
             "correct": "d",
             "explanation": "Redis dispone de un módulo que permite tratar datos de series de tiempo."
         }
+    ],
+
+    "Test 10 - Cloud Computing y Docker": [
+        {
+            "question": "¿Cuáles son los beneficios del cloud computing?",
+            "options": {
+                "a": "Escalabilidad, flexibilidad, seguridad, pago por uso.",
+                "b": "Flexibilidad, pago por uso y seguridad.",
+                "c": "Escalabilidad y portabilidad.",
+                "d": "Ninguno de los anteriores.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "a",
+            "explanation": "El cloud computing ofrece escalabilidad, flexibilidad, seguridad y modelo de pago por uso como principales beneficios."
+        },
+        {
+            "question": "¿Cuántos modelos de cloud existen?",
+            "options": {
+                "a": "Dos: público y privado.",
+                "b": "Tres: público, privado y de pago.",
+                "c": "Tres: público, privado e híbrido.",
+                "d": "Ninguno de los anteriores.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "Existen tres modelos principales de cloud: público, privado e híbrido."
+        },
+        {
+            "question": "Una afirmación verdadera sobre SaaS:",
+            "options": {
+                "a": "SaaS es ofrecer servicios de sistemas operativos virtualizados.",
+                "b": "Se centra en alojar e implementar software del cliente en el cloud para que este luego lo use a demanda.",
+                "c": "Significa Software como Servicio y ofrece al cliente licencia de todo tipo de software.",
+                "d": "El cliente usa este servicio como repositorio para guardar todo el software que compra la compañía y así no instalarlo en sus servidores principales.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "SaaS se centra en alojar e implementar software del cliente en el cloud para que este luego lo use a demanda."
+        },
+        {
+            "question": "¿En qué se parecen PaaS e IaaS?",
+            "options": {
+                "a": "En nada, cada uno ofrece servicios totalmente diferentes.",
+                "b": "PaaS ofrece determinados servicios como parte de un contexto de plataforma; IaaS, por su parte, puede que ofrezca servicios similares, pero de forma independiente.",
+                "c": "Ambos ofrecen servicios parecidos, solo que uno le da un enfoque más corporativo y el otro se centra más en resolver problemas puntuales del cliente.",
+                "d": "Ninguna de las anteriores es correcta.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "PaaS ofrece determinados servicios como parte de un contexto de plataforma; IaaS, por su parte, puede que ofrezca servicios similares, pero de forma independiente."
+        },
+        {
+            "question": "¿Qué clase de servicio se podría considerar Google Docs?",
+            "options": {
+                "a": "IaaS.",
+                "b": "PaaS.",
+                "c": "SaaS.",
+                "d": "PaaS y SaaS.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "Google Docs es un servicio SaaS (Software como Servicio), ya que ofrece software de ofimática a través de la web."
+        },
+        {
+            "question": "El encargado de gestionar los recursos físicos y distribuirlos de forma equitativa para que las virtualizaciones hagan uso de ellos es:",
+            "options": {
+                "a": "Docker.",
+                "b": "Cloud computing.",
+                "c": "SaaS.",
+                "d": "Hipervisor.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "El hipervisor es el encargado de gestionar los recursos físicos y distribuirlos de forma equitativa para que las virtualizaciones hagan uso de ellos."
+        },
+        {
+            "question": "Los componentes de Docker son:",
+            "options": {
+                "a": "Los registros.",
+                "b": "Las imágenes.",
+                "c": "Los contenedores.",
+                "d": "Todos los anteriores son correctos.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Docker está compuesto por registros, imágenes y contenedores. Todos estos componentes trabajan juntos para crear un ecosistema de contenedores."
+        },
+        {
+            "question": "Para trabajar con contenedores en Docker, ¿qué es lo primero que debemos descargar?",
+            "options": {
+                "a": "El propio contenedor.",
+                "b": "Imágenes.",
+                "c": "Registros.",
+                "d": "Ninguno de los anteriores.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "Antes de trabajar con contenedores en Docker, primero debemos descargar imágenes, que son las plantillas para crear contenedores."
+        },
+        {
+            "question": "¿Qué hace el comando docker rm id_contenedor?",
+            "options": {
+                "a": "Borra todos los contenedores que se hayan creado previamente.",
+                "b": "Borra el contenedor y limpia la imagen para crear nuevos contenedores.",
+                "c": "Borra el contenedor cuyo id corresponde con el descrito siempre que esté detenido.",
+                "d": "Borra un contenedor cuyo id es id_contenedor.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "El comando docker rm id_contenedor borra el contenedor cuyo id corresponde con el descrito, siempre que esté detenido."
+        },
+        {
+            "question": "¿Qué hace el comando docker images?",
+            "options": {
+                "a": "Muestra la lista de imágenes creadas o existentes.",
+                "b": "Muestra las imágenes con sus correspondientes contenedores asociados.",
+                "c": "Muestra las imágenes que se están ejecutando.",
+                "d": "Ninguna de las anteriores.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "a",
+            "explanation": "El comando docker images muestra la lista de imágenes creadas o existentes en el sistema."
+        }
     ]
 }
 

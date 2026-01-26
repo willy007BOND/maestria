@@ -47,10 +47,10 @@ Sistema de evaluación interactivo desarrollado con Python y SQLite para estudia
 
 **Propósito:**
 Aplicación web educativa que permite estudiar MongoDB y Big Data mediante exámenes dinámicos de 20 preguntas aleatorias. El sistema incluye:
-- Banco de 610 preguntas (conceptuales y de sintaxis)
+- Banco de 620 preguntas (conceptuales y de sintaxis)
 - Preguntas basadas en datasets reales (infovuelos, listings, data_act_01)
 - Explicaciones detalladas cuando se falla una pregunta
-- Sistema de 18 categorías (9 de MongoDB + 9 tests del curso)
+- Sistema de 19 categorías (9 de MongoDB + 10 tests del curso)
 - Selección de categorías para personalizar exámenes
 
 ---
@@ -62,7 +62,7 @@ mongodb_quiz_system/
 ├── app.py                      # Aplicación Flask principal
 ├── database.py                 # ✅ Gestión de base de datos SQLite
 ├── quiz_generator.py           # Generador de exámenes con filtro de categorías
-├── question_bank.py            # Banco de 610 preguntas (520 MongoDB + 90 tests)
+├── question_bank.py            # Banco de 620 preguntas (520 MongoDB + 100 tests)
 ├── init_db.py                  # Script para inicializar la BD
 ├── extraer_preguntas_tests.py  # Preguntas extraídas de los tests PDF
 ├── mongodb_quiz.db             # Base de datos SQLite (auto-generada)
@@ -87,7 +87,7 @@ mongodb_quiz_system/
 - Campos: id, name, description, session_number
 
 **Tabla: `questions`**
-- Banco de 610 preguntas con opciones múltiples (a-e)
+- Banco de 620 preguntas con opciones múltiples (a-e)
 - Tipos: 'conceptual' y 'syntax'
 - Dificultades: 'easy', 'medium', 'hard'
 - Campos: id, category_id, question_type, question_text, option_a-e, correct_answer, explanation, dataset_reference, difficulty
@@ -106,7 +106,7 @@ mongodb_quiz_system/
 
 ---
 
-#### **Categorías de Preguntas (18 categorías, 610 preguntas totales)**
+#### **Categorías de Preguntas (19 categorías, 620 preguntas totales)**
 
 **Categorías MongoDB (1-9): 520 preguntas**
 1. **Instalación y Entorno** (Sesión 3) - 31 preguntas
@@ -119,7 +119,7 @@ mongodb_quiz_system/
 8. **Otras Funcionalidades** (Sesión 7) - 40 preguntas
 9. **Operaciones Avanzadas** (Sesión 8) - 40 preguntas
 
-**Categorías Tests del Curso (10-18): 90 preguntas**
+**Categorías Tests del Curso (10-19): 100 preguntas**
 10. **Test 1 - Fundamentos de Datos** - 10 preguntas
 11. **Test 2 - NoSQL y MongoDB** - 10 preguntas
 12. **Test 3 - MongoDB CRUD** - 10 preguntas
@@ -129,11 +129,12 @@ mongodb_quiz_system/
 16. **Test 7 - Cassandra** - 10 preguntas
 17. **Test 8 - Grafo (Neo4j)** - 10 preguntas
 18. **Test 9 - Redis** - 10 preguntas
+19. **Test 10 - Cloud Computing y Docker** - 10 preguntas
 
 **Distribución de preguntas:**
-- 52.3% preguntas de sintaxis (basadas en datasets reales)
-- 47.7% preguntas conceptuales
-- Dificultades: 23.8% fácil, 51.8% medio, 24.4% difícil
+- 51.5% preguntas de sintaxis (basadas en datasets reales)
+- 48.5% preguntas conceptuales
+- Dificultades: 24.2% fácil, 51.8% medio, 24.0% difícil
 
 ---
 
@@ -143,7 +144,7 @@ mongodb_quiz_system/
 - Esquema de 5 tablas con relaciones
 - Funciones CRUD para todas las entidades
 - Sistema de estadísticas y progreso
-- 610 preguntas distribuidas en 18 categorías
+- 620 preguntas distribuidas en 19 categorías
 
 ✅ **Módulo `database.py`**
 - Inicialización de base de datos
@@ -154,10 +155,10 @@ mongodb_quiz_system/
 - Estadísticas generales
 
 ✅ **Módulo `question_bank.py`**
-- 610 preguntas completas (291 conceptuales, 319 de sintaxis)
-- Distribución: 145 fáciles, 316 medias, 149 difíciles
+- 620 preguntas completas (301 conceptuales, 319 de sintaxis)
+- Distribución: 150 fáciles, 321 medias, 149 difíciles
 - Basadas en datasets reales (infovuelos, listings, data_act_01)
-- Incluye preguntas de tests del curso (90 preguntas de Tests 1-9)
+- Incluye preguntas de tests del curso (100 preguntas de Tests 1-10)
 
 ✅ **Módulo `quiz_generator.py`**
 - Generador de exámenes aleatorios de 20 preguntas
@@ -167,14 +168,14 @@ mongodb_quiz_system/
 
 ✅ **Script `init_db.py`**
 - Inicialización completa de base de datos
-- Carga automática de 610 preguntas
-- Configuración de 18 categorías (9 MongoDB + 9 Tests)
+- Carga automática de 620 preguntas
+- Configuración de 19 categorías (9 MongoDB + 10 Tests)
 - Inicialización de progreso
 
 ✅ **Script `extraer_preguntas_tests.py`**
-- Preguntas extraídas de los Tests 1-9 en formato Python
+- Preguntas extraídas de los Tests 1-10 en formato Python
 - Función de formateo para integración con question_bank.py
-- 90 preguntas de tests del curso (10 por test)
+- 100 preguntas de tests del curso (10 por test)
 
 ✅ **Aplicación Flask `app.py`**
 - Ruta principal (/) con selector de categorías
@@ -270,12 +271,12 @@ Proyectos y ejercicios relacionados con Visión por Computador.
 ## Estado del Repositorio
 
 **Última actualización:** 2026-01-25
-**Último commit:** Integración Test 9 - Redis - 610 preguntas totales
+**Último commit:** Integración Test 10 - Cloud Computing y Docker - 620 preguntas totales
 
 ## Notas de Desarrollo
 
 - Los datasets han pasado por procesos de limpieza y normalización
 - Se mantienen versiones en CSV y JSON de los datasets principales
-- El proyecto mongodb_quiz_system está completo y funcional con 610 preguntas en 18 categorías
-- Se han integrado los Tests 1-9 del curso al sistema de quiz (90 preguntas adicionales)
-- Pendiente: Integrar Test 10 (último test del curso)
+- El proyecto mongodb_quiz_system está **COMPLETO** y funcional con 620 preguntas en 19 categorías
+- Se han integrado TODOS los Tests 1-10 del curso al sistema de quiz (100 preguntas adicionales)
+- Sistema completamente funcional para estudiar MongoDB y Big Data (MongoDB, Cassandra, Neo4j, Redis, Docker, Cloud Computing)
