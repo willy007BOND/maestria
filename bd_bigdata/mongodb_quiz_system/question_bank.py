@@ -7851,7 +7851,26 @@ TEST_8_GRAFO_NEO4J = [
     {"category_id": 17, "question_type": "conceptual", "question_text": "Indica qué hace la siguiente instrucción: MATCH (a:Jugador), (b:Juego) WHERE a.name = \"Rabino\" AND b.name = \"Casino\" CREATE (a)-[r:TRABAJA_EN {partida1: victorias:5}]->(b) RETURN a,b", "option_a": "Crea los nodos a y b y asigna la relación TRABAJA_EN.", "option_b": "Crea la relación TRABAJA_EN sobre los nodos a y b.", "option_c": "Busca los nodos a y b que cumplan la condición del WHERE y luego asigna la relación TRABAJA_EN entre ellos.", "option_d": "Todas las respuestas anteriores son correctas.", "option_e": "Ninguna de las anteriores.", "correct_answer": "c", "explanation": "Al ejecutarse juntas MATCH y CREATE, los nodos que cumplan la condición WHERE serán quienes reciban la relación que se indica en el CREATE.", "dataset_reference": "N/A", "difficulty": "hard"}
 ]
 
-# Total acumulado: 600 preguntas (520 originales + 80 tests) ✅✅✅✅
+# ============================================================
+# CATEGORÍA 18: TEST 9 - REDIS
+# ============================================================
+# Preguntas extraídas del Test 9 del curso
+# Total: 10 preguntas conceptuales
+
+TEST_9_REDIS = [
+    {"category_id": 18, "question_type": "conceptual", "question_text": "Las siguientes son estructuras de Redis:", "option_a": "String, integer, float, sets y lists.", "option_b": "Lists, sets, hashes, stream y bit arrays.", "option_c": "HyperLogsLogs, hashes, sets, string y float.", "option_d": "Ninguna de las anteriores es correcta.", "option_e": "Ninguna de las anteriores.", "correct_answer": "b", "explanation": "Estos son algunos de los tipos de datos que utiliza Redis para almacenar y manipular los datos. Float, por su parte, no es un tipo de datos de Redis.", "dataset_reference": "N/A", "difficulty": "medium"},
+    {"category_id": 18, "question_type": "conceptual", "question_text": "¿Cuál de estas afirmaciones es verdadera?", "option_a": "No es necesario definir previamente un modelo de datos antes de usar o guardar datos en Redis.", "option_b": "Redis se caracteriza por el tratamiento de distintos tipos de datos, los cuales se pueden aplicar en distintos casos de uso.", "option_c": "Redis es una base de datos clave-valor.", "option_d": "Todas las anteriores son correctas.", "option_e": "Ninguna de las anteriores.", "correct_answer": "d", "explanation": "Todas las afirmaciones son ciertas, hacen parte de las características relevantes de la base de datos.", "dataset_reference": "N/A", "difficulty": "medium"},
+    {"category_id": 18, "question_type": "conceptual", "question_text": "¿Cómo se llama el cliente de Redis?", "option_a": "Cliente Redis Long.", "option_b": "redis-cli.", "option_c": "cli-rediss.", "option_d": "Ninguna de las anteriores es correcta.", "option_e": "Ninguna de las anteriores.", "correct_answer": "b", "explanation": "Redis llama a su consola o terminal redis-cli, abreviatura de cliente redis en inglés.", "dataset_reference": "N/A", "difficulty": "easy"},
+    {"category_id": 18, "question_type": "conceptual", "question_text": "¿Cuál de estas instrucciones muestra todos los elementos de una lista llamada clientes?", "option_a": "LINDEX clientes 0.", "option_b": "LRANGE clientes 0 -1.", "option_c": "LRANGE clientes 0 *.", "option_d": "GET clientes 1.", "option_e": "Ninguna de las anteriores.", "correct_answer": "b", "explanation": "Los valores 0 y -1 indican que se muestren los valores desde la posición 0 hasta el final de la lista.", "dataset_reference": "N/A", "difficulty": "medium"},
+    {"category_id": 18, "question_type": "conceptual", "question_text": "¿Cuál de estas instrucciones permite añadir un elemento a la colección llamada frutas?", "option_a": "SADD frutas mango.", "option_b": "SADD mango frutas.", "option_c": "SMEMBERS frutas mango.", "option_d": "SISMEMBERS frutas mango.", "option_e": "Ninguna de las anteriores.", "correct_answer": "a", "explanation": "SADD permite añadir elementos a una colección, seguido se indica el nombre de la colección y luego el elemento a añadir.", "dataset_reference": "N/A", "difficulty": "medium"},
+    {"category_id": 18, "question_type": "conceptual", "question_text": "¿Qué hace la siguiente instrucción: SET user pep?", "option_a": "Establece un usuario en pep.", "option_b": "Crea un elemento llamado user con el valor pep.", "option_c": "Muestra el valor de user y pep.", "option_d": "Guarda el valor user en pep.", "option_e": "Ninguna de las anteriores.", "correct_answer": "b", "explanation": "SET crea un elemento, seguido se indica el nombre del elemento y luego su valor.", "dataset_reference": "N/A", "difficulty": "easy"},
+    {"category_id": 18, "question_type": "conceptual", "question_text": "¿Qué son las colecciones ordenadas?", "option_a": "Una colección cuyos elementos se ordenan por la clave.", "option_b": "Una colección cuyos elementos se ordenan por el orden en que se añaden los valores.", "option_c": "Una colección cuyos elementos se ordenan por los valores que se añaden a dicha colección, no por su clave.", "option_d": "Ninguna de las anteriores es correcta.", "option_e": "Ninguna de las anteriores.", "correct_answer": "c", "explanation": "Las colecciones ordenadas se ordenan por los valores que se añaden a dicha colección, no por su clave.", "dataset_reference": "N/A", "difficulty": "medium"},
+    {"category_id": 18, "question_type": "conceptual", "question_text": "El patrón pub/sub permite:", "option_a": "Publicar datos cada cierto tiempo en un puerto concreto.", "option_b": "Crea un canal para que los clientes se suscriban y reciban valores emitidos.", "option_c": "Publicar datos en stream para ser consumido.", "option_d": "Todas las anteriores son correctas.", "option_e": "Ninguna de las anteriores.", "correct_answer": "d", "explanation": "Según la configuración que se le aplique al patrón, este permitirá hacer las tres operaciones que se indican previamente.", "dataset_reference": "N/A", "difficulty": "hard"},
+    {"category_id": 18, "question_type": "conceptual", "question_text": "Redis es una base de datos clave-valor que utiliza:", "option_a": "RAM y memoria flash.", "option_b": "Solo RAM.", "option_c": "RAM y memoria caché.", "option_d": "RAM SSD y Sweap.", "option_e": "Ninguna de las anteriores.", "correct_answer": "a", "explanation": "Redis posee funciones especializadas para usar tanto la memoria RAM como las memorias flash, incluso en SSD.", "dataset_reference": "N/A", "difficulty": "medium"},
+    {"category_id": 18, "question_type": "conceptual", "question_text": "¿Qué afirmación es verdadera?", "option_a": "Dentro de un cluster de Redis, un servidor determinado se denomina cliente.", "option_b": "Cada nodo puede ser un nodo primario (maestro), pero no un nodo secundario (esclavo).", "option_c": "La administración del cluster se realiza en una capa de la arquitectura del cluster de Redis.", "option_d": "El almacenamiento de datos de series de tiempo es otra tarea común en Redis.", "option_e": "Ninguna de las anteriores.", "correct_answer": "d", "explanation": "Redis dispone de un módulo que permite tratar datos de series de tiempo.", "dataset_reference": "N/A", "difficulty": "medium"}
+]
+
+# Total acumulado: 610 preguntas (520 originales + 90 tests) ✅✅✅✅✅
 
 # ============================================================
 # COMPILACIÓN FINAL DE TODAS LAS PREGUNTAS
@@ -7876,12 +7895,13 @@ ALL_QUESTIONS = (
     TEST_5_BACKUP_INDICES_REPLICACION +
     TEST_6_DRIVERS_MONGODB +
     TEST_7_CASSANDRA +
-    TEST_8_GRAFO_NEO4J
+    TEST_8_GRAFO_NEO4J +
+    TEST_9_REDIS
 )
 
 # Función auxiliar para obtener todas las preguntas
 def get_all_questions():
-    """Retorna la lista completa de 600 preguntas (520 originales + 80 de tests)"""
+    """Retorna la lista completa de 610 preguntas (520 originales + 90 de tests)"""
     return ALL_QUESTIONS
 
 # Función para obtener preguntas por categoría

@@ -104,6 +104,11 @@ CATEGORIES = [
         "name": "Test 8 - Grafo (Neo4j)",
         "description": "Preguntas sobre bases de datos de grafos con Neo4j: componentes, CQL (Cypher Query Language), nodos, relaciones y operaciones",
         "session_number": 8
+    },
+    {
+        "name": "Test 9 - Redis",
+        "description": "Preguntas sobre Redis: estructuras de datos, comandos, cliente redis-cli, colecciones, patrón pub/sub y cluster",
+        "session_number": 9
     }
 ]
 
