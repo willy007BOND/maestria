@@ -5,7 +5,7 @@
 📌 Servidor iniciando...
 🌐 URL: http://127.0.0.1:5001
 📊 Base de datos: mongodb_quiz.db
-📚 Total: 570 preguntas en 14 categorías
+📚 Total: 590 preguntas en 16 categorías
 
 ✨ Presiona Ctrl+C para detener el servidor
 
@@ -27,10 +27,102 @@
 📌 Servidor iniciando...
 🌐 URL: http://127.0.0.1:5001
 📊 Base de datos: mongodb_quiz.db
-📚 Total: 570 preguntas en 14 categorías
+📚 Total: 590 preguntas en 16 categorías
 
 ✨ Presiona Ctrl+C para detener el servidor
 
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 294-674-873
+ * Detected change in '/Users/willdev/github/UNIR/maestria/bd_bigdata/mongodb_quiz_system/question_bank.py', reloading
+============================================================
+🚀 BD BIG DATA QUIZ
+============================================================
+
+📌 Servidor iniciando...
+🌐 URL: http://127.0.0.1:5001
+📊 Base de datos: mongodb_quiz.db
+📚 Total: 590 preguntas en 16 categorías
+
+✨ Presiona Ctrl+C para detener el servidor
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 294-674-873
+ * Detected change in '/Users/willdev/github/UNIR/maestria/bd_bigdata/mongodb_quiz_system/question_bank.py', reloading
+============================================================
+🚀 BD BIG DATA QUIZ
+============================================================
+
+📌 Servidor iniciando...
+🌐 URL: http://127.0.0.1:5001
+📊 Base de datos: mongodb_quiz.db
+📚 Total: 590 preguntas en 16 categorías
+
+✨ Presiona Ctrl+C para detener el servidor
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 294-674-873
+ * Detected change in '/Users/willdev/github/UNIR/maestria/bd_bigdata/mongodb_quiz_system/question_bank.py', reloading
+============================================================
+🚀 BD BIG DATA QUIZ
+============================================================
+
+📌 Servidor iniciando...
+🌐 URL: http://127.0.0.1:5001
+📊 Base de datos: mongodb_quiz.db
+📚 Total: 590 preguntas en 16 categorías
+
+✨ Presiona Ctrl+C para detener el servidor
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 294-674-873
+ * Detected change in '/Users/willdev/github/UNIR/maestria/bd_bigdata/mongodb_quiz_system/question_bank.py', reloading
+============================================================
+🚀 BD BIG DATA QUIZ
+============================================================
+
+📌 Servidor iniciando...
+🌐 URL: http://127.0.0.1:5001
+📊 Base de datos: mongodb_quiz.db
+📚 Total: 590 preguntas en 16 categorías
+
+✨ Presiona Ctrl+C para detener el servidor
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 294-674-873
+ * Detected change in '/Users/willdev/github/UNIR/maestria/bd_bigdata/mongodb_quiz_system/init_db.py', reloading
+============================================================
+🚀 BD BIG DATA QUIZ
+============================================================
+
+📌 Servidor iniciando...
+🌐 URL: http://127.0.0.1:5001
+📊 Base de datos: mongodb_quiz.db
+📚 Total: 590 preguntas en 16 categorías
+
+✨ Presiona Ctrl+C para detener el servidor
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 294-674-873
+ * Detected change in '/Users/willdev/github/UNIR/maestria/bd_bigdata/mongodb_quiz_system/app.py', reloading
+============================================================
+🚀 BD BIG DATA QUIZ
+============================================================
+
+📌 Servidor iniciando...
+🌐 URL: http://127.0.0.1:5001
+📊 Base de datos: mongodb_quiz.db
+📚 Total: 590 preguntas en 16 categorías
+
+✨ Presiona Ctrl+C para detener el servidor
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 294-674-873
+/Users/willdev/miniconda3/envs/data/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

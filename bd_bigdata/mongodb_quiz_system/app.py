@@ -312,7 +312,7 @@ if __name__ == '__main__':
     print("\n📌 Servidor iniciando...")
     print("🌐 URL: http://127.0.0.1:5001")
     print("📊 Base de datos: mongodb_quiz.db")
-    print("📚 Total: 570 preguntas en 14 categorías")
+    print("📚 Total: 600 preguntas en 17 categorías")
     print("\n✨ Presiona Ctrl+C para detener el servidor\n")
 
     app.run(debug=True, host='0.0.0.0', port=5001)

@@ -89,6 +89,21 @@ CATEGORIES = [
         "name": "Test 5 - Backup, Índices, Replicación y Sharding",
         "description": "Preguntas sobre mongodump, mongorestore, índices, replica sets, sharding y arquitectura distribuida en MongoDB",
         "session_number": 5
+    },
+    {
+        "name": "Test 6 - Drivers MongoDB",
+        "description": "Preguntas sobre drivers de MongoDB: Java, Python (PyMongo), Node.js, conexiones, BSON y gestión de colecciones",
+        "session_number": 6
+    },
+    {
+        "name": "Test 7 - Cassandra",
+        "description": "Preguntas sobre Apache Cassandra: arquitectura, colecciones CQL, Mem-Table, SSTable, keyspaces y operaciones",
+        "session_number": 7
+    },
+    {
+        "name": "Test 8 - Grafo (Neo4j)",
+        "description": "Preguntas sobre bases de datos de grafos con Neo4j: componentes, CQL (Cypher Query Language), nodos, relaciones y operaciones",
+        "session_number": 8
     }
 ]
 

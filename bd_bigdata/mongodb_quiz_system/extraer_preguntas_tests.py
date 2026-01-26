@@ -746,6 +746,375 @@ TESTS_DATA = {
             "correct": "d",
             "explanation": "Todos los comandos anteriores permiten acceder a una colección en MongoDB."
         }
+    ],
+
+    "Test 7 - Cassandra": [
+        {
+            "question": "Cassandra:",
+            "options": {
+                "a": "Es un sistema de almacenamiento de datos NoSQL desarrollado por Facebook.",
+                "b": "Es un sistema de almacenamiento en tiempo real para aplicaciones en línea.",
+                "c": "Está diseñado para manejar cargas de trabajo en múltiples nodos.",
+                "d": "Todas las afirmaciones anteriores son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Todas estas afirmaciones definen lo que es Cassandra y lo que puede hacer como base de datos NoSQL."
+        },
+        {
+            "question": "¿Cuáles son los componentes principales de Cassandra?",
+            "options": {
+                "a": "Cluster, keyspace, column y column & family.",
+                "b": "Columna name, tables y keyspace.",
+                "c": "Mem-Table, SSTable y Bloom Filter.",
+                "d": "Las respuestas A y C son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "a",
+            "explanation": "Además de los componentes que permiten el almacenamiento del dato y su manipulación, la tabla de memoria, la SSTable y BFilter son componentes claves que dan a Cassandra agilidad y robustez."
+        },
+        {
+            "question": "¿Cuáles son las colecciones en CQL Cassandra?",
+            "options": {
+                "a": "Tupple, list y timestamp.",
+                "b": "Map, list y set.",
+                "c": "Counter, duration y date.",
+                "d": "Ninguna respuesta anterior es correcta.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "Estas son las principales colecciones que utiliza Cassandra y que optimiza para facilitar su implementación en determinados contextos."
+        },
+        {
+            "question": "¿Cuál es la principal característica de la colección list?",
+            "options": {
+                "a": "Almacenar datos de forma aleatoria.",
+                "b": "Almacenar datos de forma ordenada y que se puedan repetir.",
+                "c": "Almacenar elementos clave-valor.",
+                "d": "Almacenar elementos para usarlos en un orden concreto.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Cuando el orden de los elementos importa, se utiliza list en Cassandra. La consulta de estos elementos es mediante su posición."
+        },
+        {
+            "question": "¿Qué pasa con los datos eliminados en Cassandra?",
+            "options": {
+                "a": "Se borran inmediatamente de la base de datos.",
+                "b": "Se almacenan temporalmente en la papelera de reciclaje de Cassandra.",
+                "c": "Son marcados con una lápida.",
+                "d": "Nunca se borran, están inactivos hasta que el usuario los vuelva a activar.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "Cassandra tiene un modo particular de eliminar los datos borrados. Estos no se eliminan de inmediato, sino que son marcados para que tareas posteriores se encarguen de su borrado real."
+        },
+        {
+            "question": "¿Cuál de las siguientes afirmaciones es verdadera?",
+            "options": {
+                "a": "Cassandra escribe los datos en una caché clave-valor llamada Mem-Table.",
+                "b": "Los datos en Mem-Table se ordenan por clave.",
+                "c": "Existe una Mem-Table por cada ColumnFamily y de ella se recuperan los datos por la columna clave.",
+                "d": "Todas las afirmaciones anteriores son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Las tres afirmaciones explican cómo utiliza Cassandra la memoria mediante la tabla Mem-Table."
+        },
+        {
+            "question": "La instrucción ALTER KEYSPACE se puede utilizar para:",
+            "options": {
+                "a": "Definir un esquema.",
+                "b": "Crear una tabla.",
+                "c": "Ejecutar una consulta.",
+                "d": "Modificar un keyspace.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "La instrucción ALTER modifica cualquier elemento que se indique a continuación, en este caso el keyspace."
+        },
+        {
+            "question": "Al intentar borrar un elemento que no existe en una colección set, se produce:",
+            "options": {
+                "a": "La inserción de un nuevo elemento con dicho valor.",
+                "b": "Un error en la operación de borrado.",
+                "c": "Una operación que no se lleva a cabo y que tampoco genera error alguno.",
+                "d": "Una mutación de la colección.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "No es un error intentar borrar un elemento que no existe en un set, simplemente la operación no se realiza y tampoco genera ningún mensaje de error."
+        },
+        {
+            "question": "¿Qué es una UDT?",
+            "options": {
+                "a": "Un tipo de datos primitivo.",
+                "b": "Un objeto con funciones especiales en Cassandra.",
+                "c": "Un tipo de datos definido por el usuario.",
+                "d": "Un proceso de carga de datos.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "La sigla UDT significa User Define Tupe, es decir, un tipo de datos definido por el usuario."
+        },
+        {
+            "question": "¿Cuál de las siguientes instrucciones es correcta?",
+            "options": {
+                "a": "select * from client.agent where dept='AB';",
+                "b": "drop index IF EXISTS clients.DeptIndex;",
+                "c": "insert into University.Teacher(id,Name,Email,Description) values (2, 'Hamilton',['hamilton@hotmail.com'], ['Data Science']);",
+                "d": "Todas las instrucciones anteriores son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Todas las instrucciones son correctas en este caso."
+        }
+    ],
+
+    "Test 8 - Grafo (Neo4j)": [
+        {
+            "question": "¿Cuáles son los principales componentes de un grafo?",
+            "options": {
+                "a": "El esquema, los nodos, las relaciones y las propiedades.",
+                "b": "Nodos, relaciones y propiedades.",
+                "c": "Nodos y relaciones, las propiedades están implícitas en cada uno.",
+                "d": "Ninguna de las anteriores es correcta.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "Un grafo se representa principalmente por nodos, relaciones y propiedades. Otros elementos, como los esquemas, son propios del concepto de base de datos."
+        },
+        {
+            "question": "¿Qué afirmación define las características principales del modelo de grafos?",
+            "options": {
+                "a": "El modelo representa datos en nodos, relaciones y propiedades.",
+                "b": "Las propiedades son pares clave-valor.",
+                "c": "Las relaciones conectan los nodos.",
+                "d": "Todas las anteriores son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Todas las afirmaciones definen las características de Neo4j vistas en este tema."
+        },
+        {
+            "question": "¿Qué es CQL?",
+            "options": {
+                "a": "El lenguaje de consulta para Neo4j Graph Database.",
+                "b": "Un lenguaje para insertar y borrar nodos y relaciones.",
+                "c": "Un lenguaje enfocado a encontrar solo nodos dentro de un grafo.",
+                "d": "Todas las afirmaciones anteriores son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "a",
+            "explanation": "CQL o Cypher Query Language es el lenguaje que utiliza Neo4j para la manipulación de grafos."
+        },
+        {
+            "question": "¿Qué hace la siguiente instrucción: MATCH ( n ) DETACH DELETE n?",
+            "options": {
+                "a": "Limpia la base de datos.",
+                "b": "Borra todos los nodos y relaciones de la base de datos.",
+                "c": "Borra solo los nodos existentes.",
+                "d": "Borra los nodos y sus propiedades.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "Cuidado, esta instrucción borra tanto nodos como relaciones de la base de datos. De igual forma, incluye las propiedades de ambos elementos."
+        },
+        {
+            "question": "La cláusula que borra etiquetas y propiedades es:",
+            "options": {
+                "a": "DELETE.",
+                "b": "UNWIND.",
+                "c": "REMOVE.",
+                "d": "DROP.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "REMOVE permite eliminar tanto las etiquetas como las propiedades de nodos y relaciones. DELETE borra nodos o relaciones y DROP no existe en Neo4j."
+        },
+        {
+            "question": "¿Qué significa n en la siguiente instrucción: MATCH ( n ) RETURN n.name, n.runs ORDER BY n.runs?",
+            "options": {
+                "a": "Cualquier nodo y relación.",
+                "b": "Cualquier nodo.",
+                "c": "Cualquier relación con las propiedades name y runs.",
+                "d": "Los nodos cuya propiedad name tiene un valor.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "a",
+            "explanation": "n representa cualquier nodo relacionado con otros nodos."
+        },
+        {
+            "question": "¿La instrucción MATCH ( n ) RETURN n.name order by n.name qué retorna?",
+            "options": {
+                "a": "Un grafo con los nodos n.",
+                "b": "Un listado.",
+                "c": "Un listado y un grafo.",
+                "d": "Una lista ordenada de las propiedades nombre de todos los nodos.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Al igual que en SQL, order by ordena un resultado, en este caso el retorno en la lista de nombres ordenada ascendentemente por defecto."
+        },
+        {
+            "question": "¿La instrucción CREATE (Pepe)-[r:CANTA_EN{name=\"Padre\"}]-(Concierto) genera algún tipo de error al ser ejecutada?",
+            "options": {
+                "a": "No, crea los nodos Pepe y Concierto y su relación CANTAEN.",
+                "b": "Sí, la propiedad de la relación es incorrecta.",
+                "c": "Sí, no se indica una dirección o sentido de la relación.",
+                "d": "Todas las respuestas anteriores son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "Siempre es necesario indicar el sentido de la relación. Si este no se indica, Neo4j genera un error preguntando por esta definición."
+        },
+        {
+            "question": "La instrucción CREATE (Juan)-[r:HIJO_DE]->(Alma) crea:",
+            "options": {
+                "a": "Los nodos Juan y Alma y una relación entre ellos llamada HIJO_DE.",
+                "b": "Una relación entre los nodos Juan y Alma llamada HIJO_DE.",
+                "c": "Una relación saliente de Juan hacia Ana llamada HIJO_DE.",
+                "d": "Ninguna de las anteriores es correcta.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "a",
+            "explanation": "Juan y Alma son nodos, aunque existan se crearán dichos nodos y ambos se le asignará la relación HIJO_DE."
+        },
+        {
+            "question": "Indica qué hace la siguiente instrucción: MATCH (a:Jugador), (b:Juego) WHERE a.name = \"Rabino\" AND b.name = \"Casino\" CREATE (a)-[r:TRABAJA_EN {partida1: victorias:5}]->(b) RETURN a,b",
+            "options": {
+                "a": "Crea los nodos a y b y asigna la relación TRABAJA_EN.",
+                "b": "Crea la relación TRABAJA_EN sobre los nodos a y b.",
+                "c": "Busca los nodos a y b que cumplan la condición del WHERE y luego asigna la relación TRABAJA_EN entre ellos.",
+                "d": "Todas las respuestas anteriores son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "Al ejecutarse juntas MATCH y CREATE, los nodos que cumplan la condición WHERE serán quienes reciban la relación que se indica en el CREATE."
+        }
+    ],
+
+    "Test 9 - Redis": [
+        {
+            "question": "Las siguientes son estructuras de Redis:",
+            "options": {
+                "a": "String, integer, float, sets y lists.",
+                "b": "Lists, sets, hashes, stream y bit arrays.",
+                "c": "HyperLogsLogs, hashes, sets, string y float.",
+                "d": "Ninguna de las anteriores es correcta.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "Estos son algunos de los tipos de datos que utiliza Redis para almacenar y manipular los datos. Float, por su parte, no es un tipo de datos de Redis."
+        },
+        {
+            "question": "¿Cuál de estas afirmaciones es verdadera?",
+            "options": {
+                "a": "No es necesario definir previamente un modelo de datos antes de usar o guardar datos en Redis.",
+                "b": "Redis se caracteriza por el tratamiento de distintos tipos de datos, los cuales se pueden aplicar en distintos casos de uso.",
+                "c": "Redis es una base de datos clave-valor.",
+                "d": "Todas las anteriores son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Todas las afirmaciones son ciertas, hacen parte de las características relevantes de la base de datos."
+        },
+        {
+            "question": "¿Cómo se llama el cliente de Redis?",
+            "options": {
+                "a": "Cliente Redis Long.",
+                "b": "redis-cli.",
+                "c": "cli-rediss.",
+                "d": "Ninguna de las anteriores es correcta.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "Redis llama a su consola o terminal redis-cli, abreviatura de cliente redis en inglés."
+        },
+        {
+            "question": "¿Cuál de estas instrucciones muestra todos los elementos de una lista llamada clientes?",
+            "options": {
+                "a": "LINDEX clientes 0.",
+                "b": "LRANGE clientes 0 -1.",
+                "c": "LRANGE clientes 0 *.",
+                "d": "GET clientes 1.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "Los valores 0 y -1 indican que se muestren los valores desde la posición 0 hasta el final de la lista."
+        },
+        {
+            "question": "¿Cuál de estas instrucciones permite añadir un elemento a la colección llamada frutas?",
+            "options": {
+                "a": "SADD frutas mango.",
+                "b": "SADD mango frutas.",
+                "c": "SMEMBERS frutas mango.",
+                "d": "SISMEMBERS frutas mango.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "a",
+            "explanation": "SADD permite añadir elementos a una colección, seguido se indica el nombre de la colección y luego el elemento a añadir."
+        },
+        {
+            "question": "¿Qué hace la siguiente instrucción: SET user pep?",
+            "options": {
+                "a": "Establece un usuario en pep.",
+                "b": "Crea un elemento llamado user con el valor pep.",
+                "c": "Muestra el valor de user y pep.",
+                "d": "Guarda el valor user en pep.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "b",
+            "explanation": "SET crea un elemento, seguido se indica el nombre del elemento y luego su valor."
+        },
+        {
+            "question": "¿Qué son las colecciones ordenadas?",
+            "options": {
+                "a": "Una colección cuyos elementos se ordenan por la clave.",
+                "b": "Una colección cuyos elementos se ordenan por el orden en que se añaden los valores.",
+                "c": "Una colección cuyos elementos se ordenan por los valores que se añaden a dicha colección, no por su clave.",
+                "d": "Ninguna de las anteriores es correcta.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "c",
+            "explanation": "Las colecciones ordenadas se ordenan por los valores que se añaden a dicha colección, no por su clave."
+        },
+        {
+            "question": "El patrón pub/sub permite:",
+            "options": {
+                "a": "Publicar datos cada cierto tiempo en un puerto concreto.",
+                "b": "Crea un canal para que los clientes se suscriban y reciban valores emitidos.",
+                "c": "Publicar datos en stream para ser consumido.",
+                "d": "Todas las anteriores son correctas.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Según la configuración que se le aplique al patrón, este permitirá hacer las tres operaciones que se indican previamente."
+        },
+        {
+            "question": "Redis es una base de datos clave-valor que utiliza:",
+            "options": {
+                "a": "RAM y memoria flash.",
+                "b": "Solo RAM.",
+                "c": "RAM y memoria caché.",
+                "d": "RAM SSD y Sweap.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "a",
+            "explanation": "Redis posee funciones especializadas para usar tanto la memoria RAM como las memorias flash, incluso en SSD."
+        },
+        {
+            "question": "¿Qué afirmación es verdadera?",
+            "options": {
+                "a": "Dentro de un cluster de Redis, un servidor determinado se denomina cliente.",
+                "b": "Cada nodo puede ser un nodo primario (maestro), pero no un nodo secundario (esclavo).",
+                "c": "La administración del cluster se realiza en una capa de la arquitectura del cluster de Redis.",
+                "d": "El almacenamiento de datos de series de tiempo es otra tarea común en Redis.",
+                "e": "Ninguna de las anteriores."
+            },
+            "correct": "d",
+            "explanation": "Redis dispone de un módulo que permite tratar datos de series de tiempo."
+        }
     ]
 }
 
